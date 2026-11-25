@@ -14,8 +14,8 @@
       <h1 class="text-3xl font-bold tracking-tight sm:text-4xl"><%= home_t("landing.hero.title") %></h1>
       <p class="max-w-2xl text-base text-base-content/60"><%= home_t("landing.hero.lead") %></p>
       <div class="flex flex-wrap items-center gap-3">
-        <%= link_button home_t("landing.hero.play"), play_path, size: :lg, icon: "keyboard" %>
-        <%= link_button home_t("landing.hero.catalog"), catalog_index_path, size: :lg, variant: :outline, icon: "library" %>
+        <%= link_button home_t("landing.hero.play"), play_path, size: :sm, icon: "keyboard" %>
+        <%= link_button home_t("landing.hero.catalog"), catalog_index_path, size: :sm, variant: :outline, icon: "library" %>
         <%= link_to home_t("landing.hero.home"), home_path, class: "text-sm text-primary underline underline-offset-3" %>
       </div>
     </div>
@@ -45,7 +45,7 @@
             class="h-12 w-full rounded-lg border-2 border-base-300 bg-base-100 px-4 font-mono text-xl outline-none focus-visible:border-primary aria-invalid:border-error">
         </div>
         <p aria-live="polite" class="min-h-5 text-[13px] text-base-content/60" data-try-word-target="note"></p>
-        <%= button_to follow_catalog_path(@try_pack.catalog_id, practice: 1), class: button_classes(variant: :outline, size: :lg, class: "w-full"), form_class: "block", "data-try-word-target": "button" do %>
+        <%= button_to follow_catalog_path(@try_pack.catalog_id, practice: 1), class: button_classes(variant: :outline, size: :sm, class: "w-full"), form_class: "block", "data-try-word-target": "button" do %>
           <%= tt("landing.try.continue") %><%= icon("arrow-right") %>
         <% end %>
       </div>
@@ -92,7 +92,7 @@
     </section>
 
     <div class="flex flex-wrap gap-3 border-t pt-8">
-      <%= link_button home_t("landing.hero.play"), play_path, size: :lg, icon: "keyboard" %>
+      <%= link_button home_t("landing.hero.play"), play_path, size: :sm, icon: "keyboard" %>
     </div>
   </div>
 </main>

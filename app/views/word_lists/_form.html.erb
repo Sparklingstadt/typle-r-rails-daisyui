@@ -19,7 +19,7 @@
         keepEditing: tt_forms("wordLists.editor.keepEditing"), discardAction: tt_forms("wordLists.editor.discard") }.transform_values { |v| JSON.parse(v) }.to_json %>
 <%= form_with model: list.persisted? ? list : (pack&.persisted? ? [pack, list] : list), url: (create_list_path unless list.persisted? || pack&.persisted?),
       data: { controller: "word-rows", action: "input->word-rows#changed change->word-rows#changed keydown->word-rows#saveShortcut submit->word-rows#submitting turbo:before-visit@document->word-rows#leave beforeunload@window->word-rows#unload", "word-rows-labels-value": word_rows_labels } do |f| %>
-  <%= visit_button back, variant: :ghost, size: :lg, class: "-ml-2.5 mb-2 text-base-content/60" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
+  <%= visit_button back, variant: :ghost, size: :sm, class: "-ml-2.5 mb-2 text-base-content/60" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
   <%= page_header(title, description) do %>
     <%= render "layouts/application/page_storage_badge" %>
   <% end %>

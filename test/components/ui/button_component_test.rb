@@ -2,12 +2,12 @@ require "test_helper"
 
 class Ui::ButtonComponentTest < ViewComponent::TestCase
   test "a link styled as a button, with its variant and size" do
-    render_inline(Ui::ButtonComponent.new("戻る", url: "/packs", variant: :outline, size: :lg, icon: "arrow-left"))
+    render_inline(Ui::ButtonComponent.new("戻る", url: "/packs", variant: :outline, size: :sm, icon: "arrow-left"))
 
-    link = page.find("a[href='/packs'][data-slot=button][data-variant=outline][data-size=lg]")
+    link = page.find("a[href='/packs'][data-slot=button][data-variant=outline][data-size=sm]")
     assert_equal "戻る", link.text
     assert link.has_css?("svg.lucide-arrow-left[aria-hidden=true]"), "the icon comes before the label"
-    assert_includes link[:class].split, "btn-sm", "the lg size"
+    assert_includes link[:class].split, "btn-sm", "the sm size"
   end
 
   test "a block takes the label's place" do

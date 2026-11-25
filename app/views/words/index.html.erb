@@ -35,18 +35,18 @@
               <%# Under lg, where the side panel is not shown, the lists are chosen in typle-r's picker dialog. %>
               <div class="contents" data-controller="list-picker">
                 <button type="button" aria-haspopup="dialog" aria-label="<%= tt("wordLists.words.switchList", name: practice_name_text(@list)) %>" data-action="list-picker#open" data-list-picker-target="trigger"
-                  class="<%= button_classes(variant: :outline, size: :lg, class: "lg:hidden") %>"><%= icon("chevrons-up-down") %><%= tt("wordLists.words.switch") %></button>
+                  class="<%= button_classes(variant: :outline, size: :sm, class: "lg:hidden") %>"><%= icon("chevrons-up-down") %><%= tt("wordLists.words.switch") %></button>
                 <%= render "practice/aside", lists: @lists, selected: @list, mode: nil, id: "words-picker",
                       url: ->(list) { words_path(list: list.id) }, heading: tt("wordLists.words.candidates"),
                       search_label: tt("wordLists.words.filter"), search_placeholder: tt("wordLists.words.filter"), no_match: tt("wordLists.words.noMatch"),
                       scroll_class: "-mx-1 max-h-[min(28rem,calc(100dvh-18rem))] overflow-y-auto overscroll-contain px-1",
                       dialog: { title: tt("wordLists.words.pickerTitle"), description: tt("wordLists.words.pickerDescription") } %>
               </div>
-              <%= link_button play_path(list: @list.id), size: :lg, "aria-label": tt("wordLists.words.practiceList", name: practice_name_text(@list)) do %><%= icon(:keyboard) %><%= tt("wordLists.words.practice") %><% end %>
+              <%= link_button play_path(list: @list.id), size: :sm, "aria-label": tt("wordLists.words.practiceList", name: practice_name_text(@list)) do %><%= icon(:keyboard) %><%= tt("wordLists.words.practice") %><% end %>
               <% if @list.editable? %>
-                <%= link_button edit_word_list_path(@list), variant: :outline, size: :lg, "aria-label": tt("wordLists.words.editList", name: practice_name_text(@list)) do %><%= icon(:pencil) %><%= tt("wordLists.words.edit") %><% end %>
+                <%= link_button edit_word_list_path(@list), variant: :outline, size: :sm, "aria-label": tt("wordLists.words.editList", name: practice_name_text(@list)) do %><%= icon(:pencil) %><%= tt("wordLists.words.edit") %><% end %>
               <% else %>
-                <%= link_button packs_path(pack: @list.pack_id), variant: :outline, size: :lg, "aria-label": tt("wordLists.words.editList", name: practice_name_text(@list)) do %><%= icon(:pencil) %><%= tt("wordLists.words.edit") %><% end %>
+                <%= link_button packs_path(pack: @list.pack_id), variant: :outline, size: :sm, "aria-label": tt("wordLists.words.editList", name: practice_name_text(@list)) do %><%= icon(:pencil) %><%= tt("wordLists.words.edit") %><% end %>
               <% end %>
             </div>
           </div>

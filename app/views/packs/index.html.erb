@@ -106,7 +106,7 @@
             <% end %>
           </div>
         </div>
-        <button type="button" class="<%= button_classes(variant: :ghost, size: :lg, class: "text-base-content/60") %>" data-packs-filter-target="clear" data-action="packs-filter#clear" hidden><%= tt("wordLists.filter.clear") %></button>
+        <button type="button" class="<%= button_classes(variant: :ghost, size: :sm, class: "text-base-content/60") %>" data-packs-filter-target="clear" data-action="packs-filter#clear" hidden><%= tt("wordLists.filter.clear") %></button>
         <p aria-live="polite" class="ml-auto text-sm text-base-content/60 tabular-nums" data-packs-filter-target="count"><%= tt("wordLists.manager.count", total: @packs.size) %></p>
       </div>
       <ul class="<%= cn(UiHelper::CARD_LIST, "overflow-visible") %>" data-packs-filter-target="list">

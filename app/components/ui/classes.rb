@@ -4,8 +4,7 @@ module Ui
   module Classes
     MERGER = TailwindMerge::Merger.new
 
-    # daisyUI's btn, in the variants and sizes the pages ask for. "lg" is the compact button of toolbars and rows (as in
-    # typle-r, where it is smaller than the default), so it is daisyUI's btn-sm.
+    # daisyUI's btn, in the variants and sizes the pages ask for. Each size is named after the daisyUI size it gives.
     BUTTON_BASE = "btn flex-nowrap whitespace-nowrap font-medium"
     BUTTON_VARIANTS = {
       default: "btn-primary",
@@ -19,7 +18,6 @@ module Ui
       default: "btn-md",
       xs: "btn-xs",
       sm: "btn-sm",
-      lg: "btn-sm",
       icon: "btn-square btn-sm",
       "icon-xs": "btn-square btn-xs",
       "icon-sm": "btn-square btn-sm",

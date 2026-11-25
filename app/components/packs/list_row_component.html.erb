@@ -15,10 +15,10 @@
     <p class="flex items-center gap-1.5 text-xs text-base-content/60"><%= icon(:history, class: "size-3.5 shrink-0") %><%= lists_practice_text(records) %></p>
   </div>
   <div class="-mr-2 flex items-center gap-1 sm:mr-0">
-    <%= link_button play_path(list: list.id), variant: :ghost, size: :lg, class: "hidden h-10 px-3 text-base-content/60 sm:inline-flex",
+    <%= link_button play_path(list: list.id), variant: :ghost, size: :sm, class: "hidden h-10 px-3 text-base-content/60 sm:inline-flex",
           title: t("design.lists.row.practice"), "aria-label": t("design.lists.row.practice_list", name: list.name) do %><%= icon(:keyboard) %><%= t("design.lists.row.practice") %><% end %>
     <% if list.editable? %>
-      <%= visit_button edit_word_list_path(list), variant: :outline, size: :lg, class: "size-10 px-0 sm:w-auto sm:px-3",
+      <%= visit_button edit_word_list_path(list), variant: :outline, size: :sm, class: "size-10 px-0 sm:w-auto sm:px-3",
             title: t("design.lists.row.edit"), "aria-label": t("design.lists.row.edit_list", name: list.name) do %><%= icon(:pencil) %><span class="hidden sm:inline"><%= t("design.lists.row.edit") %></span><% end %>
     <% end %>
     <%= lists_menu(label: t("design.lists.row.more_for", name: list.name), title: t("design.lists.row.more_actions")) do %>

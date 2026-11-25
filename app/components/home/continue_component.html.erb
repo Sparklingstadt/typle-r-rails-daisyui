@@ -15,7 +15,7 @@
       <% if rest.positive? %><li class="px-1 text-[13px] text-base-content/60"><%= home_t("dashboard.continue.more", count: rest) %></li><% end %>
     </ul>
     <div class="flex flex-wrap items-center gap-3">
-      <%= link_button home_t("dashboard.continue.practice"), play_path(list: list.id), size: :lg, icon: "keyboard",
+      <%= link_button home_t("dashboard.continue.practice"), play_path(list: list.id), size: :sm, icon: "keyboard",
             aria: { label: home_t("dashboard.continue.practice_list", name: list.full_name) } %>
       <%= link_button home_t("dashboard.continue.other"), packs_path, variant: :link %>
     </div>

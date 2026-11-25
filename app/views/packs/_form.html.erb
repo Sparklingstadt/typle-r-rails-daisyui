@@ -3,7 +3,7 @@
 <%= form_with model: pack, data: { controller: "pack-form", action: "input->pack-form#changed change->pack-form#changed submit->pack-form#submitting turbo:before-visit@document->pack-form#leave beforeunload@window->pack-form#unload",
       "pack-form-labels-value": { discard: tt("wordLists.editor.discardTitle"), discardDescription: tt("wordLists.editor.discardDescription"),
                                   keepEditing: tt("wordLists.editor.keepEditing"), discardAction: tt("wordLists.editor.discard") }.to_json } do |f| %>
-  <%= visit_button pack.persisted? ? packs_path(pack: pack.id) : packs_path, variant: :ghost, size: :lg, class: "-ml-2.5 mb-2 text-base-content/60" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
+  <%= visit_button pack.persisted? ? packs_path(pack: pack.id) : packs_path, variant: :ghost, size: :sm, class: "-ml-2.5 mb-2 text-base-content/60" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
   <%= page_header(title, description) do %>
     <%= render "layouts/application/page_storage_badge" %>
   <% end %>
