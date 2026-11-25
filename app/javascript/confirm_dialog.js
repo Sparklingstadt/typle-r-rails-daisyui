@@ -2,7 +2,7 @@ import { Turbo } from "@hotwired/turbo-rails"
 
 // typle-r's AlertDialog in place of window.confirm: a title, a description, optional details and two buttons. A form
 // asks for it with data-turbo-confirm (the title) and data-confirm-* (see ConfirmHelper#confirm_data).
-export function confirmDialog({ title, description = "", details = "", action, cancel, variant = "destructive" }) {
+export function confirmDialog({ title, description = "", details = "", action, cancel, variant = "error" }) {
   const dialog = document.getElementById("confirm-dialog")
   if (!dialog) return Promise.resolve(window.confirm([title, description].filter(Boolean).join("\n\n")))
   dialog.querySelector("#confirm-dialog-title").textContent = title
@@ -41,7 +41,7 @@ export function confirmDialog({ title, description = "", details = "", action, c
 function fromElement(title, element) {
   const data = element?.dataset ?? {}
   return confirmDialog({ title, description: data.confirmDescription, details: data.confirmDetails, action: data.confirmAction,
-    cancel: data.confirmCancel, variant: data.confirmVariant || "destructive" })
+    cancel: data.confirmCancel, variant: data.confirmVariant || "error" })
 }
 
 Turbo.config.forms.confirm = (message, form, submitter) => fromElement(message, submitter?.dataset.turboConfirm ? submitter : form)

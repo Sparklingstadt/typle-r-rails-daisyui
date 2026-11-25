@@ -42,7 +42,7 @@
 
       <% if @list && @list.practice_records.any? %>
         <% last = @list.practice_records.map(&:practiced_at).max %>
-        <section aria-labelledby="list-summary-heading" class="grid gap-4 rounded-xl border bg-base-100 p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-6 sm:p-5">
+        <section aria-labelledby="list-summary-heading" class="<%= cn(UiHelper::PANEL, "grid gap-4 p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-6 sm:p-5") %>">
           <div class="min-w-0">
             <h2 id="list-summary-heading" class="font-bold [overflow-wrap:anywhere]"><%= practice_name(@list) %></h2>
             <p class="text-[13px] text-base-content/60 tabular-nums">

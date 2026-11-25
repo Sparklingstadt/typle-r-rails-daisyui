@@ -1,13 +1,12 @@
-# A card (daisyUI's card with a border): a block of the page, with its parts in Ui::Card.
+# A card (daisyUI's card with a border): a block of the page. Its padding and gap are the page's (class:).
 class Ui::CardComponent < ApplicationComponent
-  def initialize(size: :default, class: nil, tag_name: :div, **options)
-    @size = size
+  def initialize(class: nil, tag_name: :div, **options)
     @class = class_option(binding)
     @tag_name = tag_name
     @options = options
   end
 
   def call
-    content_tag(@tag_name, content, class: cn(CARD, @class), "data-slot": "card", "data-size": @size, **@options)
+    content_tag(@tag_name, content, class: cn(CARD, @class), **@options)
   end
 end

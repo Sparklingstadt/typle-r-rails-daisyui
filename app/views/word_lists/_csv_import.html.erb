@@ -54,8 +54,8 @@
       </fieldset>
     </div>
     <p role="status" class="sr-only" data-word-rows-target="importStatus"></p>
-    <div role="alert" class="<%= alert_classes(:destructive, "border-error/40 bg-error/5") %>" data-word-rows-target="importError" hidden>
-      <%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm" data-word-rows-target="importErrorText"></div>
+    <div role="alert" class="<%= alert_classes(:error, "border-error/40 bg-error/5") %>" data-word-rows-target="importError" hidden>
+      <%= icon("circle-alert") %><div class="text-sm" data-word-rows-target="importErrorText"></div>
     </div>
     <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
       <button type="button" class="<%= button_classes(variant: :ghost) %>" data-action="word-rows#closeImport"><%= tt("common.form.cancel") %></button>

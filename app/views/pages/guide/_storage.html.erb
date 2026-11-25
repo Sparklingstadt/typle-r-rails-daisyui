@@ -4,7 +4,7 @@
   <div class="grid gap-3 sm:grid-cols-2">
     <% [["hard-drive", "browser", [guide_t("storage.browser.p1"), guide_own("storage.browser.p2")]],
         [:cloud, "account", [guide_t("storage.account.p1"), guide_t("storage.account.p2")]]].each do |icon_name, place, points| %>
-      <div class="rounded-xl border bg-base-100 p-4">
+      <div class="<%= cn(UiHelper::PANEL, "p-4") %>">
         <div class="flex items-center gap-3">
           <span class="grid size-9 shrink-0 place-items-center rounded-full bg-base-200 text-base-content/60"><%= icon(icon_name) %></span>
           <div>

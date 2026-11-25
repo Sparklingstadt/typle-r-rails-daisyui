@@ -1,14 +1,14 @@
 <%# typle-r's PackListOrder and SortableListRow: the pack's lists in order, sorted by dragging the grip or from each row's
     menu (list_order_controller.js); the order is sent as list_ids[]. %>
 <% lists = pack.word_lists.to_a %>
-<section aria-labelledby="pack-order-heading" class="space-y-3 rounded-xl border bg-base-100 p-4 sm:p-6" data-controller="list-order">
+<section aria-labelledby="pack-order-heading" class="<%= cn(UiHelper::PANEL, "space-y-3 p-4 sm:p-6") %>" data-controller="list-order">
   <div class="space-y-1">
     <h2 id="pack-order-heading" class="text-base font-bold"><%= tt("wordLists.packEditor.lists") %></h2>
     <p class="text-xs text-base-content/60"><%= tt("wordLists.packEditor.listsHelp") %></p>
   </div>
   <ul class="space-y-2" data-list-order-target="rows">
     <% lists.each do |list| %>
-      <li role="group" aria-label="<%= list.name %>" class="flex items-center gap-2 rounded-xl border bg-base-100 p-3" data-list-order-target="row">
+      <li role="group" aria-label="<%= list.name %>" class="<%= cn(UiHelper::PANEL, "flex flex-row items-center gap-2 p-3") %>" data-list-order-target="row">
         <input type="hidden" name="list_ids[]" value="<%= list.id %>">
         <button type="button" draggable="true" <%= "disabled" if lists.size < 2 %> class="<%= button_classes(variant: :ghost, size: :icon, class: "touch-none cursor-grab text-base-content/60 active:cursor-grabbing") %>"
                 aria-label="<%= tt("wordLists.packEditor.drag", name: list.name) %>" title="<%= tt("wordLists.packEditor.dragTitle") %>"
@@ -23,7 +23,7 @@
                    aria-label="<%= tt("wordLists.packEditor.listActions", name: list.name) %>" title="<%= tt("wordLists.editor.actions") %>"><%= icon(:ellipsis) %></button>
           <div role="menu" class="<%= cn(UiHelper::MENU_CONTENT, "absolute top-full right-0 mt-1 min-w-52") %>">
             <% [["up", "arrow-up", "moveUp"], ["down", "arrow-down", "moveDown"], ["first", "arrow-up-to-line", "moveFirst"], ["last", "arrow-down-to-line", "moveLast"]].each do |where, icon_name, key| %>
-              <button type="button" role="menuitem" class="<%= cn(ListsDesignHelper::LISTS_MENU_ITEM, "disabled:pointer-events-none disabled:opacity-40") %>"
+              <button type="button" role="menuitem" class="<%= cn(UiHelper::MENU_ITEM, "disabled:pointer-events-none disabled:opacity-40") %>"
                       data-action="list-order#move" data-list-order-where-param="<%= where %>" data-move="<%= where %>"><%= icon(icon_name) %><%= tt("wordLists.editor.#{key}") %></button>
             <% end %>
           </div>

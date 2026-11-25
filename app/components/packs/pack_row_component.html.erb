@@ -6,7 +6,7 @@
         <h3 class="font-medium [overflow-wrap:anywhere]"><button type="button" aria-expanded="<%= open? %>" aria-controls="<%= panel_id %>" data-lists--disclosure-target="button" data-action="lists--disclosure#toggle"
             class="group/disclosure -my-1 -ml-1.5 inline-flex items-start gap-1.5 rounded-md py-1 pr-1 pl-1.5 text-left outline-none hover:underline focus-visible:ring-3 focus-visible:ring-primary/50"><%= icon("chevron-right", class: "mt-1 size-4 shrink-0 text-base-content/60 transition-transform group-aria-expanded/disclosure:rotate-90 motion-reduce:transition-none") %><%= pack.name %></button></h3>
         <%= lists_labels(category: lists_pack_category(pack), tags: pack.tags) %>
-        <% if pack.followed? %><%= ui_badge(t("design.lists.follow.badge"), variant: :secondary) %><% end %>
+        <% if pack.followed? %><%= ui_badge(t("design.lists.follow.badge"), variant: :ghost) %><% end %>
       </div>
       <p class="text-sm text-base-content/60">
         <%= t("design.lists.pack.lists", count: lists.size) %>
@@ -21,20 +21,20 @@
     <div class="-mr-2 flex items-center gap-1 sm:mr-0">
       <%= lists_menu(label: t("design.lists.pack.more_for", name: pack.name), title: t("design.lists.pack.more_actions")) do %>
         <% if (target = lists_practice_target(pack)) %>
-          <%= link_to play_path(list: target.id), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:keyboard) %><%= t("design.lists.pack.practice") %><% end %>
+          <%= link_to play_path(list: target.id), class: UiHelper::MENU_ITEM do %><%= icon(:keyboard) %><%= t("design.lists.pack.practice") %><% end %>
         <% end %>
         <% if pack.editable? %>
-          <%= link_to edit_pack_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:pencil) %><%= t("design.lists.pack.edit") %><% end %>
-          <%= link_to new_pack_word_list_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon("list-plus") %><%= t("design.lists.pack.add_list") %><% end %>
+          <%= link_to edit_pack_path(pack), class: UiHelper::MENU_ITEM do %><%= icon(:pencil) %><%= t("design.lists.pack.edit") %><% end %>
+          <%= link_to new_pack_word_list_path(pack), class: UiHelper::MENU_ITEM do %><%= icon("list-plus") %><%= t("design.lists.pack.add_list") %><% end %>
         <% end %>
-        <%= button_to copy_pack_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM, form_class: "contents" do %><%= icon(:copy) %><%= tt("wordLists.pack.copy") %><% end %>
-        <%= link_to export_pack_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM, data: { turbo: false } do %><%= icon(:download) %><%= tt("wordLists.pack.export") %><% end %>
+        <%= button_to copy_pack_path(pack), class: UiHelper::MENU_ITEM, form_class: "contents" do %><%= icon(:copy) %><%= tt("wordLists.pack.copy") %><% end %>
+        <%= link_to export_pack_path(pack), class: UiHelper::MENU_ITEM, data: { turbo: false } do %><%= icon(:download) %><%= tt("wordLists.pack.export") %><% end %>
         <%= lists_menu_separator %>
         <% if pack.followed? %>
-          <%= button_to unfollow_catalog_path(pack.catalog_id), method: :delete, class: ListsDesignHelper::LISTS_MENU_DESTRUCTIVE, form_class: "contents",
+          <%= button_to unfollow_catalog_path(pack.catalog_id), method: :delete, class: UiHelper::MENU_ITEM_ERROR, form_class: "contents",
                 form: { data: unfollow_confirm_data(pack.name) } do %><%= icon("user-minus") %><%= t("design.lists.follow.unfollow") %><% end %>
         <% else %>
-          <%= button_to pack_path(pack), method: :delete, class: ListsDesignHelper::LISTS_MENU_DESTRUCTIVE, form_class: "contents",
+          <%= button_to pack_path(pack), method: :delete, class: UiHelper::MENU_ITEM_ERROR, form_class: "contents",
                 form: { data: delete_confirm_data(title: tt("wordLists.delete.packTitle", name: pack.name), description: tt("wordLists.delete.packDescription", lists: lists.size, records: records.size)) } do %><%= icon("trash-2") %><%= t("design.lists.pack.delete") %><% end %>
         <% end %>
       <% end %>

@@ -7,8 +7,8 @@
     <h1 class="mb-4 text-3xl"><%= home_t("home.welcome.title") %></h1>
     <p class="mb-6"><%= home_t("home.welcome.text") %></p>
     <div class="mb-6 flex flex-wrap gap-3">
-      <%= ui_badge(home_t("home.welcome.lists", count: current_user.word_lists.count), variant: :secondary) %>
-      <%= ui_badge(home_t("home.welcome.practices", count: @dashboard.records.size), variant: :secondary) %>
+      <%= ui_badge(home_t("home.welcome.lists", count: current_user.word_lists.count), variant: :ghost) %>
+      <%= ui_badge(home_t("home.welcome.practices", count: @dashboard.records.size), variant: :ghost) %>
     </div>
     <nav aria-label="<%= home_t("home.welcome.nav_label") %>" class="flex flex-wrap gap-4">
       <%= link_button home_t("home.welcome.play"), play_path %>

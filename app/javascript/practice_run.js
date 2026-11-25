@@ -381,7 +381,7 @@ export function guardSwitches(controller) {
     if (kind === "current") return
     const texts = controller.messagesValue.switch ?? {}
     const confirmed = await confirmDialog({
-      title: texts.title, action: texts.confirm, cancel: texts.continue, variant: "default",
+      title: texts.title, action: texts.confirm, cancel: texts.continue, variant: "primary",
       description: message(texts.description, { list: controller.messagesValue.listName ?? "", done: controller.index, total: controller.wordsValue.length, next: target.dataset.switchName ?? "" }),
     })
     if (confirmed) Turbo.visit(target.getAttribute("href") || target.dataset.url)

@@ -64,14 +64,14 @@
           <% device_label = @device.none? ? t("design.practice.device_menu.unselected") : @device.options.find { |_, key| key == @device.key }&.first %>
           <%# typle-r's DeviceMenu: a menu of the devices to choose from, with a way to manage them; locked while a run is on. %>
           <div class="relative shrink-0" data-controller="dropdown" data-practice-menu>
-            <button type="button" data-dropdown-target="trigger" data-lock-while-running class="inline-flex h-8 max-w-28 shrink-0 items-center gap-1.5 rounded-full border bg-base-100 px-2.5 text-[13px] outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 sm:max-w-52 in-data-[running=true]:pointer-events-none in-data-[running=true]:cursor-default in-data-[running=true]:text-base-content/60 in-data-[running=true]:hover:bg-base-100"
+            <button type="button" data-dropdown-target="trigger" data-lock-while-running class="<%= button_classes(variant: :outline, size: :sm, class: "max-w-28 shrink-0 gap-1.5 rounded-full bg-base-100 px-2.5 text-[13px] font-normal sm:max-w-52") %> in-data-[running=true]:pointer-events-none in-data-[running=true]:cursor-default in-data-[running=true]:text-base-content/60 in-data-[running=true]:hover:bg-base-100"
                      aria-label="<%= t("design.practice.device_menu.label", device: device_label) %>" title="<%= t("design.practice.device_menu.change") %>">
               <%= icon("keyboard", class: "size-3.5 shrink-0") %>
               <span class="truncate" data-device-label><%= device_label %></span>
               <%= icon("chevron-down", class: "size-3.5 shrink-0 in-data-[running=true]:hidden") %><%= icon("lock", class: "hidden size-3 shrink-0 in-data-[running=true]:block") %>
             </button>
-            <div role="menu" data-slot="dropdown-menu-content" class="absolute top-full right-0 z-50 mt-1.5 w-64 rounded-lg border bg-base-100 p-1 text-base-content shadow-md">
-              <p data-slot="dropdown-menu-label" class="px-2 pt-1.5 pb-1 text-xs text-base-content/60"><%= t("design.practice.device_menu.heading") %></p>
+            <div role="menu" class="absolute top-full right-0 z-50 mt-1.5 w-64 rounded-lg border bg-base-100 p-1 text-base-content shadow-md">
+              <p class="px-2 pt-1.5 pb-1 text-xs text-base-content/60"><%= t("design.practice.device_menu.heading") %></p>
               <%= form_with url: choose_devices_path, role: "group" do |f| %>
                 <% @device.options.each do |label, key| %>
                   <% chosen = key == @device.key %>
@@ -82,7 +82,7 @@
                   </button>
                 <% end %>
               <% end %>
-              <div role="separator" data-slot="dropdown-menu-separator" class="my-1 h-px bg-base-300"></div>
+              <div role="separator" class="my-1 h-px bg-base-300"></div>
               <%= link_to devices_path, role: "menuitem", class: "relative flex cursor-pointer items-center gap-2 rounded-md py-2 pr-3 pl-8 text-sm outline-none hover:bg-base-200 hover:text-base-content focus-visible:bg-base-200 focus-visible:text-base-content" do %>
                 <%= icon(:monitor, class: "absolute left-2.5 size-4") %><%= t("design.practice.device_menu.manage") %>
               <% end %>
@@ -117,7 +117,7 @@
       <%# Only a list marked for writing offers the choice. %>
       <% if @writing_language %>
         <div class="flex justify-center border-b px-4 py-2">
-          <%= records_pill(label: t("design.practice.mode_label"), item_class: PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE_ITEM, items: [
+          <%= records_pill(label: t("design.practice.mode_label"), items: [
                 [t("design.practice.mode_typing"), play_path(base), !writing, { practice_switch: writing ? "mode" : "noop", switch_name: tt("practice.modeTyping") }],
                 [t("design.practice.mode_writing"), play_path(base.merge(mode: "writing")), writing, { practice_switch: writing ? "noop" : "mode", switch_name: tt("practice.modeWriting") }]
               ]) %>
@@ -146,16 +146,16 @@
             <p class="<%= practice_design_text_class(@words.first&.dig(:display)) %>" data-writing-target="display"></p>
           </div>
           <div class="flex flex-col items-center gap-2.5 px-4 pt-2 pb-4 sm:px-6 sm:pb-5">
-            <div role="radiogroup" aria-orientation="horizontal" aria-label="<%= t("design.practice.writing_input_method") %>" class="<%= PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE %>" data-writing-target="inputSwitch" hidden>
-              <button type="button" role="radio" class="<%= PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="pad"><%= t("design.practice.writing_input_pad") %></button>
-              <button type="button" role="radio" class="<%= PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="field"><%= t("design.practice.writing_input_field") %></button>
+            <div role="radiogroup" aria-orientation="horizontal" aria-label="<%= t("design.practice.writing_input_method") %>" class="<%= UiHelper::SEGMENTED %>" data-writing-target="inputSwitch" hidden>
+              <button type="button" role="radio" class="<%= UiHelper::SEGMENTED_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="pad"><%= t("design.practice.writing_input_pad") %></button>
+              <button type="button" role="radio" class="<%= UiHelper::SEGMENTED_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="field"><%= t("design.practice.writing_input_field") %></button>
             </div>
             <div class="flex w-full max-w-xl flex-wrap items-center justify-center gap-2" data-writing-target="fieldArea">
               <input id="writing-field" type="text" lang="<%= @writing_language %>" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
                 aria-label="<%= t("design.practice.writing_input") %>" placeholder="<%= t("design.practice.writing_input") %>" aria-describedby="writing-feedback" data-writing-target="field"
                 class="h-12 min-w-0 flex-1 basis-60 rounded-lg border bg-base-100 px-3 text-center text-xl outline-none placeholder:text-base placeholder:text-base-content/60 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-primary/50"
                 data-action="input->writing#fieldInput keydown->writing#fieldKey compositionstart->writing#compositionStart compositionend->writing#compositionEnd blur->writing#blur focus->writing#focus">
-              <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+              <button type="button" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                 <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
               </button>
               <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
@@ -175,7 +175,7 @@
               <div class="flex flex-wrap items-center justify-center gap-2">
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#undo"><%= icon("undo-2") %><%= t("design.practice.writing_pad_undo") %></button>
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#clearPad"><%= icon("eraser") %><%= t("design.practice.writing_pad_clear") %></button>
-                <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+                <button type="button" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                   <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
                 </button>
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
@@ -196,7 +196,7 @@
           <div class="relative flex min-h-44 flex-1 flex-col items-center justify-center gap-3 px-4 pt-6 pb-2 text-center sm:min-h-52 sm:gap-3.5 sm:px-6 sm:pt-11">
             <p class="max-w-full text-base break-words text-base-content empty:hidden" data-practice-target="annotation"></p>
             <p class="<%= practice_design_text_class(@words.first&.dig(:display)) %>" data-practice-target="display"></p>
-            <span class="rounded-full border px-2 text-xs text-base-content/60" data-practice-target="typeThis" hidden><%= t("design.practice.word.type_this") %></span>
+            <span class="<%= badge_classes(variant: :outline, class: "font-normal text-base-content/60") %>" data-practice-target="typeThis" hidden><%= t("design.practice.word.type_this") %></span>
             <p class="<%= practice_design_text_class(@words.first&.dig(:input)) %>" data-practice-target="letters"></p>
             <% if @mode == "recall" %>
               <button type="button" class="<%= button_classes(variant: :outline, size: :sm) %>" data-practice-target="reveal"

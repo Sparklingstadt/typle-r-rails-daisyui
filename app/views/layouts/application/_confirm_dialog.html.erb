@@ -1,17 +1,17 @@
 <%# typle-r's AlertDialog (DeleteConfirmation, UnfollowDialog, DiscardChangesDialog, SessionSettings): every confirmation
     of the app opens here instead of the browser's own box (confirm_dialog.js). %>
-<dialog id="confirm-dialog" role="alertdialog" aria-labelledby="confirm-dialog-title" aria-describedby="confirm-dialog-description" data-size="default" data-default-action="<%= tt("common.delete.confirm") %>"
+<dialog id="confirm-dialog" role="alertdialog" aria-labelledby="confirm-dialog-title" aria-describedby="confirm-dialog-description" data-default-action="<%= tt("common.delete.confirm") %>"
         class="modal">
   <div class="modal-box group/alert-dialog-content grid max-w-sm gap-4 p-4">
-    <div data-slot="alert-dialog-header" class="grid grid-rows-[auto_1fr] place-items-center gap-1.5 text-center sm:place-items-start sm:text-left">
-      <h2 id="confirm-dialog-title" data-slot="alert-dialog-title" class="font-heading text-base font-medium"></h2>
-      <p id="confirm-dialog-description" data-slot="alert-dialog-description" class="text-sm text-balance text-base-content/60 md:text-pretty"></p>
+    <div class="grid grid-rows-[auto_1fr] place-items-center gap-1.5 text-center sm:place-items-start sm:text-left">
+      <h2 id="confirm-dialog-title" class="font-heading text-base font-medium"></h2>
+      <p id="confirm-dialog-description" class="text-sm text-balance text-base-content/60 md:text-pretty"></p>
     </div>
     <div data-confirm-details hidden></div>
-    <div data-slot="alert-dialog-footer" class="-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-base-200/50 p-4 sm:flex-row sm:justify-end">
-      <button type="button" value="cancel" data-confirm-cancel data-slot="alert-dialog-cancel" class="<%= button_classes(variant: :outline) %>"><%= tt("common.form.cancel") %></button>
-      <button type="button" value="confirm" data-confirm-action data-variant="destructive" data-slot="alert-dialog-action" class="<%= button_classes(variant: :destructive) %>"></button>
-      <button type="button" value="confirm" data-confirm-action data-variant="default" data-slot="alert-dialog-action" class="<%= button_classes %>" hidden></button>
+    <div class="-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-base-200/50 p-4 sm:flex-row sm:justify-end">
+      <button type="button" value="cancel" data-confirm-cancel class="<%= button_classes(variant: :outline) %>"><%= tt("common.form.cancel") %></button>
+      <button type="button" value="confirm" data-confirm-action data-variant="error" class="<%= button_classes(variant: :error) %>"></button>
+      <button type="button" value="confirm" data-confirm-action data-variant="primary" class="<%= button_classes %>" hidden></button>
     </div>
   </div>
 </dialog>

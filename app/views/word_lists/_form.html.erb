@@ -25,7 +25,7 @@
   <% end %>
 
   <div class="space-y-6">
-    <section class="space-y-2 rounded-xl border bg-base-100 p-4 sm:p-6" aria-label="<%= t("design.lists.editor.basics") %>"
+    <section class="<%= cn(UiHelper::PANEL, "space-y-2 p-4 sm:p-6") %>" aria-label="<%= t("design.lists.editor.basics") %>"
              data-controller="lists--pack-move" data-lists--pack-move-original-value="<%= list.pack_id if list.persisted? %>">
       <% if pack&.persisted? && !list.persisted? %>
         <p class="pb-2 text-sm text-base-content/60 [overflow-wrap:anywhere]"><%= t("design.lists.editor.adding_to", name: pack.name) %></p>
@@ -81,7 +81,7 @@
     <section aria-labelledby="word_list_words_heading" class="md:overflow-hidden md:rounded-xl md:border md:bg-base-100">
       <div class="flex flex-wrap items-center gap-2 pb-3 md:px-6 md:py-4">
         <h2 id="word_list_words_heading" class="text-base font-bold"><%= tt("wordLists.editor.words") %></h2>
-        <%= ui_badge(variant: :secondary, class: "tabular-nums") do %><span data-word-rows-target="count"><%= rows.size %></span> / <%= number_with_delimiter(1000) %><% end %>
+        <%= ui_badge(variant: :ghost, class: "tabular-nums") do %><span data-word-rows-target="count"><%= rows.size %></span> / <%= number_with_delimiter(1000) %><% end %>
         <div class="ml-auto">
           <%= render "word_lists/csv_import" %>
         </div>
@@ -130,11 +130,11 @@
               <button type="button" data-dropdown-target="trigger" class="<%= button_classes(variant: :ghost, size: :icon, class: "list-none") %>" title="<%= tt("wordLists.editor.actions") %>" data-role="actions"><%= icon(:ellipsis) %></button>
               <div class="absolute top-full right-0 z-50 mt-1 min-w-52 rounded-lg border bg-base-100 p-1 text-base-content shadow-md">
                 <% [["up", "arrow-up", "moveUp", "Alt+↑"], ["down", "arrow-down", "moveDown", "Alt+↓"], ["first", "arrow-up-to-line", "moveFirst", nil], ["last", "arrow-down-to-line", "moveLast", nil]].each do |where, icon_name, label, keys| %>
-                  <button type="button" class="relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none select-none hover:bg-base-200 hover:text-base-content disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:text-base-content/60"
+                  <button type="button" class="<%= UiHelper::MENU_ITEM %>"
                     data-action="word-rows#move" data-word-rows-where-param="<%= where %>" data-role="move-<%= where %>"><%= icon(icon_name) %><%= tt("wordLists.editor.#{label}") %><% if keys %><span aria-hidden="true" class="ml-auto text-xs text-base-content/60"><%= keys %></span><% end %></button>
                 <% end %>
                 <div role="separator" class="my-1 h-px bg-base-300"></div>
-                <button type="button" class="relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm text-error outline-none select-none hover:bg-error/10 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4"
+                <button type="button" class="<%= UiHelper::MENU_ITEM_ERROR %>"
                   data-action="word-rows#remove" data-role="remove-menu"><%= icon("trash-2") %><%= tt("wordLists.editor.deleteWord") %></button>
               </div>
             </div>

@@ -42,7 +42,7 @@ class Packs::PackRowComponentTest < ViewComponent::TestCase
     followed = OfficialCatalog.follow(@user, "pack-vim-beginner")
     render_inline(Packs::PackRowComponent.new(pack: followed))
 
-    assert_selector "[data-slot=badge]", text: I18n.t("design.lists.follow.badge")
+    assert_selector ".badge", text: I18n.t("design.lists.follow.badge")
     assert_selector "form[action='/catalog/#{followed.catalog_id}/unfollow']", visible: :all
     assert_no_selector "form[action='/packs/#{followed.id}']", visible: :all
   end

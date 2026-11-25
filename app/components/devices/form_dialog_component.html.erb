@@ -31,7 +31,7 @@
         </div>
       <% end %>
       <% if form_error %>
-        <div role="alert" class="<%= alert_classes(:destructive, "border-error/40 bg-error/5") %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm"><%= form_error %></div></div>
+        <div role="alert" class="<%= alert_classes(:error, "border-error/40 bg-error/5") %>"><%= icon("circle-alert") %><div class="text-sm"><%= form_error %></div></div>
       <% end %>
       <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
         <button type="button" class="<%= button_classes(variant: :outline) %>" data-action="modal#close"><%= settings_t("form.cancel") %></button>

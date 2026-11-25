@@ -15,7 +15,7 @@ class Ui::ClearableSearchFieldComponent < ApplicationComponent
   end
 
   def call
-    tag.label(class: cn("input min-w-0 flex-1", @size, @input_class, @class), "data-slot": "search-field") do
+    tag.label(class: cn("input min-w-0 flex-1", @size, @input_class, @class)) do
       safe_join([
         tag.span(@label, class: "sr-only"),
         icon(:search, class: "pointer-events-none size-4 shrink-0 text-base-content/60"),

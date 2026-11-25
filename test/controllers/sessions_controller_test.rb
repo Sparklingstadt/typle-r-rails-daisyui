@@ -5,8 +5,8 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get "/signin", params: { returnTo: "/records" }
     assert_response :success
     assert_select "form[action='/auth/sid'] + form[action='/auth/github']"
-    assert_select "form[action='/auth/sid'] button[data-variant=default].w-full", "Sparklingstadt IDでログイン"
-    assert_select "form[action='/auth/github'] button[data-variant=outline].w-full", "GitHubでログイン"
+    assert_select "form[action='/auth/sid'] button.btn-primary.w-full", "Sparklingstadt IDでログイン"
+    assert_select "form[action='/auth/github'] button.btn-outline.w-full", "GitHubでログイン"
     assert_select "form[action='/auth/sid'] input[name=origin][value='/records']"
     assert_select "form[action='/auth/github'] input[name=origin][value='/records']"
     assert_select "input[name=password]", false, "no ID and password"
@@ -20,7 +20,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     with_env("SID_CLIENT_SECRET" => nil) do
       get "/signin"
       assert_select "form[action='/auth/sid']", false
-      assert_select "form[action='/auth/github'] button[data-variant=default]", "GitHubでログイン"
+      assert_select "form[action='/auth/github'] button.btn-primary", "GitHubでログイン"
     end
     with_env("SID_ISSUER" => nil, "GITHUB_CLIENT_ID" => nil) do
       get "/signin"

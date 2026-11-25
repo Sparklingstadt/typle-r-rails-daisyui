@@ -30,7 +30,7 @@
 
       <%= render "pages/guide/shortcuts" %>
 
-      <div class="flex flex-col items-start gap-3 rounded-xl border bg-base-100 p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div class="<%= cn(UiHelper::PANEL, "flex flex-col items-start gap-3 p-5 sm:flex-row sm:items-center sm:justify-between") %>">
         <p class="font-bold"><%= guide_t("cta.text") %></p>
         <%= link_button play_path do %><%= icon(:keyboard) %><%= guide_t("cta.action") %><% end %>
       </div>

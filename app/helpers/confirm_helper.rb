@@ -18,7 +18,7 @@ module ConfirmHelper
     delete_confirm_data(title: tt("wordLists.follow.title", name:), description: tt("wordLists.follow.description", name:), action: tt("wordLists.follow.confirm"))
   end
 
-  def confirm_data(title:, description: nil, details: nil, action: nil, cancel: nil, variant: :destructive)
+  def confirm_data(title:, description: nil, details: nil, action: nil, cancel: nil, variant: :error)
     { turbo_confirm: title, confirm_description: description, confirm_details: details&.to_str, confirm_action: action,
       confirm_cancel: cancel, confirm_variant: variant }.compact
   end

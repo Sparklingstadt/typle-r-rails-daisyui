@@ -5,5 +5,5 @@ class Ui::EmptyStateComponent < ApplicationComponent
     @class = class_option(binding)
   end
 
-  def call = tag.div(content, class: cn(EMPTY_STATE, @class), "data-slot": "empty-state")
+  def call = tag.div(content, class: cn(EMPTY_STATE, @class))
 end

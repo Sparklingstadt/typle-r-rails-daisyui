@@ -5,7 +5,7 @@ class Devices::RowComponentTest < ViewComponent::TestCase
     render_inline(Devices::RowComponent.new(device: nil, usage: nil, current_key: Device::DEFAULT_KEY))
 
     assert_selector "h3", text: I18n.t("devices.default_name")
-    assert_selector "[data-slot=badge] svg.lucide-check"
+    assert_selector ".badge svg.lucide-check"
     assert_no_selector "button"
   end
 

@@ -1,6 +1,6 @@
 # A badge: daisyUI's badge in the app's variants (Ui::Classes::BADGE_VARIANTS).
 class Ui::BadgeComponent < ApplicationComponent
-  def initialize(text = nil, variant: :default, class: nil, **options)
+  def initialize(text = nil, variant: :primary, class: nil, **options)
     @text = text
     @variant = variant
     @class = class_option(binding)
@@ -8,6 +8,6 @@ class Ui::BadgeComponent < ApplicationComponent
   end
 
   def call
-    tag.span(content? ? content : @text, class: badge_classes(variant: @variant, class: @class), "data-slot": "badge", **@options)
+    tag.span(content? ? content : @text, class: badge_classes(variant: @variant, class: @class), **@options)
   end
 end

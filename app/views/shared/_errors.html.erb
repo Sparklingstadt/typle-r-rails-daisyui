@@ -1,9 +1,9 @@
 <%# typle-r's ErrorAlert: the reasons a form was not saved. %>
 <% if record.errors.any? %>
   <% messages = record.errors.full_messages %>
-  <div data-slot="alert" role="alert" class="<%= alert_classes(:destructive, cn("border-error/40 bg-error/5", local_assigns[:class])) %>">
+  <div role="alert" class="<%= alert_classes(:error, cn("border-error/40 bg-error/5", local_assigns[:class])) %>">
     <%= icon("circle-alert") %>
-    <div data-slot="alert-description" class="text-sm text-balance text-error/90 md:text-pretty">
+    <div class="text-sm text-balance text-error/90 md:text-pretty">
       <% if messages.one? %>
         <%= messages.first %>
       <% else %>

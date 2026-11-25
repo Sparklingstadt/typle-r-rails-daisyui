@@ -1,7 +1,7 @@
 # The parts of typle-r's settings, account and info pages (src/components/Settings, Devices, About, Guide, AccountForm)
 # that the pages here share. The class strings are typle-r's.
 module SettingsDesignHelper
-  SETTINGS_SECTION = "rounded-xl border bg-base-100 p-4 sm:p-5"
+  SETTINGS_SECTION = "#{UiHelper::PANEL} p-4 sm:p-5"
   SETTINGS_LINK = "underline underline-offset-4"
   SETTINGS_GUIDE_LINK = "font-medium underline decoration-base-content/30 underline-offset-3 hover:decoration-base-content"
   SETTINGS_CHECKBOX = "size-4 shrink-0 cursor-pointer accent-primary disabled:cursor-not-allowed"
@@ -57,9 +57,9 @@ module SettingsDesignHelper
   # A record's problems, as an alert (typle-r's ErrorAlert).
   def settings_errors(record)
     return if record.nil? || record.errors.empty?
-    tag.div(role: "alert", class: alert_classes(:destructive)) do
+    tag.div(role: "alert", class: alert_classes(:error)) do
       safe_join([icon("circle-alert"),
-                 tag.ul(class: "text-sm", "data-slot": "alert-description") { safe_join(record.errors.full_messages.map { tag.li(_1) }) }])
+                 tag.ul(class: "text-sm") { safe_join(record.errors.full_messages.map { tag.li(_1) }) }])
     end
   end
 
@@ -101,8 +101,8 @@ module SettingsDesignHelper
 
   # A chip of 関心 (typle-r's InterestSettings): a toggle button that saves at once, disabled while saving.
   def settings_interest_chip(id, label, chosen)
-    classes = cn("inline-flex min-h-10 cursor-pointer items-center rounded-full border px-4 text-sm font-medium transition-colors outline-none focus-visible:ring-3 focus-visible:ring-primary/50 disabled:opacity-60 in-[form[aria-busy=true]]:opacity-60",
-                 chosen ? "border-primary bg-primary text-primary-content" : "bg-base-100 hover:bg-base-200")
+    classes = button_classes(variant: chosen ? :primary : :outline,
+                             class: cn("rounded-full px-4 text-sm disabled:opacity-60 in-[form[aria-busy=true]]:opacity-60", !chosen && "bg-base-100"))
     tag.button(label, type: "submit", name: "toggle", value: id, class: classes, "aria-pressed": chosen.to_s)
   end
 
