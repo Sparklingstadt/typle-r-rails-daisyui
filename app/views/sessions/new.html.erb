@@ -8,18 +8,18 @@
   <div class="max-w-sm space-y-4">
     <%# Sparklingstadt ID, the login shared by the Sparklingstadt services, comes first. %>
     <% if SidLogin.enabled? %>
-      <%= form_button tt("account.signInWithSid"), "/auth/sid", method: :post, size: :lg, icon: "log-in", class: "w-full",
+      <%= form_button tt("account.signInWithSid"), "/auth/sid", method: :post, size: :sm, icon: "log-in", class: "w-full",
             form_class: "block", params: { origin: return_to }, data: { turbo: false } %>
     <% end %>
     <% if GithubLogin.enabled? %>
-      <%= form_button tt("account.signInWithGitHub"), "/auth/github", method: :post, size: :lg, icon: "log-in", class: "w-full",
+      <%= form_button tt("account.signInWithGitHub"), "/auth/github", method: :post, size: :sm, icon: "log-in", class: "w-full",
             variant: SidLogin.enabled? ? :outline : :default, form_class: "block", params: { origin: return_to }, data: { turbo: false } %>
     <% end %>
     <% if !SidLogin.enabled? && !GithubLogin.enabled? %>
       <p class="text-sm text-base-content/60"><%= tt("errors.authUnavailable") %></p>
     <% end %>
     <% if @local_login %>
-      <%= form_button t(".local_login"), local_session_path, method: :post, size: :lg, variant: :outline, class: "w-full",
+      <%= form_button t(".local_login"), local_session_path, method: :post, size: :sm, variant: :outline, class: "w-full",
             form_class: "block", params: { returnTo: return_to } %>
     <% end %>
     <% if params[:error].present? %><%= form_message(tt("account.signInFailed"), kind: :error) %><% end %>

@@ -91,7 +91,7 @@
         <% end %>
         <%# Handwriting never combines with recall, so the recall switch is hidden while writing. %>
         <% unless writing %>
-          <%= tag.button type: "button", class: button_classes(variant: :ghost, size: :lg, class: "shrink-0 px-2 sm:px-2.5"), data: { visit_url: play_path(base.merge(mode: (@mode == "recall" ? nil : "recall")).compact), lock_while_running: true },
+          <%= tag.button type: "button", class: button_classes(variant: :ghost, size: :sm, class: "shrink-0 px-2 sm:px-2.5"), data: { visit_url: play_path(base.merge(mode: (@mode == "recall" ? nil : "recall")).compact), lock_while_running: true },
                 "aria-pressed": (@mode == "recall").to_s, title: t("design.practice.recall.toggle"), "aria-label": t("design.practice.recall.toggle") do %>
             <%= icon("brain") %><span class="hidden xl:inline"><%= t("design.practice.recall.toggle") %></span>
           <% end %>
@@ -108,7 +108,7 @@
             <%= icon("panel-right-close", class: "in-[[data-play-aside=collapsed]]:hidden") %><%= icon("panel-right-open", class: "hidden in-[[data-play-aside=collapsed]]:block") %>
           </button>
         <% end %>
-        <button type="button" class="<%= button_classes(variant: :ghost, size: :lg, class: "shrink-0 px-2 sm:px-2.5") %>" data-action="<%= controller %>#restart"
+        <button type="button" class="<%= button_classes(variant: :ghost, size: :sm, class: "shrink-0 px-2 sm:px-2.5") %>" data-action="<%= controller %>#restart"
           aria-label="<%= t("design.practice.header.restart") %>" aria-keyshortcuts="Escape" title="<%= t("design.practice.header.restart_title") %>">
           <%= icon("rotate-ccw") %><span class="hidden sm:inline"><%= t("design.practice.header.restart_short") %></span><%= kbd("Esc", class: "hidden sm:inline-flex") %>
         </button>
@@ -155,10 +155,10 @@
                 aria-label="<%= t("design.practice.writing_input") %>" placeholder="<%= t("design.practice.writing_input") %>" aria-describedby="writing-feedback" data-writing-target="field"
                 class="h-12 min-w-0 flex-1 basis-60 rounded-lg border bg-base-100 px-3 text-center text-xl outline-none placeholder:text-base placeholder:text-base-content/60 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-primary/50"
                 data-action="input->writing#fieldInput keydown->writing#fieldKey compositionstart->writing#compositionStart compositionend->writing#compositionEnd blur->writing#blur focus->writing#focus">
-              <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :lg, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+              <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                 <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
               </button>
-              <button type="button" class="<%= button_classes(variant: :outline, size: :lg, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
+              <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
             </div>
             <div class="flex w-full max-w-xl flex-col gap-2" data-writing-target="padArea" hidden>
               <div class="relative rounded-lg bg-base-100">
@@ -173,12 +173,12 @@
                 </div>
               </div>
               <div class="flex flex-wrap items-center justify-center gap-2">
-                <button type="button" class="<%= button_classes(variant: :outline, size: :lg, class: "h-12") %>" data-action="writing#undo"><%= icon("undo-2") %><%= t("design.practice.writing_pad_undo") %></button>
-                <button type="button" class="<%= button_classes(variant: :outline, size: :lg, class: "h-12") %>" data-action="writing#clearPad"><%= icon("eraser") %><%= t("design.practice.writing_pad_clear") %></button>
-                <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :lg, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+                <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#undo"><%= icon("undo-2") %><%= t("design.practice.writing_pad_undo") %></button>
+                <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#clearPad"><%= icon("eraser") %><%= t("design.practice.writing_pad_clear") %></button>
+                <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                   <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
                 </button>
-                <button type="button" class="<%= button_classes(variant: :outline, size: :lg, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
+                <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
               </div>
             </div>
             <%# typle-r's WritingPractice: what was read, or what went wrong, or else the Esc hint; one at a time. %>
@@ -233,7 +233,7 @@
               <span class="text-xs text-base-content/60"><%= t("design.practice.upcoming.next") %></span>
               <span class="contents" data-practice-target="upcoming" data-last="<%= t("design.practice.upcoming.last") %>"></span>
               <span class="flex-1"></span>
-              <button type="button" class="<%= button_classes(variant: :ghost, size: :lg) %>" aria-expanded="true" aria-controls="all-words" data-action="practice#toggleAll" data-practice-target="showAll">
+              <button type="button" class="<%= button_classes(variant: :ghost, size: :sm) %>" aria-expanded="true" aria-controls="all-words" data-action="practice#toggleAll" data-practice-target="showAll">
                 <%= t("design.practice.upcoming.show_all") %><%= icon("chevron-up", class: "size-4 group-aria-[expanded=false]/button:hidden") %><%= icon("chevron-down", class: "size-4 group-aria-[expanded=true]/button:hidden") %>
               </button>
               <ul id="all-words" aria-label="<%= t("design.practice.upcoming.all_words") %>" data-practice-target="allWords"

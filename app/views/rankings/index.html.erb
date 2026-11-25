@@ -12,8 +12,8 @@
         <p class="max-w-md text-sm text-balance text-base-content/60"><%= records_t("rankings.empty.description") %></p>
       </div>
       <div class="flex flex-wrap justify-center gap-2">
-        <%= link_button play_path, size: :lg do %><%= icon(:keyboard) %><%= records_t("rankings.empty.practice") %><% end %>
-        <%= link_button new_pack_path, size: :lg, variant: :outline do %><%= icon(:plus) %><%= records_t("rankings.empty.create") %><% end %>
+        <%= link_button play_path, size: :sm do %><%= icon(:keyboard) %><%= records_t("rankings.empty.practice") %><% end %>
+        <%= link_button new_pack_path, size: :sm, variant: :outline do %><%= icon(:plus) %><%= records_t("rankings.empty.create") %><% end %>
       </div>
     <% end %>
   <% else %>

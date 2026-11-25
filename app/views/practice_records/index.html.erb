@@ -33,7 +33,7 @@
         <%= render PracticeRecords::FilterMenuComponent.new(name: records_t("history.filter.device"), all_label: records_t("history.filter.all_devices"), value: @device, options: records_device_choices(@device_options),
               url: ->(value) { records_url.({ device: value }) }) %>
         <% if filtered %>
-          <%= link_button records_t("history.filter.clear"), practice_records_path, variant: :ghost, size: :lg, class: "text-base-content/60" %>
+          <%= link_button records_t("history.filter.clear"), practice_records_path, variant: :ghost, size: :sm, class: "text-base-content/60" %>
         <% end %>
         <p id="record-count" aria-live="polite" class="ml-auto text-sm text-base-content/60 tabular-nums">
           <%= filtered ? records_t("history.filter.filtered_count", matched: @records.size, count: @all.size) : records_t("history.filter.count", count: @all.size) %>

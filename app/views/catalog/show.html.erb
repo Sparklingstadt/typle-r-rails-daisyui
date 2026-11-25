@@ -13,9 +13,9 @@
     <% full = !@followed && current_user && current_user.packs.where.not(catalog_id: nil).count >= Pack::MAX_FOLLOWED %>
     <div class="space-y-2">
       <% if @followed && (first = lists_practice_target(@followed)) %>
-        <%= visit_button play_path(list: first.id), size: :lg do %><%= icon(:keyboard) %><%= t("design.lists.official.practice") %><% end %>
+        <%= visit_button play_path(list: first.id), size: :sm do %><%= icon(:keyboard) %><%= t("design.lists.official.practice") %><% end %>
       <% else %>
-        <%= form_button t("design.lists.official.practice"), follow_catalog_path(@pack.catalog_id, practice: 1), size: :lg, icon: :keyboard, disabled: full %>
+        <%= form_button t("design.lists.official.practice"), follow_catalog_path(@pack.catalog_id, practice: 1), size: :sm, icon: :keyboard, disabled: full %>
       <% end %>
       <% if full %><p class="text-[13px] text-base-content/60"><%= tt("officialPack.full", max: Pack::MAX_FOLLOWED) %></p><% end %>
     </div>

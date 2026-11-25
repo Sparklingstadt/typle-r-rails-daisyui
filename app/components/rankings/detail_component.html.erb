@@ -10,9 +10,9 @@
     </div>
     <div class="flex w-full gap-2 sm:w-auto">
       <% if mode_records.any? %>
-        <%= link_button practice_records_path(list: list.id), variant: :ghost, size: :lg, class: "hidden sm:inline-flex" do %><%= records_t("rankings.detail.view_records") %><%= icon("arrow-right") %><% end %>
+        <%= link_button practice_records_path(list: list.id), variant: :ghost, size: :sm, class: "hidden sm:inline-flex" do %><%= records_t("rankings.detail.view_records") %><%= icon("arrow-right") %><% end %>
       <% end %>
-      <%= link_button practice_path, size: :lg, class: "grow sm:grow-0" do %><%= icon(:keyboard) %><%= records_t("rankings.detail.practice") %><% end %>
+      <%= link_button practice_path, size: :sm, class: "grow sm:grow-0" do %><%= icon(:keyboard) %><%= records_t("rankings.detail.practice") %><% end %>
     </div>
   </div>
 

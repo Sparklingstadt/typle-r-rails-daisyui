@@ -23,6 +23,6 @@
   </div>
 <% else %>
   <%# typle-r's AccountBar: the link names the page's path; a click adds its query (as in /play?list=…). %>
-  <%= link_button new_session_path(returnTo: request.path), variant: :outline, size: :lg, class: "gap-2 px-3",
+  <%= link_button new_session_path(returnTo: request.path), variant: :outline, size: :sm, class: "gap-2 px-3",
         data: ({ return_href: new_session_path(returnTo: request.fullpath) } if request.query_string.present?) do %><%= icon("log-in") %><%= t("layouts.application.sign_in") %><% end %>
 <% end %>
