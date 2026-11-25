@@ -31,6 +31,8 @@ module Ui
       destructive: "badge-error badge-soft",
       outline: "badge-outline border-base-300",
       ghost: "badge-ghost",
+      warning: "badge-warning badge-soft",
+      info: "badge-info badge-soft",
       link: "border-0 bg-transparent text-primary underline-offset-4 hover:underline"
     }.freeze
 
@@ -42,6 +44,9 @@ module Ui
     CARD_ACTION = "col-start-2 row-span-2 row-start-1 self-start justify-self-end"
     CARD_CONTENT = "px-(--card-spacing)"
     CARD_FOOTER = "card-actions items-center border-t bg-base-200/50 p-(--card-spacing)"
+    # A plain bordered box (daisyUI's card with a border) for a section or a row: its padding and layout are the caller's.
+    PANEL = "card card-border border-base-300 bg-base-100"
+    PANEL_DASHED = "card card-dash border-base-300 bg-base-100"
     CARD_LIST = "divide-y divide-base-300 overflow-hidden rounded-box border bg-base-100"
 
     INPUT = "input w-full"

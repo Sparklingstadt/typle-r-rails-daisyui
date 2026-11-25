@@ -16,7 +16,7 @@
       <h2 id="features-heading" class="text-base font-bold"><%= settings_t("about.features.title") %></h2>
       <ul class="grid gap-3 sm:grid-cols-3">
         <% [[:create, new_pack_path, :plus], [:play, play_path, :keyboard], [:rankings, rankings_path, :trophy]].each do |key, path, icon_name| %>
-          <li class="relative flex gap-3 rounded-xl border bg-base-100 p-4 pr-10 transition-colors has-[a:hover]:border-base-content/25 has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-primary/50 sm:block sm:pr-4">
+          <li class="<%= cn(UiHelper::PANEL, "relative flex flex-row gap-3 p-4 pr-10 transition-colors has-[a:hover]:border-base-content/25 has-[a:focus-visible]:ring-3 has-[a:focus-visible]:ring-primary/50 sm:block sm:pr-4") %>">
             <span aria-hidden="true" class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-base-200 text-base-content sm:mb-3"><%= icon(icon_name) %></span>
             <div class="min-w-0">
               <h3 class="font-bold"><%= link_to tt("about.features.#{key}.title"), path, class: "outline-none after:absolute after:inset-0 after:rounded-xl" %></h3>
@@ -33,14 +33,14 @@
       <p class="max-w-2xl text-sm text-base-content/60"><%= settings_t("about.storage.text") %></p>
       <ul class="grid gap-3 sm:grid-cols-2">
         <% [["browser", "hard-drive", !signed_in?], ["account", :cloud, signed_in?]].each do |place, icon_name, active| %>
-          <li aria-current="<%= active ? "true" : nil %>" class="<%= cn("rounded-xl border bg-base-100 p-4", active && "border-base-content/40 ring-1 ring-base-content/40") %>">
+          <li aria-current="<%= active ? "true" : nil %>" class="<%= cn(UiHelper::PANEL, "p-4", active && "border-base-content/40 ring-1 ring-base-content/40") %>">
             <div class="mb-3 flex items-start gap-3">
               <span aria-hidden="true" class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-base-200"><%= icon(icon_name) %></span>
               <div class="min-w-0 flex-1">
                 <h3 class="font-bold"><%= settings_t("about.places.#{place}.title") %></h3>
                 <p class="text-xs text-base-content/60"><%= settings_t("about.places.#{place}.condition") %></p>
               </div>
-              <% if active %><span class="inline-flex h-6 shrink-0 items-center rounded-full bg-primary px-2.5 text-xs font-medium text-primary-content"><%= settings_t("about.places.current") %></span><% end %>
+              <% if active %><span class="<%= badge_classes(class: "h-6 px-2.5") %>"><%= settings_t("about.places.current") %></span><% end %>
             </div>
             <ul class="space-y-1.5 text-sm">
               <% %w[p1 p2 p3].each do |point| %>
@@ -55,7 +55,7 @@
 
     <section aria-labelledby="version-heading" class="space-y-3">
       <h2 id="version-heading" class="text-base font-bold"><%= settings_t("about.version.title") %></h2>
-      <dl class="divide-y rounded-xl border bg-base-100 text-sm">
+      <dl class="<%= cn(UiHelper::PANEL, "divide-y text-sm") %>">
         <div class="grid gap-1 px-4 py-3 sm:grid-cols-[10rem_1fr] sm:gap-4">
           <dt class="text-base-content/60"><%= tt("about.version.version") %></dt>
           <dd class="tabular-nums">v<%= Typle::VERSION %></dd>

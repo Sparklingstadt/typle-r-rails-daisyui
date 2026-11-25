@@ -9,7 +9,7 @@
   <% end %>
 
   <div class="space-y-6">
-    <section class="space-y-2 rounded-xl border bg-base-100 p-4 sm:p-6" aria-label="<%= t("design.lists.pack_editor.info") %>">
+    <section class="<%= cn(UiHelper::PANEL, "space-y-2 p-4 sm:p-6") %>" aria-label="<%= t("design.lists.pack_editor.info") %>">
       <%= f.label :name, class: label_classes do %><%= t("design.lists.pack_editor.name") %><span aria-hidden="true" class="text-error">*</span><% end %>
       <%= f.text_field :name, required: true, maxlength: 200, autofocus: true, class: input_classes("h-11"),
             "aria-invalid": (true if name_error), "aria-describedby": ["pack_name_help", ("pack_name_error" if name_error)].compact.join(" ") %>
@@ -22,7 +22,7 @@
     <% if pack.persisted? %><%= render "packs/list_order", pack: %><% end %>
     <% if pack.new_record? %>
       <%# PackListChoices: the lists the new pack is made of. %>
-      <section aria-labelledby="pack-lists-heading" class="space-y-3 rounded-xl border bg-base-100 p-4 sm:p-6" data-controller="pack-choices"
+      <section aria-labelledby="pack-lists-heading" class="<%= cn(UiHelper::PANEL, "space-y-3 p-4 sm:p-6") %>" data-controller="pack-choices"
         data-pack-choices-chosen-value="<%= tt_forms("wordLists.packEditor.chosen") %>">
         <div class="space-y-1">
           <div class="flex flex-wrap items-baseline gap-x-2">

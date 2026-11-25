@@ -1,4 +1,4 @@
-<span class="<%= cn("inline-flex h-7 shrink-0 items-center gap-1.5 rounded-full border bg-base-100 px-2.5 text-xs font-medium text-base-content/70", local_assigns[:class]) %>"
+<span class="<%= badge_classes(variant: :outline, class: cn("h-7 gap-1.5 bg-base-100 px-2.5 text-base-content/70 [&>svg]:size-3.5!", local_assigns[:class])) %>"
   title="<%= t(signed_in? ? "layouts.application.storage_account_detail" : "layouts.application.storage_browser_detail") %>">
   <%= icon(signed_in? ? :cloud : "hard-drive", class: "size-3.5 text-base-content/60") %>
   <span class="sr-only"><%= t("layouts.application.storage_label") %></span><%= t(signed_in? ? "layouts.application.storage_account" : "layouts.application.storage_browser") %>
