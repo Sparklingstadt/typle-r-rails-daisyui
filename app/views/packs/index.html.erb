@@ -43,8 +43,8 @@
       data-packs-filter-all-tags-value="<%= tt("wordLists.filter.allTags") %>" data-packs-filter-category-current-value="<%= tt("wordLists.filter.categoryCurrent", category: "%{category}") %>" data-packs-filter-tags-current-value="<%= tt("wordLists.filter.tagsCurrent", tags: "%{tags}") %>" data-packs-filter-separator-value="<%= tt("wordLists.filter.separator") %>">
       <div class="flex min-h-11 flex-wrap items-center gap-x-2 gap-y-2">
         <h2 id="list-heading" tabindex="-1" class="text-base font-bold outline-none"><%= tt("wordLists.manager.heading") %></h2>
-        <%= ui_badge(tt("wordLists.manager.ownCount", count: own, max: 150), variant: :secondary, class: "tabular-nums", title: limit_title) %>
-        <%= ui_badge(tt("wordLists.manager.followedCount", count: followed, max: 200), variant: :secondary, class: "tabular-nums", title: limit_title) %>
+        <%= ui_badge(tt("wordLists.manager.ownCount", count: own, max: 150), variant: :ghost, class: "tabular-nums", title: limit_title) %>
+        <%= ui_badge(tt("wordLists.manager.followedCount", count: followed, max: 200), variant: :ghost, class: "tabular-nums", title: limit_title) %>
         <div class="ml-auto flex"><%= import %></div>
         <%= link_button new_pack_path, variant: :outline do %><%= icon(:plus) %><%= tt("wordLists.manager.createPack") %><% end %>
         <%= link_button create_list_path do %><%= icon(:plus) %><%= tt("wordLists.manager.createList") %><% end %>

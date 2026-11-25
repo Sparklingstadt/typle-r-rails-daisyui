@@ -10,9 +10,9 @@
     <% pack.first_words.each do |word| %><li class="[overflow-wrap:anywhere]"><%= word[:display] %></li><% end %>
   </ul>
   <% if local_assigns[:start] %>
-    <%= form_button t("catalog.card.start"), follow_catalog_path(pack.catalog_id, practice: 1), variant: local_assigns[:primary] ? :default : :outline,
+    <%= form_button t("catalog.card.start"), follow_catalog_path(pack.catalog_id, practice: 1), variant: local_assigns[:primary] ? :primary : :outline,
           icon: :keyboard, class: "w-full", form_class: "mt-auto", "aria-describedby": name_id %>
   <% elsif local_assigns[:followed] %>
-    <%= ui_badge(t("design.lists.catalog.following"), variant: :secondary, class: "mt-auto") %>
+    <%= ui_badge(t("design.lists.catalog.following"), variant: :ghost, class: "mt-auto") %>
   <% end %>
 <% end %>

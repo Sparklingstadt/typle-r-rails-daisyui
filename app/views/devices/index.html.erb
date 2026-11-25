@@ -43,7 +43,7 @@
       <div class="flex min-h-11 flex-wrap items-center gap-x-2 gap-y-2">
         <h2 id="device-list-heading" class="text-base font-bold"><%= settings_t("devices.listHeading") %></h2>
         <% if @devices.any? %>
-          <%= ui_badge settings_t("devices.count", count: @devices.size), variant: :secondary, class: "tabular-nums" %>
+          <%= ui_badge settings_t("devices.count", count: @devices.size), variant: :ghost, class: "tabular-nums" %>
           <% if full %>
             <button type="button" disabled class="<%= button_classes(class: "ml-auto") %>"><%= icon(:plus) %><%= settings_t("devices.add") %></button>
           <% else %>

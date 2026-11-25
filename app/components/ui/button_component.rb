@@ -6,7 +6,7 @@
 class Ui::ButtonComponent < ApplicationComponent
   KINDS = %i[link visit form].freeze
 
-  def initialize(label = nil, url:, as: :link, variant: :default, size: :default, class: nil, icon: nil, form_class: "contents", **options)
+  def initialize(label = nil, url:, as: :link, variant: :primary, size: :default, class: nil, icon: nil, form_class: "contents", **options)
     raise ArgumentError, "unknown button kind: #{as.inspect}" unless KINDS.include?(as)
     @label = label
     @url = url

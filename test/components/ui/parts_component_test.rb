@@ -3,7 +3,7 @@ require "test_helper"
 # The small parts of the design system: Badge, EmptyState, EmptyNote, IconTile and Kbd.
 class Ui::PartsComponentTest < ViewComponent::TestCase
   test "a badge shows its text or block in its variant" do
-    render_inline(Ui::BadgeComponent.new("公式", variant: :secondary, title: "t"))
+    render_inline(Ui::BadgeComponent.new("公式", variant: :ghost, title: "t"))
     assert_selector "span[data-slot=badge][title=t]", text: "公式"
     assert_includes page.find("span")[:class].split, "badge-ghost"
 

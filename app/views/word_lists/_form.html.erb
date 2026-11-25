@@ -81,7 +81,7 @@
     <section aria-labelledby="word_list_words_heading" class="md:overflow-hidden md:rounded-xl md:border md:bg-base-100">
       <div class="flex flex-wrap items-center gap-2 pb-3 md:px-6 md:py-4">
         <h2 id="word_list_words_heading" class="text-base font-bold"><%= tt("wordLists.editor.words") %></h2>
-        <%= ui_badge(variant: :secondary, class: "tabular-nums") do %><span data-word-rows-target="count"><%= rows.size %></span> / <%= number_with_delimiter(1000) %><% end %>
+        <%= ui_badge(variant: :ghost, class: "tabular-nums") do %><span data-word-rows-target="count"><%= rows.size %></span> / <%= number_with_delimiter(1000) %><% end %>
         <div class="ml-auto">
           <%= render "word_lists/csv_import" %>
         </div>

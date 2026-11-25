@@ -57,7 +57,7 @@ module SettingsDesignHelper
   # A record's problems, as an alert (typle-r's ErrorAlert).
   def settings_errors(record)
     return if record.nil? || record.errors.empty?
-    tag.div(role: "alert", class: alert_classes(:destructive)) do
+    tag.div(role: "alert", class: alert_classes(:error)) do
       safe_join([icon("circle-alert"),
                  tag.ul(class: "text-sm", "data-slot": "alert-description") { safe_join(record.errors.full_messages.map { tag.li(_1) }) }])
     end
@@ -101,7 +101,7 @@ module SettingsDesignHelper
 
   # A chip of 関心 (typle-r's InterestSettings): a toggle button that saves at once, disabled while saving.
   def settings_interest_chip(id, label, chosen)
-    classes = button_classes(variant: chosen ? :default : :outline,
+    classes = button_classes(variant: chosen ? :primary : :outline,
                              class: cn("rounded-full px-4 text-sm disabled:opacity-60 in-[form[aria-busy=true]]:opacity-60", !chosen && "bg-base-100"))
     tag.button(label, type: "submit", name: "toggle", value: id, class: classes, "aria-pressed": chosen.to_s)
   end

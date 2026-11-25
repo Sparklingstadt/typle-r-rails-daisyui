@@ -7,11 +7,10 @@ module Ui
     # daisyUI's btn, in the variants and sizes the pages ask for. Each size is named after the daisyUI size it gives.
     BUTTON_BASE = "btn flex-nowrap whitespace-nowrap font-medium"
     BUTTON_VARIANTS = {
-      default: "btn-primary",
+      primary: "btn-primary",
       outline: "btn-outline border-base-300 hover:border-base-300 hover:bg-base-200 hover:text-base-content",
-      secondary: "",
       ghost: "btn-ghost",
-      destructive: "btn-error btn-soft",
+      error: "btn-error btn-soft",
       link: "btn-link"
     }.freeze
     BUTTON_SIZES = {
@@ -26,9 +25,8 @@ module Ui
 
     BADGE_BASE = "badge badge-sm w-fit shrink-0 gap-1 whitespace-nowrap font-medium [&>svg]:size-3!"
     BADGE_VARIANTS = {
-      default: "badge-primary",
-      secondary: "badge-ghost",
-      destructive: "badge-error badge-soft",
+      primary: "badge-primary",
+      error: "badge-error badge-soft",
       outline: "badge-outline border-base-300",
       ghost: "badge-ghost",
       warning: "badge-warning badge-soft",
@@ -68,7 +66,7 @@ module Ui
     TABLE_CELL = "whitespace-nowrap"
 
     ALERT = "alert text-left text-sm"
-    ALERT_VARIANTS = { default: "", destructive: "alert-error alert-soft", success: "alert-success" }.freeze
+    ALERT_VARIANTS = { plain: "", error: "alert-error alert-soft", success: "alert-success" }.freeze
     EMPTY_NOTE = "rounded-box border border-dashed bg-base-100 px-5 py-6 text-sm text-base-content/60"
     EMPTY_STATE = "flex flex-col items-center gap-4 rounded-box border border-dashed bg-base-100 px-6 text-center"
     # daisyUI's input as a label around its icon and the field (the field inside takes no style of its own).
@@ -84,15 +82,15 @@ module Ui
     # as tailwind-merge decides.
     def cn(*classes) = MERGER.merge(classes.flatten.select { |name| name.is_a?(String) && !name.empty? }.join(" "))
 
-    def button_classes(variant: :default, size: :default, class: nil)
+    def button_classes(variant: :primary, size: :default, class: nil)
       cn(BUTTON_BASE, BUTTON_VARIANTS.fetch(variant.to_sym), BUTTON_SIZES.fetch(size.to_sym), binding.local_variable_get(:class))
     end
 
-    def badge_classes(variant: :default, class: nil) = cn(BADGE_BASE, BADGE_VARIANTS.fetch(variant.to_sym), binding.local_variable_get(:class))
+    def badge_classes(variant: :primary, class: nil) = cn(BADGE_BASE, BADGE_VARIANTS.fetch(variant.to_sym), binding.local_variable_get(:class))
     def select_classes(variant, extra = nil) = cn(SELECT_BASE, SELECT_VARIANTS.fetch(variant.to_sym), extra)
     def input_classes(extra = nil) = cn(INPUT, extra)
     def textarea_classes(extra = nil) = cn(TEXTAREA, extra)
     def label_classes(extra = nil) = cn(LABEL, extra)
-    def alert_classes(variant = :default, extra = nil) = cn(ALERT, ALERT_VARIANTS.fetch(variant.to_sym), extra)
+    def alert_classes(variant = :plain, extra = nil) = cn(ALERT, ALERT_VARIANTS.fetch(variant.to_sym), extra)
   end
 end

@@ -68,7 +68,7 @@ module UiHelper
   def page_alert
     return if alert.blank? || @page_alert_shown
     @page_alert_shown = true
-    tag.div(role: "alert", class: alert_classes(:destructive, "mb-6 border-error/40 bg-error/5")) do
+    tag.div(role: "alert", class: alert_classes(:error, "mb-6 border-error/40 bg-error/5")) do
       safe_join([ icon("circle-alert"), tag.div(alert, "data-slot": "alert-description", class: "text-sm") ])
     end
   end

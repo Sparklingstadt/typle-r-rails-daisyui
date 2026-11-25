@@ -155,7 +155,7 @@
                 aria-label="<%= t("design.practice.writing_input") %>" placeholder="<%= t("design.practice.writing_input") %>" aria-describedby="writing-feedback" data-writing-target="field"
                 class="h-12 min-w-0 flex-1 basis-60 rounded-lg border bg-base-100 px-3 text-center text-xl outline-none placeholder:text-base placeholder:text-base-content/60 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-primary/50"
                 data-action="input->writing#fieldInput keydown->writing#fieldKey compositionstart->writing#compositionStart compositionend->writing#compositionEnd blur->writing#blur focus->writing#focus">
-              <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+              <button type="button" data-slot="button" data-variant="primary" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                 <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
               </button>
               <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
@@ -175,7 +175,7 @@
               <div class="flex flex-wrap items-center justify-center gap-2">
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#undo"><%= icon("undo-2") %><%= t("design.practice.writing_pad_undo") %></button>
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#clearPad"><%= icon("eraser") %><%= t("design.practice.writing_pad_clear") %></button>
-                <button type="button" data-slot="button" data-variant="default" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+                <button type="button" data-slot="button" data-variant="primary" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                   <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
                 </button>
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>

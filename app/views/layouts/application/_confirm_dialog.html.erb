@@ -10,8 +10,8 @@
     <div data-confirm-details hidden></div>
     <div data-slot="alert-dialog-footer" class="-mx-4 -mb-4 flex flex-col-reverse gap-2 rounded-b-xl border-t bg-base-200/50 p-4 sm:flex-row sm:justify-end">
       <button type="button" value="cancel" data-confirm-cancel data-slot="alert-dialog-cancel" class="<%= button_classes(variant: :outline) %>"><%= tt("common.form.cancel") %></button>
-      <button type="button" value="confirm" data-confirm-action data-variant="destructive" data-slot="alert-dialog-action" class="<%= button_classes(variant: :destructive) %>"></button>
-      <button type="button" value="confirm" data-confirm-action data-variant="default" data-slot="alert-dialog-action" class="<%= button_classes %>" hidden></button>
+      <button type="button" value="confirm" data-confirm-action data-variant="error" data-slot="alert-dialog-action" class="<%= button_classes(variant: :error) %>"></button>
+      <button type="button" value="confirm" data-confirm-action data-variant="primary" data-slot="alert-dialog-action" class="<%= button_classes %>" hidden></button>
     </div>
   </div>
 </dialog>

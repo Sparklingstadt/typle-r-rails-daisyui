@@ -13,7 +13,7 @@ class Ui::ButtonComponentTest < ViewComponent::TestCase
   test "a block takes the label's place" do
     render_inline(Ui::ButtonComponent.new(url: "/home")) { "ホーム" }
 
-    assert_selector "a[href='/home'][data-variant=default]", text: "ホーム"
+    assert_selector "a[href='/home'][data-variant=primary]", text: "ホーム"
   end
 
   test "a button that opens a page is a button, with the page in data-visit-url" do
@@ -24,10 +24,10 @@ class Ui::ButtonComponentTest < ViewComponent::TestCase
   end
 
   test "a form button submits its request from a form that does not affect the layout" do
-    render_inline(Ui::ButtonComponent.new("削除", url: "/packs/1", as: :form, method: :delete, variant: :destructive))
+    render_inline(Ui::ButtonComponent.new("削除", url: "/packs/1", as: :form, method: :delete, variant: :error))
 
     assert_selector "form.contents[action='/packs/1'] input[name=_method][value=delete]", visible: :all
-    assert_selector "form button[type=submit][data-variant=destructive]", text: "削除"
+    assert_selector "form button[type=submit][data-variant=error]", text: "削除"
   end
 
   test "the page's class wins over the button's own" do

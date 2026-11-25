@@ -18,7 +18,7 @@
             <ul class="space-y-1 font-mono text-[15px]">
               <% pack.first_words.each do |word| %><li><%= word[:display] %></li><% end %>
             </ul>
-            <%= form_button t("design.practice.starter.start"), follow_catalog_path(pack.catalog_id, practice: 1), variant: index.zero? ? :default : :outline,
+            <%= form_button t("design.practice.starter.start"), follow_catalog_path(pack.catalog_id, practice: 1), variant: index.zero? ? :primary : :outline,
                   icon: "keyboard", class: "w-full", form_class: "mt-auto", "aria-describedby": name_id %>
           <% end %>
         </li>
