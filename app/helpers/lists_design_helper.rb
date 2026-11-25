@@ -3,10 +3,8 @@
 module ListsDesignHelper
   # typle-r's PackRow and ListRow: one grid row with the name, the numbers and the actions.
   LISTS_ROW = "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 px-4 py-3.5 sm:grid-cols-[minmax(0,1fr)_11rem_auto] sm:gap-x-5 sm:px-5"
-  # DropdownMenuContent and DropdownMenuItem.
+  # DropdownMenuContent (its items are Ui::Classes::MENU_ITEM).
   LISTS_MENU = "absolute top-full right-0 z-50 mt-1 min-w-56 rounded-lg border bg-base-100 p-1 text-left text-base-content shadow-md"
-  LISTS_MENU_ITEM = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-normal outline-none select-none hover:bg-base-200 hover:text-base-content focus-visible:bg-base-200 focus-visible:text-base-content [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-base-content/60"
-  LISTS_MENU_DESTRUCTIVE = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-normal text-error outline-none select-none hover:bg-base-200 hover:text-error focus-visible:bg-base-200 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-error"
   # The amber notes of the editor (the word count changing, a pack being deleted).
   LISTS_HINT = "flex gap-2 rounded-lg bg-warning/10 px-3 py-2 text-[13px] text-warning"
 

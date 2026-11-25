@@ -22,17 +22,17 @@
             title: t("design.lists.row.edit"), "aria-label": t("design.lists.row.edit_list", name: list.name) do %><%= icon(:pencil) %><span class="hidden sm:inline"><%= t("design.lists.row.edit") %></span><% end %>
     <% end %>
     <%= lists_menu(label: t("design.lists.row.more_for", name: list.name), title: t("design.lists.row.more_actions")) do %>
-      <%= link_to play_path(list: list.id), class: cn(ListsDesignHelper::LISTS_MENU_ITEM, "sm:hidden") do %><%= icon(:keyboard) %><%= t("design.lists.row.practice_this") %><% end %>
+      <%= link_to play_path(list: list.id), class: cn(UiHelper::MENU_ITEM, "sm:hidden") do %><%= icon(:keyboard) %><%= t("design.lists.row.practice_this") %><% end %>
       <% if records.any? %>
-        <%= link_to rankings_path(list: list.id), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:trophy) %><%= tt("wordLists.row.rankings") %><% end %>
-        <%= link_to practice_records_path(list: list.id), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:history) %><%= t("design.lists.row.records") %><span class="ml-auto text-xs text-base-content/60 tabular-nums"><%= t("design.lists.row.record_count", count: records.size) %></span><% end %>
+        <%= link_to rankings_path(list: list.id), class: UiHelper::MENU_ITEM do %><%= icon(:trophy) %><%= tt("wordLists.row.rankings") %><% end %>
+        <%= link_to practice_records_path(list: list.id), class: UiHelper::MENU_ITEM do %><%= icon(:history) %><%= t("design.lists.row.records") %><span class="ml-auto text-xs text-base-content/60 tabular-nums"><%= t("design.lists.row.record_count", count: records.size) %></span><% end %>
       <% end %>
       <%= lists_menu_separator(class: ("sm:hidden" if records.empty?)) %>
-      <%= link_to export_word_list_path(list), class: ListsDesignHelper::LISTS_MENU_ITEM, data: { turbo: false } do %><%= icon(:download) %><%= t("design.lists.row.export") %><% end %>
+      <%= link_to export_word_list_path(list), class: UiHelper::MENU_ITEM, data: { turbo: false } do %><%= icon(:download) %><%= t("design.lists.row.export") %><% end %>
       <% if list.editable? %>
-        <%= button_to copy_word_list_path(list), class: ListsDesignHelper::LISTS_MENU_ITEM, form_class: "contents" do %><%= icon(:copy) %><%= tt("wordLists.row.copy") %><% end %>
+        <%= button_to copy_word_list_path(list), class: UiHelper::MENU_ITEM, form_class: "contents" do %><%= icon(:copy) %><%= tt("wordLists.row.copy") %><% end %>
         <%= lists_menu_separator %>
-        <%= button_to word_list_path(list), method: :delete, class: ListsDesignHelper::LISTS_MENU_DESTRUCTIVE, form_class: "contents",
+        <%= button_to word_list_path(list), method: :delete, class: UiHelper::MENU_ITEM_ERROR, form_class: "contents",
               form: { data: list_delete_confirm_data(list, records) } do %><%= icon("trash-2") %><%= t("design.lists.row.delete") %><% end %>
       <% end %>
     <% end %>

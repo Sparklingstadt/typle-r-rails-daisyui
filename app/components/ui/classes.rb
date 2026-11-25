@@ -66,10 +66,18 @@ module Ui
     # daisyUI's input as a label around its icon and the field (the field inside takes no style of its own).
     SEARCH_FIELD = "input w-full text-base-content/60"
 
+    # A choice of a few options as a pill (typle-r's ModeToggle and OrderToggle): daisyUI's boxed tabs, its items radio
+    # buttons. daisyUI raises the tab that is aria-current; a radio's aria-checked is raised here.
+    SEGMENTED = "tabs tabs-box h-9 shrink-0 flex-nowrap rounded-full border border-base-300 bg-base-200/60 p-0.5"
+    SEGMENTED_ITEM = "tab h-full rounded-full px-3 text-[13px] text-base-content/60 hover:text-base-content disabled:opacity-60 aria-checked:bg-base-100 aria-checked:font-medium aria-checked:text-base-content aria-checked:shadow-sm"
+
     PAGE_WIDTHS = { narrow: "max-w-4xl", medium: "max-w-5xl", wide: "max-w-6xl" }.freeze
 
     # A menu's box and its choices (a check at the left of the chosen one).
     MENU_CONTENT = "menu z-50 flex-nowrap rounded-box border bg-base-100 p-1 text-base-content shadow-md"
+    # A menu's action (an icon and its label), and the one that deletes.
+    MENU_ITEM = "flex w-full cursor-pointer items-center gap-2.5 rounded-field px-2.5 py-2 text-left text-sm font-normal outline-none select-none hover:bg-base-200 focus-visible:bg-base-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-base-content/60"
+    MENU_ITEM_ERROR = MERGER.merge([MENU_ITEM, "text-error hover:bg-error/10 focus-visible:bg-error/10 [&_svg]:text-error"])
     MENU_INSET_ITEM = "relative flex w-full cursor-pointer items-center gap-2 rounded-field py-2 pr-3 pl-8 text-left text-sm outline-none select-none hover:bg-base-200 focus-visible:bg-base-200 has-focus-visible:bg-base-200"
 
     # cn(): joins classes (leaving out nil and false, from `condition && "classes"`), the later winning over the earlier

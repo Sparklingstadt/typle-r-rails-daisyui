@@ -21,20 +21,20 @@
     <div class="-mr-2 flex items-center gap-1 sm:mr-0">
       <%= lists_menu(label: t("design.lists.pack.more_for", name: pack.name), title: t("design.lists.pack.more_actions")) do %>
         <% if (target = lists_practice_target(pack)) %>
-          <%= link_to play_path(list: target.id), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:keyboard) %><%= t("design.lists.pack.practice") %><% end %>
+          <%= link_to play_path(list: target.id), class: UiHelper::MENU_ITEM do %><%= icon(:keyboard) %><%= t("design.lists.pack.practice") %><% end %>
         <% end %>
         <% if pack.editable? %>
-          <%= link_to edit_pack_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:pencil) %><%= t("design.lists.pack.edit") %><% end %>
-          <%= link_to new_pack_word_list_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon("list-plus") %><%= t("design.lists.pack.add_list") %><% end %>
+          <%= link_to edit_pack_path(pack), class: UiHelper::MENU_ITEM do %><%= icon(:pencil) %><%= t("design.lists.pack.edit") %><% end %>
+          <%= link_to new_pack_word_list_path(pack), class: UiHelper::MENU_ITEM do %><%= icon("list-plus") %><%= t("design.lists.pack.add_list") %><% end %>
         <% end %>
-        <%= button_to copy_pack_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM, form_class: "contents" do %><%= icon(:copy) %><%= tt("wordLists.pack.copy") %><% end %>
-        <%= link_to export_pack_path(pack), class: ListsDesignHelper::LISTS_MENU_ITEM, data: { turbo: false } do %><%= icon(:download) %><%= tt("wordLists.pack.export") %><% end %>
+        <%= button_to copy_pack_path(pack), class: UiHelper::MENU_ITEM, form_class: "contents" do %><%= icon(:copy) %><%= tt("wordLists.pack.copy") %><% end %>
+        <%= link_to export_pack_path(pack), class: UiHelper::MENU_ITEM, data: { turbo: false } do %><%= icon(:download) %><%= tt("wordLists.pack.export") %><% end %>
         <%= lists_menu_separator %>
         <% if pack.followed? %>
-          <%= button_to unfollow_catalog_path(pack.catalog_id), method: :delete, class: ListsDesignHelper::LISTS_MENU_DESTRUCTIVE, form_class: "contents",
+          <%= button_to unfollow_catalog_path(pack.catalog_id), method: :delete, class: UiHelper::MENU_ITEM_ERROR, form_class: "contents",
                 form: { data: unfollow_confirm_data(pack.name) } do %><%= icon("user-minus") %><%= t("design.lists.follow.unfollow") %><% end %>
         <% else %>
-          <%= button_to pack_path(pack), method: :delete, class: ListsDesignHelper::LISTS_MENU_DESTRUCTIVE, form_class: "contents",
+          <%= button_to pack_path(pack), method: :delete, class: UiHelper::MENU_ITEM_ERROR, form_class: "contents",
                 form: { data: delete_confirm_data(title: tt("wordLists.delete.packTitle", name: pack.name), description: tt("wordLists.delete.packDescription", lists: lists.size, records: records.size)) } do %><%= icon("trash-2") %><%= t("design.lists.pack.delete") %><% end %>
         <% end %>
       <% end %>

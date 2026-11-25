@@ -4,8 +4,6 @@ module RecordsDesignHelper
   LOW_ACCURACY = 90
   # Shared by the column labels and the rows so the numbers line up under their headings (RecordRow's recordColumns).
   RECORDS_COLUMNS = "sm:grid-cols-[3.25rem_minmax(0,1fr)_7rem_4.75rem_5.25rem_3rem_2.5rem] sm:gap-x-4"
-  RECORDS_PILL = "inline-flex h-9 shrink-0 items-center rounded-full border bg-base-200/60 p-0.5 text-[13px]"
-  RECORDS_PILL_ITEM = "inline-flex h-full items-center rounded-full px-3 text-base-content/60 outline-none hover:text-base-content focus-visible:ring-3 focus-visible:ring-primary/50 aria-checked:bg-base-100 aria-checked:font-medium aria-checked:text-base-content aria-checked:shadow-sm"
   RECORDS_MENU_ITEM = UiHelper::MENU_INSET_ITEM
 
   def records_t(key, **options) = t("design.records.#{key}", **options)
@@ -125,10 +123,10 @@ module RecordsDesignHelper
   end
 
   # ModeToggle / OrderToggle (typle-r's Radix RadioGroup): radio buttons, the chosen one raised; choosing one opens its URL.
-  def records_pill(label:, items:, item_class: RECORDS_PILL_ITEM, **options)
-    tag.div(role: "radiogroup", class: RECORDS_PILL, "aria-label": label, "aria-orientation": "horizontal", data: { controller: "radio-group" }, **options) do
+  def records_pill(label:, items:, **options)
+    tag.div(role: "radiogroup", class: UiHelper::SEGMENTED, "aria-label": label, "aria-orientation": "horizontal", data: { controller: "radio-group" }, **options) do
       safe_join(items.map { |text, url, current, data = {}|
-        tag.button(tag.span(text), type: "button", role: "radio", class: item_class, "aria-checked": current.to_s, tabindex: (current ? 0 : -1),
+        tag.button(tag.span(text), type: "button", role: "radio", class: UiHelper::SEGMENTED_ITEM, "aria-checked": current.to_s, tabindex: (current ? 0 : -1),
           data: { url:, radio_group_target: "radio", action: "radio-group#choose keydown->radio-group#key", **data })
       })
     end

@@ -117,7 +117,7 @@
       <%# Only a list marked for writing offers the choice. %>
       <% if @writing_language %>
         <div class="flex justify-center border-b px-4 py-2">
-          <%= records_pill(label: t("design.practice.mode_label"), item_class: PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE_ITEM, items: [
+          <%= records_pill(label: t("design.practice.mode_label"), items: [
                 [t("design.practice.mode_typing"), play_path(base), !writing, { practice_switch: writing ? "mode" : "noop", switch_name: tt("practice.modeTyping") }],
                 [t("design.practice.mode_writing"), play_path(base.merge(mode: "writing")), writing, { practice_switch: writing ? "noop" : "mode", switch_name: tt("practice.modeWriting") }]
               ]) %>
@@ -146,9 +146,9 @@
             <p class="<%= practice_design_text_class(@words.first&.dig(:display)) %>" data-writing-target="display"></p>
           </div>
           <div class="flex flex-col items-center gap-2.5 px-4 pt-2 pb-4 sm:px-6 sm:pb-5">
-            <div role="radiogroup" aria-orientation="horizontal" aria-label="<%= t("design.practice.writing_input_method") %>" class="<%= PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE %>" data-writing-target="inputSwitch" hidden>
-              <button type="button" role="radio" class="<%= PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="pad"><%= t("design.practice.writing_input_pad") %></button>
-              <button type="button" role="radio" class="<%= PracticeDesignHelper::PRACTICE_DESIGN_TOGGLE_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="field"><%= t("design.practice.writing_input_field") %></button>
+            <div role="radiogroup" aria-orientation="horizontal" aria-label="<%= t("design.practice.writing_input_method") %>" class="<%= UiHelper::SEGMENTED %>" data-writing-target="inputSwitch" hidden>
+              <button type="button" role="radio" class="<%= UiHelper::SEGMENTED_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="pad"><%= t("design.practice.writing_input_pad") %></button>
+              <button type="button" role="radio" class="<%= UiHelper::SEGMENTED_ITEM %>" data-action="writing#chooseInput keydown->writing#inputKey" data-writing-input-param="field"><%= t("design.practice.writing_input_field") %></button>
             </div>
             <div class="flex w-full max-w-xl flex-wrap items-center justify-center gap-2" data-writing-target="fieldArea">
               <input id="writing-field" type="text" lang="<%= @writing_language %>" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"

@@ -23,7 +23,7 @@
                    aria-label="<%= tt("wordLists.packEditor.listActions", name: list.name) %>" title="<%= tt("wordLists.editor.actions") %>"><%= icon(:ellipsis) %></button>
           <div role="menu" class="<%= cn(UiHelper::MENU_CONTENT, "absolute top-full right-0 mt-1 min-w-52") %>">
             <% [["up", "arrow-up", "moveUp"], ["down", "arrow-down", "moveDown"], ["first", "arrow-up-to-line", "moveFirst"], ["last", "arrow-down-to-line", "moveLast"]].each do |where, icon_name, key| %>
-              <button type="button" role="menuitem" class="<%= cn(ListsDesignHelper::LISTS_MENU_ITEM, "disabled:pointer-events-none disabled:opacity-40") %>"
+              <button type="button" role="menuitem" class="<%= cn(UiHelper::MENU_ITEM, "disabled:pointer-events-none disabled:opacity-40") %>"
                       data-action="list-order#move" data-list-order-where-param="<%= where %>" data-move="<%= where %>"><%= icon(icon_name) %><%= tt("wordLists.editor.#{key}") %></button>
             <% end %>
           </div>
