@@ -20,7 +20,7 @@
   <% end %>
   <% current_sort = records_t("rankings.list.sorts.#{@sort}") %>
   <div class="relative shrink-0" data-controller="dropdown">
-    <button type="button" data-dropdown-target="trigger" class="inline-flex h-9 items-center gap-1 rounded-lg px-2 text-xs text-base-content/60 outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 aria-expanded:bg-base-200" aria-label="<%= records_t("rankings.list.sort_label", sort: current_sort) %>">
+    <button type="button" data-dropdown-target="trigger" class="<%= button_classes(variant: :ghost, size: :sm, class: "h-9 gap-1 px-2 font-normal text-base-content/60 aria-expanded:bg-base-200") %>" aria-label="<%= records_t("rankings.list.sort_label", sort: current_sort) %>">
       <%= current_sort %><%= icon("chevron-down", class: "size-3.5") %>
     </button>
     <div role="menu" class="<%= cn(UiHelper::MENU_CONTENT, "absolute top-full right-0 mt-1.5 w-44") %>">

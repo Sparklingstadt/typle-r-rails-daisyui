@@ -34,7 +34,7 @@
     <% categories = @packs.map(&:category).compact.tally.sort_by { |name, _| Collation.key(name) }.to_h %>
     <% uncategorized = @packs.count { |pack| pack.category.blank? } %>
     <% tags = @packs.flat_map(&:tags).tally %>
-    <% trigger = "inline-flex h-10 max-w-full shrink-0 items-center gap-1.5 rounded-lg border bg-base-100 px-3 text-sm outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 aria-expanded:bg-base-200" %>
+    <% trigger = button_classes(variant: :outline, class: "max-w-full shrink-0 gap-1.5 bg-base-100 px-3 text-sm font-normal aria-expanded:bg-base-200") %>
     <% menu = cn(UiHelper::MENU_CONTENT, "absolute top-full left-0 mt-1.5 max-h-96 w-60 overflow-y-auto") %>
     <% item = UiHelper::MENU_INSET_ITEM %>
     <section aria-labelledby="list-heading" class="space-y-3" data-controller="packs-filter"
@@ -93,7 +93,7 @@
           </div>
         <% end %>
         <div class="relative" data-controller="dropdown">
-          <button type="button" data-dropdown-target="trigger" class="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border bg-base-100 px-3 text-sm outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 aria-expanded:bg-base-200"
+          <button type="button" data-dropdown-target="trigger" class="<%= button_classes(variant: :outline, class: "shrink-0 gap-1.5 bg-base-100 px-3 text-sm font-normal aria-expanded:bg-base-200") %>"
             aria-label="<%= tt("wordLists.order.current", order: tt("wordLists.order.#{@order}")) %>">
             <span class="text-base-content/60"><%= tt("wordLists.order.label") %></span><%= tt("wordLists.order.#{@order}") %><%= icon("chevron-down", class: "size-3.5 text-base-content/60") %>
           </button>
@@ -114,7 +114,7 @@
           <%= render Packs::PackRowComponent.new(pack:, pointed: pack.id == @pointed_pack_id, open: pack.id == @open_pack_id, pointed_list_id: @pointed_list_id) %>
         <% end %>
       </ul>
-      <div class="flex flex-col items-start gap-3 rounded-xl border border-dashed bg-base-100 px-5 py-6" data-packs-filter-target="empty" hidden>
+      <div class="<%= cn(UiHelper::PANEL_DASHED, "flex flex-col items-start gap-3 px-5 py-6") %>" data-packs-filter-target="empty" hidden>
         <p class="text-sm text-base-content/60 [overflow-wrap:anywhere]"><%= tt("wordLists.filter.noMatch") %></p>
         <button type="button" class="<%= button_classes(variant: :outline) %>" data-action="packs-filter#clear"><%= tt("wordLists.filter.clearAll") %></button>
       </div>

@@ -23,7 +23,7 @@
     <% if @try_words.any? %>
       <%# typle-r's src/components/Landing/TryWord.tsx. Nothing typed here is recorded. %>
       <% words = @try_words.map { |w| { input: w[:input], meaning: home_word_meaning(w[:display], w[:annotation]) } } %>
-      <div class="space-y-5 rounded-2xl border bg-base-100 p-6 shadow-xs sm:p-7" data-controller="try-word"
+      <div class="<%= cn(UiHelper::PANEL, "space-y-5 p-6 shadow-xs sm:p-7") %>" data-controller="try-word"
         data-try-word-words-value="<%= words.to_json %>" data-try-word-total-value="<%= @try_list.word_count %>" data-try-word-name-value="<%= @try_list.name %>"
         data-try-word-progress-value="<%= tt("landing.try.progress") %>" data-try-word-hint-value="<%= tt("landing.try.hint") %>"
         data-try-word-done-value="<%= tt_forms("landing.try.done") %>">
@@ -58,7 +58,7 @@
       <p class="max-w-2xl text-sm text-base-content/60"><%= home_t("landing.packs.lead", total: counts[:total]) %></p>
       <ul class="grid gap-3 sm:grid-cols-2">
         <% pack_groups.each do |key, icon_name, count, samples| %>
-          <li class="rounded-xl border bg-base-100 p-5">
+          <li class="<%= cn(UiHelper::PANEL, "p-5") %>">
             <div class="mb-3 flex items-center gap-3">
               <span aria-hidden="true" class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-base-200 text-base-content"><%= icon(icon_name) %></span>
               <h3 class="font-bold"><%= home_t("landing.packs.#{key}.title") %></h3>
@@ -75,7 +75,7 @@
       <h2 id="features-heading" class="text-lg font-bold"><%= home_t("landing.features.title") %></h2>
       <ul class="grid gap-3 sm:grid-cols-3">
         <% features.each do |key, icon_name| %>
-          <li class="rounded-xl border bg-base-100 p-4">
+          <li class="<%= cn(UiHelper::PANEL, "p-4") %>">
             <span aria-hidden="true" class="mb-3 flex size-9 items-center justify-center rounded-lg bg-base-200 text-base-content"><%= icon(icon_name) %></span>
             <h3 class="font-bold"><%= home_t("landing.features.#{key}.title") %></h3>
             <p class="mt-1 text-sm text-base-content/60"><%= home_t("landing.features.#{key}.text") %></p>

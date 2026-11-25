@@ -32,11 +32,11 @@
       </div>
 
       <div class="xl:grid xl:grid-cols-[320px_minmax(0,1fr)] xl:items-start xl:gap-6">
-        <section aria-label="<%= records_t("rankings.lists") %>" data-ranking-list class="<%= cn("rounded-xl border bg-base-100 xl:sticky xl:top-6", opened && "hidden xl:block") %>">
+        <section aria-label="<%= records_t("rankings.lists") %>" data-ranking-list class="<%= cn(UiHelper::PANEL, "xl:sticky xl:top-6", opened && "hidden xl:block") %>">
           <%= render "rankings/list", packs: @packs, selected: @detail&.list, rankings_url: %>
         </section>
         <% if @detail %>
-          <section aria-labelledby="ranking-title" class="<%= cn("min-w-0 rounded-xl border bg-base-100", !opened && "hidden xl:block") %>">
+          <section aria-labelledby="ranking-title" class="<%= cn(UiHelper::PANEL, "min-w-0", !opened && "hidden xl:block") %>">
             <%= render Rankings::DetailComponent.new(ranking: @detail, mode: @mode, device: @device, order: @order, show_all: @show_all, include_others: @include_others, rankings_url:) %>
           </section>
         <% end %>

@@ -104,14 +104,14 @@ module RecordsDesignHelper
   # BestBadge / RecallBadge / the handwriting badge of a row.
   def records_best_badge
     tag.span(safe_join([icon(:trophy, class: "size-3"), records_t("history.row.best")]), title: records_t("history.row.best_title"),
-      class: "inline-flex h-5 shrink-0 items-center gap-1 rounded-full bg-warning/15 px-2 text-xs font-bold text-warning")
+      class: badge_classes(variant: :warning, class: "font-bold"))
   end
 
   def records_mode_badge(record)
     if record.writing?
-      tag.span(safe_join([icon("pen-line", class: "size-3"), records_t("history.mode_writing")]), class: "inline-flex h-5 shrink-0 items-center gap-1 rounded-full border px-2 text-xs font-medium")
+      tag.span(safe_join([icon("pen-line", class: "size-3"), records_t("history.mode_writing")]), class: badge_classes(variant: :outline))
     elsif record.recall?
-      tag.span(records_t("history.recall_badge"), class: "inline-flex h-5 shrink-0 items-center rounded-full bg-info/15 px-2 text-xs font-bold text-info")
+      tag.span(records_t("history.recall_badge"), class: badge_classes(variant: :info, class: "font-bold"))
     end
   end
 

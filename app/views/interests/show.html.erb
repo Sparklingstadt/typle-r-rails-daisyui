@@ -11,7 +11,7 @@
       </div>
       <% Interests::OPTIONS.select { |option| @ids.include?(option.id) }.each do |option| %>
         <% parent = chip_label.(option.id) %>
-        <section role="group" aria-label="<%= settings_t("interests.childrenLabel", parent:) %>" class="space-y-2 rounded-xl border bg-base-100 p-4">
+        <section role="group" aria-label="<%= settings_t("interests.childrenLabel", parent:) %>" class="<%= cn(UiHelper::PANEL, "space-y-2 p-4") %>">
           <h2 class="text-sm font-bold"><%= parent %></h2>
           <div class="flex flex-wrap gap-2">
             <% option.children.each do |child| %><%= settings_interest_chip(child.id, chip_label.(child.id), @ids.include?(child.id)) %><% end %>

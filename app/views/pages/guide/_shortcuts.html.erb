@@ -8,7 +8,7 @@
                  [[%w[Ctrl Enter]], guide_t("shortcuts.actions.save")]]]
    ] %>
 <%= guide_section("shortcuts", :command, guide_t("contents.shortcuts"), guide_t("shortcuts.lead")) do %>
-  <div class="divide-y overflow-hidden rounded-xl border bg-base-100 text-sm">
+  <div class="<%= cn(UiHelper::PANEL, "divide-y overflow-hidden text-sm") %>">
     <% shortcuts.each do |screen, rows| %>
       <div>
         <h3 class="bg-base-200/50 px-4 py-2 text-xs font-bold text-base-content/60"><%= guide_t("shortcuts.screens.#{screen}") %></h3>

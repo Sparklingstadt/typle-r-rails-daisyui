@@ -64,7 +64,7 @@
           <% device_label = @device.none? ? t("design.practice.device_menu.unselected") : @device.options.find { |_, key| key == @device.key }&.first %>
           <%# typle-r's DeviceMenu: a menu of the devices to choose from, with a way to manage them; locked while a run is on. %>
           <div class="relative shrink-0" data-controller="dropdown" data-practice-menu>
-            <button type="button" data-dropdown-target="trigger" data-lock-while-running class="inline-flex h-8 max-w-28 shrink-0 items-center gap-1.5 rounded-full border bg-base-100 px-2.5 text-[13px] outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 sm:max-w-52 in-data-[running=true]:pointer-events-none in-data-[running=true]:cursor-default in-data-[running=true]:text-base-content/60 in-data-[running=true]:hover:bg-base-100"
+            <button type="button" data-dropdown-target="trigger" data-lock-while-running class="<%= button_classes(variant: :outline, size: :sm, class: "max-w-28 shrink-0 gap-1.5 rounded-full bg-base-100 px-2.5 text-[13px] font-normal sm:max-w-52") %> in-data-[running=true]:pointer-events-none in-data-[running=true]:cursor-default in-data-[running=true]:text-base-content/60 in-data-[running=true]:hover:bg-base-100"
                      aria-label="<%= t("design.practice.device_menu.label", device: device_label) %>" title="<%= t("design.practice.device_menu.change") %>">
               <%= icon("keyboard", class: "size-3.5 shrink-0") %>
               <span class="truncate" data-device-label><%= device_label %></span>
@@ -196,7 +196,7 @@
           <div class="relative flex min-h-44 flex-1 flex-col items-center justify-center gap-3 px-4 pt-6 pb-2 text-center sm:min-h-52 sm:gap-3.5 sm:px-6 sm:pt-11">
             <p class="max-w-full text-base break-words text-base-content empty:hidden" data-practice-target="annotation"></p>
             <p class="<%= practice_design_text_class(@words.first&.dig(:display)) %>" data-practice-target="display"></p>
-            <span class="rounded-full border px-2 text-xs text-base-content/60" data-practice-target="typeThis" hidden><%= t("design.practice.word.type_this") %></span>
+            <span class="<%= badge_classes(variant: :outline, class: "font-normal text-base-content/60") %>" data-practice-target="typeThis" hidden><%= t("design.practice.word.type_this") %></span>
             <p class="<%= practice_design_text_class(@words.first&.dig(:input)) %>" data-practice-target="letters"></p>
             <% if @mode == "recall" %>
               <button type="button" class="<%= button_classes(variant: :outline, size: :sm) %>" data-practice-target="reveal"

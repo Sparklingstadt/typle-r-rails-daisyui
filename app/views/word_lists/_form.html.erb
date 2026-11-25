@@ -25,7 +25,7 @@
   <% end %>
 
   <div class="space-y-6">
-    <section class="space-y-2 rounded-xl border bg-base-100 p-4 sm:p-6" aria-label="<%= t("design.lists.editor.basics") %>"
+    <section class="<%= cn(UiHelper::PANEL, "space-y-2 p-4 sm:p-6") %>" aria-label="<%= t("design.lists.editor.basics") %>"
              data-controller="lists--pack-move" data-lists--pack-move-original-value="<%= list.pack_id if list.persisted? %>">
       <% if pack&.persisted? && !list.persisted? %>
         <p class="pb-2 text-sm text-base-content/60 [overflow-wrap:anywhere]"><%= t("design.lists.editor.adding_to", name: pack.name) %></p>
