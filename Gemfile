@@ -62,7 +62,7 @@ group :development do
   gem "web-console"
 end
 
-# The same design system as typle-r: Tailwind CSS v4 with typle-r's shadcn tokens, and lucide icons.
+# Tailwind CSS v4 with daisyUI 5 (vendored in app/assets/tailwind), and lucide icons.
 gem "tailwindcss-rails", "~> 4.0"
 gem "lucide-rails"
 gem "tailwind_merge"
