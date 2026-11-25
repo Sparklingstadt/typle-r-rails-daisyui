@@ -28,7 +28,7 @@ class Packs::PackRowComponentTest < ViewComponent::TestCase
 
     render_inline(Packs::PackRowComponent.new(pack: @pack, pointed: true))
     assert_selector "button[aria-expanded=true]"
-    assert_selector "div.bg-green-50[data-controller=row-highlight]"
+    assert_selector "div.bg-success\\/10[data-controller=row-highlight]"
   end
 
   test "the list pointed at is highlighted" do

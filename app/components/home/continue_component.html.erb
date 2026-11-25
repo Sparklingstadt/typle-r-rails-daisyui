@@ -3,7 +3,7 @@
     <p class="text-[13px] font-bold text-primary"><%= home_t("dashboard.continue.label") %></p>
     <div class="space-y-1.5">
       <h2 id="continue-name" class="text-2xl font-bold break-words"><%= practice_name(list) %></h2>
-      <p class="text-sm text-muted-foreground">
+      <p class="text-sm text-base-content/60">
         <%= home_t("dashboard.continue.meta", count: list.words.size, day: home_day(last_practiced, now)) %>
         <% if best %> · <%= home_t("dashboard.continue.best", accuracy: format_accuracy(best.accuracy), time: format("%.2f", best.seconds)) %><% end %>
       </p>
@@ -12,7 +12,7 @@
       <% samples.each do |word| %>
         <li lang="und" class="max-w-full truncate rounded-lg border px-2.5 py-1 font-mono text-[15px]"><%= word.display %></li>
       <% end %>
-      <% if rest.positive? %><li class="px-1 text-[13px] text-muted-foreground"><%= home_t("dashboard.continue.more", count: rest) %></li><% end %>
+      <% if rest.positive? %><li class="px-1 text-[13px] text-base-content/60"><%= home_t("dashboard.continue.more", count: rest) %></li><% end %>
     </ul>
     <div class="flex flex-wrap items-center gap-3">
       <%= link_button home_t("dashboard.continue.practice"), play_path(list: list.id), size: :lg, icon: "keyboard",

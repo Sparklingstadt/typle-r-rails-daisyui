@@ -1,5 +1,5 @@
 <%# typle-r's PageStorageBadge: beside a page heading on narrow screens, where the top bar hides its own badge. %>
-<span class="inline-flex h-7 items-center gap-1.5 rounded-full border bg-card px-3 text-xs font-medium text-muted-foreground sm:hidden"
+<span class="inline-flex h-7 items-center gap-1.5 rounded-full border bg-base-100 px-3 text-xs font-medium text-base-content/60 sm:hidden"
   title="<%= tt(signed_in? ? "common.storage.accountDetail" : "common.storage.guestDetail") %>">
   <%= icon(signed_in? ? :cloud : "hard-drive", class: "size-3.5") %><%= tt(signed_in? ? "common.storage.account" : "common.storage.guest") %>
 </span>

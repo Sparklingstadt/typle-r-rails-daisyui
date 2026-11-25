@@ -1,5 +1,5 @@
-<header class="sticky top-0 z-40 h-14 w-full border-b bg-background" aria-label="<%= t("layouts.application.top_bar") %>">
-  <a href="#main-content" class="sr-only rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50"><%= t("layouts.application.skip") %></a>
+<header class="sticky top-0 z-40 h-14 w-full border-b bg-base-100" aria-label="<%= t("layouts.application.top_bar") %>">
+  <a href="#main-content" class="sr-only rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-content focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50"><%= t("layouts.application.skip") %></a>
   <div class="flex h-full items-center gap-1 px-2 sm:px-4">
     <button type="button" class="<%= button_classes(variant: :ghost, size: :icon, class: "size-10 xl:hidden") %>" aria-label="<%= t("layouts.application.open_menu") %>"
       aria-controls="drawer" aria-expanded="false" data-drawer-target="opener" data-action="drawer#open"><%= icon(:menu, class: "size-5") %></button>
@@ -7,11 +7,11 @@
     <div class="ml-auto flex min-w-0 items-center gap-1 sm:gap-2">
       <%= render "layouts/application/storage_badge", class: "hidden sm:inline-flex" %>
       <div class="relative" data-controller="theme">
-        <button type="button" class="<%= button_classes(variant: :ghost, size: :icon, class: "size-10") %>" aria-label="<%= t("layouts.application.theme_label") %>"
+        <button type="button" class="<%= button_classes(variant: :ghost, size: :icon, class: "size-10 aria-pressed:bg-transparent aria-pressed:shadow-none aria-pressed:hover:bg-base-200") %>" aria-label="<%= t("layouts.application.theme_label") %>"
           data-theme-target="button" data-action="theme#toggle" data-to-light="<%= t("layouts.application.to_light") %>" data-to-dark="<%= t("layouts.application.to_dark") %>">
           <%= icon(:sun, class: "size-5 dark:hidden") %><%= icon(:moon, class: "hidden size-5 dark:block") %>
         </button>
-        <p role="status" hidden data-theme-target="failed" class="absolute top-full right-0 z-50 mt-2 w-56 rounded-md border bg-popover p-2 text-xs text-popover-foreground shadow-md"><%= t("layouts.application.theme_save_failed") %></p>
+        <p role="status" hidden data-theme-target="failed" class="absolute top-full right-0 z-50 mt-2 w-56 rounded-md border bg-base-100 p-2 text-xs text-base-content shadow-md"><%= t("layouts.application.theme_save_failed") %></p>
       </div>
       <%= render "layouts/application/account_bar" %>
     </div>

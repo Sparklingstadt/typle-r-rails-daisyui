@@ -2,7 +2,7 @@
 <% now = Time.current %>
 <% filter = { pack: @pack&.id, list: @list&.id, device: @device }.compact %>
 <% records_url = ->(changes = {}) { practice_records_path(filter.merge(changes).compact.presence) } %>
-<% link = "underline underline-offset-3 hover:text-foreground" %>
+<% link = "underline underline-offset-3 hover:text-base-content" %>
 <%= page_main(width: :medium) do %>
   <%= page_header(records_t("history.title"), records_rich("history.intro", { rankings: ->(chunks) { link_to(chunks, rankings_path, class: link) }, home: ->(chunks) { link_to(chunks, home_path, class: link) } })) do %><%= render "layouts/application/page_storage_badge" %><% end %>
 
@@ -11,7 +11,7 @@
       <%= empty_state_icon(:history) %>
       <div class="space-y-1.5">
         <h2 class="font-bold"><%= records_t("history.empty.title") %></h2>
-        <p class="max-w-md text-sm text-balance text-muted-foreground"><%= records_t("history.empty.description") %></p>
+        <p class="max-w-md text-sm text-balance text-base-content/60"><%= records_t("history.empty.description") %></p>
       </div>
       <%= link_button play_path do %><%= icon(:keyboard) %><%= records_t("history.empty.practice") %><% end %>
     <% end %>
@@ -33,19 +33,19 @@
         <%= render PracticeRecords::FilterMenuComponent.new(name: records_t("history.filter.device"), all_label: records_t("history.filter.all_devices"), value: @device, options: records_device_choices(@device_options),
               url: ->(value) { records_url.({ device: value }) }) %>
         <% if filtered %>
-          <%= link_button records_t("history.filter.clear"), practice_records_path, variant: :ghost, size: :lg, class: "text-muted-foreground" %>
+          <%= link_button records_t("history.filter.clear"), practice_records_path, variant: :ghost, size: :lg, class: "text-base-content/60" %>
         <% end %>
-        <p id="record-count" aria-live="polite" class="ml-auto text-sm text-muted-foreground tabular-nums">
+        <p id="record-count" aria-live="polite" class="ml-auto text-sm text-base-content/60 tabular-nums">
           <%= filtered ? records_t("history.filter.filtered_count", matched: @records.size, count: @all.size) : records_t("history.filter.count", count: @all.size) %>
         </p>
       </div>
 
       <% if @list && @list.practice_records.any? %>
         <% last = @list.practice_records.map(&:practiced_at).max %>
-        <section aria-labelledby="list-summary-heading" class="grid gap-4 rounded-xl border bg-card p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-6 sm:p-5">
+        <section aria-labelledby="list-summary-heading" class="grid gap-4 rounded-xl border bg-base-100 p-4 sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center sm:gap-6 sm:p-5">
           <div class="min-w-0">
             <h2 id="list-summary-heading" class="font-bold [overflow-wrap:anywhere]"><%= practice_name(@list) %></h2>
-            <p class="text-[13px] text-muted-foreground tabular-nums">
+            <p class="text-[13px] text-base-content/60 tabular-nums">
               <%= records_t("history.summary.words", count: @list.words.size) %> · <%= records_t("history.summary.runs", count: @list.practice_records.size) %> · <%= records_t("history.summary.last", day: records_day(last, now)) %>
             </p>
           </div>
@@ -54,9 +54,9 @@
             <div class="grid min-w-0 gap-2 sm:text-right">
               <% bests.each do |mode, best| %>
                 <div data-best-mode="<%= mode || "normal" %>">
-                  <p class="inline-flex items-center gap-1 text-xs text-muted-foreground"><%= icon(:trophy, class: "size-3 text-amber-600") %><%= records_t("history.summary.best", mode: records_t("rankings.mode.#{mode || "normal"}")) %></p>
+                  <p class="inline-flex items-center gap-1 text-xs text-base-content/60"><%= icon(:trophy, class: "size-3 text-warning") %><%= records_t("history.summary.best", mode: records_t("rankings.mode.#{mode || "normal"}")) %></p>
                   <p class="tabular-nums"><%= records_time(best.seconds, class: "text-lg font-bold") %><span class="ml-2 text-sm"><%= records_accuracy(best.accuracy) %></span>
-                    <span class="ml-2 text-xs text-muted-foreground"><%= records_day(best.practiced_at, now) %></span></p>
+                    <span class="ml-2 text-xs text-base-content/60"><%= records_day(best.practiced_at, now) %></span></p>
                 </div>
               <% end %>
             </div>
@@ -73,7 +73,7 @@
         <%= empty_state(class: "py-10") do %>
           <div class="space-y-1.5">
             <h2 class="font-bold"><%= unpractised ? records_t("history.filtered_empty.list_title", name: @list.full_name) : records_t("history.filtered_empty.title") %></h2>
-            <p class="text-sm text-muted-foreground"><%= records_t(unpractised ? "history.filtered_empty.list_description" : "history.filtered_empty.description") %></p>
+            <p class="text-sm text-base-content/60"><%= records_t(unpractised ? "history.filtered_empty.list_description" : "history.filtered_empty.description") %></p>
           </div>
           <div class="flex flex-wrap justify-center gap-2">
             <% if @list %>
@@ -85,7 +85,7 @@
       <% else %>
         <% shown = @records.first(@shown) %>
         <div class="space-y-6">
-          <div aria-hidden="true" class="<%= cn("hidden px-5 text-xs text-muted-foreground sm:grid", RecordsDesignHelper::RECORDS_COLUMNS) %>">
+          <div aria-hidden="true" class="<%= cn("hidden px-5 text-xs text-base-content/60 sm:grid", RecordsDesignHelper::RECORDS_COLUMNS) %>">
             <span><%= records_t("history.columns.time") %></span><span><%= records_t(@list ? "history.columns.device_words" : "history.columns.list_device") %></span>
             <span class="text-right"><%= records_t("history.columns.duration") %></span><span class="text-right"><%= records_t("history.columns.accuracy") %></span>
             <span class="text-right"><%= records_t("history.columns.per_word") %></span><span class="text-right"><%= records_t("history.columns.mistakes") %></span><span></span>
@@ -95,7 +95,7 @@
             <section aria-label="<%= heading %>" class="space-y-2">
               <div class="flex items-baseline justify-between gap-3 px-1">
                 <h2 class="text-sm font-bold"><%= heading %></h2>
-                <p class="text-xs text-muted-foreground tabular-nums"><%= records_t("history.day.summary", count: day_records.size, duration: records_duration(day_records.sum(&:seconds))) %></p>
+                <p class="text-xs text-base-content/60 tabular-nums"><%= records_t("history.day.summary", count: day_records.size, duration: records_duration(day_records.sum(&:seconds))) %></p>
               </div>
               <ul class="<%= UiHelper::CARD_LIST %>">
                 <% day_records.each do |record| %>
@@ -109,7 +109,7 @@
               <%= link_button records_t("history.more", count: @records.size - @shown), records_url.({ shown: @shown + PracticeRecordsController::PAGE_SIZE }), variant: :outline %>
             </div>
           <% end %>
-          <p class="text-xs text-muted-foreground"><%= records_t("history.note") %></p>
+          <p class="text-xs text-base-content/60"><%= records_t("history.note") %></p>
         </div>
       <% end %>
     </div>

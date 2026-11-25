@@ -18,6 +18,6 @@ class Ui::PageHeaderComponent < ApplicationComponent
   private
 
   def heading
-    safe_join([ tag.h1(@title, class: "text-2xl font-bold"), (tag.p(@description, class: "text-sm text-muted-foreground") if @description) ].compact)
+    safe_join([ tag.h1(@title, class: "text-2xl font-bold"), (tag.p(@description, class: "text-sm text-base-content/60") if @description) ].compact)
   end
 end

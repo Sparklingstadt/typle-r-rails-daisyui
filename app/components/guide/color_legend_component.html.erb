@@ -1,14 +1,14 @@
 <div class="grid gap-3 sm:grid-cols-2">
   <% examples.each do |example| %>
-    <figure class="flex flex-col gap-4 rounded-xl border bg-card p-4">
+    <figure class="flex flex-col gap-4 rounded-xl border bg-base-100 p-4">
       <div class="flex items-baseline justify-between gap-3">
         <%= letters(example) %>
-        <span class="shrink-0 text-xs text-muted-foreground"><%= typed(example) %></span>
+        <span class="shrink-0 text-xs text-base-content/60"><%= typed(example) %></span>
       </div>
       <figcaption>
         <ul class="flex flex-wrap gap-x-4 gap-y-1.5 text-sm">
           <% example[:items].each do |state| %>
-            <li class="inline-flex items-center gap-1.5"><span class="<%= swatch_class(state) %>" aria-hidden="true"><%= guide_t("legend.swatch") %></span><%= guide_t("legend.#{state}.label") %><span class="text-muted-foreground"><%= guide_t("legend.#{state}.note") %></span></li>
+            <li class="inline-flex items-center gap-1.5"><span class="<%= swatch_class(state) %>" aria-hidden="true"><%= guide_t("legend.swatch") %></span><%= guide_t("legend.#{state}.label") %><span class="text-base-content/60"><%= guide_t("legend.#{state}.note") %></span></li>
           <% end %>
         </ul>
       </figcaption>

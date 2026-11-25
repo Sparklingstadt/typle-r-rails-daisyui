@@ -1,9 +1,9 @@
 # The parts of typle-r's settings, account and info pages (src/components/Settings, Devices, About, Guide, AccountForm)
 # that the pages here share. The class strings are typle-r's.
 module SettingsDesignHelper
-  SETTINGS_SECTION = "rounded-xl border bg-card p-4 sm:p-5"
+  SETTINGS_SECTION = "rounded-xl border bg-base-100 p-4 sm:p-5"
   SETTINGS_LINK = "underline underline-offset-4"
-  SETTINGS_GUIDE_LINK = "font-medium underline decoration-foreground/30 underline-offset-3 hover:decoration-foreground"
+  SETTINGS_GUIDE_LINK = "font-medium underline decoration-base-content/30 underline-offset-3 hover:decoration-base-content"
   SETTINGS_CHECKBOX = "size-4 shrink-0 cursor-pointer accent-primary disabled:cursor-not-allowed"
 
   # The marked letters of the languages the packs cover (typle-r's SimpleInputTable).
@@ -40,7 +40,7 @@ module SettingsDesignHelper
             icon_tile(icon),
             tag.div(class: "min-w-0 space-y-1") do
               safe_join([tag.h2(title, id: "#{id}-heading", class: "font-bold"),
-                         (tag.p(description, id: "#{id}-description", class: "text-sm text-muted-foreground") if description)].compact)
+                         (tag.p(description, id: "#{id}-description", class: "text-sm text-base-content/60") if description)].compact)
             end
           ])
         end,
@@ -51,7 +51,7 @@ module SettingsDesignHelper
 
   # typle-r's FormMessage: what a form did, or why it could not.
   def form_message(text, kind: :done)
-    kind == :error ? tag.p(text, role: "alert", class: "text-sm text-destructive") : tag.p(text, role: "status", class: "text-sm")
+    kind == :error ? tag.p(text, role: "alert", class: "text-sm text-error") : tag.p(text, role: "status", class: "text-sm")
   end
 
   # A record's problems, as an alert (typle-r's ErrorAlert).
@@ -72,15 +72,15 @@ module SettingsDesignHelper
   end
 
   # typle-r's Kbd of the simple input table.
-  def settings_key(text) = tag.kbd(text, class: "rounded border bg-muted px-1.5 py-0.5 font-mono text-xs")
+  def settings_key(text) = tag.kbd(text, class: "rounded border bg-base-200 px-1.5 py-0.5 font-mono text-xs")
 
   # Keys of the guide ("Ctrl" "+" "Enter").
   def settings_keys(*keys)
     tag.span(class: "inline-flex flex-wrap items-center gap-1") do
       safe_join(keys.each_with_index.map { |key, index|
         tag.span(class: "inline-flex items-center gap-1") do
-          safe_join([(tag.span("+", class: "text-xs text-muted-foreground", "aria-hidden": "true") if index.positive?),
-                     kbd(key, class: "h-6 px-2 text-xs text-foreground/80")].compact)
+          safe_join([(tag.span("+", class: "text-xs text-base-content/60", "aria-hidden": "true") if index.positive?),
+                     kbd(key, class: "h-6 px-2 text-xs text-base-content/80")].compact)
         end
       })
     end
@@ -91,9 +91,9 @@ module SettingsDesignHelper
     tag.section(id:, "aria-labelledby": "#{id}-heading", class: "border-t pt-8") do
       safe_join([
         tag.h2(id: "#{id}-heading", class: "flex items-center gap-2.5 text-xl font-bold") do
-          safe_join([tag.span(icon(icon_name, class: "size-4.5"), class: "grid size-8 shrink-0 place-items-center rounded-lg bg-muted text-muted-foreground"), title])
+          safe_join([tag.span(icon(icon_name, class: "size-4.5"), class: "grid size-8 shrink-0 place-items-center rounded-lg bg-base-200 text-base-content/60"), title])
         end,
-        tag.p(lead, class: "mt-3 text-muted-foreground"),
+        tag.p(lead, class: "mt-3 text-base-content/60"),
         tag.div(capture(&block), class: "mt-5 space-y-5")
       ])
     end
@@ -101,12 +101,12 @@ module SettingsDesignHelper
 
   # A chip of 関心 (typle-r's InterestSettings): a toggle button that saves at once, disabled while saving.
   def settings_interest_chip(id, label, chosen)
-    classes = cn("inline-flex min-h-10 cursor-pointer items-center rounded-full border px-4 text-sm font-medium transition-colors outline-none focus-visible:ring-3 focus-visible:ring-ring/50 disabled:opacity-60 in-[form[aria-busy=true]]:opacity-60",
-                 chosen ? "border-primary bg-primary text-primary-foreground" : "bg-card hover:bg-muted")
+    classes = cn("inline-flex min-h-10 cursor-pointer items-center rounded-full border px-4 text-sm font-medium transition-colors outline-none focus-visible:ring-3 focus-visible:ring-primary/50 disabled:opacity-60 in-[form[aria-busy=true]]:opacity-60",
+                 chosen ? "border-primary bg-primary text-primary-content" : "bg-base-100 hover:bg-base-200")
     tag.button(label, type: "submit", name: "toggle", value: id, class: classes, "aria-pressed": chosen.to_s)
   end
 
   def settings_points(items)
-    tag.ul(class: "list-disc space-y-1 pl-5 marker:text-muted-foreground/60") { safe_join(Array(items).map { tag.li(_1) }) }
+    tag.ul(class: "list-disc space-y-1 pl-5 marker:text-base-content/36") { safe_join(Array(items).map { tag.li(_1) }) }
   end
 end

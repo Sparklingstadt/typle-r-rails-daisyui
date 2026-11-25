@@ -1,10 +1,10 @@
 <% if items.empty? %>
-  <p class="rounded-xl p-4 text-sm ring-1 ring-foreground/10"><%= home_t("dashboard.weak.none") %></p>
+  <p class="rounded-xl p-4 text-sm ring-1 ring-base-content/10"><%= home_t("dashboard.weak.none") %></p>
 <% else %>
   <ul class="flex flex-col gap-4">
     <% items.each do |item| %>
       <% total = item.words.size + item.more %>
-      <li class="flex flex-col gap-3 rounded-xl p-4 ring-1 ring-foreground/10 sm:px-5">
+      <li class="flex flex-col gap-3 rounded-xl p-4 ring-1 ring-base-content/10 sm:px-5">
         <p class="font-medium break-words"><%= practice_name(item.list) %></p>
         <ul aria-label="<%= home_t("dashboard.weak.words_of", name: item.list.full_name) %>" class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           <% item.words.each do |weak_word| %>
@@ -13,13 +13,13 @@
             <li class="flex min-w-0 items-center justify-between gap-3 rounded-lg border px-3 py-2">
               <span class="min-w-0">
                 <span lang="und" class="block truncate font-mono"><%= written(word) %></span>
-                <% if meaning.present? %><span class="block truncate text-[13px] text-muted-foreground"><%= meaning %></span><% end %>
+                <% if meaning.present? %><span class="block truncate text-[13px] text-base-content/60"><%= meaning %></span><% end %>
               </span>
-              <span class="shrink-0 text-[13px] font-bold text-red-700 tabular-nums dark:text-red-400"><%= home_t("dashboard.weak.runs", count: weak_word.runs) %></span>
+              <span class="shrink-0 text-[13px] font-bold text-error tabular-nums"><%= home_t("dashboard.weak.runs", count: weak_word.runs) %></span>
             </li>
           <% end %>
         </ul>
-        <% if item.more.positive? %><p class="text-[13px] text-muted-foreground"><%= home_t("dashboard.weak.more", count: item.more) %></p><% end %>
+        <% if item.more.positive? %><p class="text-[13px] text-base-content/60"><%= home_t("dashboard.weak.more", count: item.more) %></p><% end %>
         <div>
           <%= link_button play_path(list: item.list.id, review: "weak"), variant: :outline,
                 aria: { label: home_t("dashboard.weak.practice_list", name: item.list.full_name, count: total) } do %>

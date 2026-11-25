@@ -19,16 +19,16 @@
         keepEditing: tt_forms("wordLists.editor.keepEditing"), discardAction: tt_forms("wordLists.editor.discard") }.transform_values { |v| JSON.parse(v) }.to_json %>
 <%= form_with model: list.persisted? ? list : (pack&.persisted? ? [pack, list] : list), url: (create_list_path unless list.persisted? || pack&.persisted?),
       data: { controller: "word-rows", action: "input->word-rows#changed change->word-rows#changed keydown->word-rows#saveShortcut submit->word-rows#submitting turbo:before-visit@document->word-rows#leave beforeunload@window->word-rows#unload", "word-rows-labels-value": word_rows_labels } do |f| %>
-  <%= visit_button back, variant: :ghost, size: :lg, class: "-ml-2.5 mb-2 text-muted-foreground" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
+  <%= visit_button back, variant: :ghost, size: :lg, class: "-ml-2.5 mb-2 text-base-content/60" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
   <%= page_header(title, description) do %>
     <%= render "layouts/application/page_storage_badge" %>
   <% end %>
 
   <div class="space-y-6">
-    <section class="space-y-2 rounded-xl border bg-card p-4 sm:p-6" aria-label="<%= t("design.lists.editor.basics") %>"
+    <section class="space-y-2 rounded-xl border bg-base-100 p-4 sm:p-6" aria-label="<%= t("design.lists.editor.basics") %>"
              data-controller="lists--pack-move" data-lists--pack-move-original-value="<%= list.pack_id if list.persisted? %>">
       <% if pack&.persisted? && !list.persisted? %>
-        <p class="pb-2 text-sm text-muted-foreground [overflow-wrap:anywhere]"><%= t("design.lists.editor.adding_to", name: pack.name) %></p>
+        <p class="pb-2 text-sm text-base-content/60 [overflow-wrap:anywhere]"><%= t("design.lists.editor.adding_to", name: pack.name) %></p>
       <%# typle-r's /create chooses no pack (the list starts a pack of its own); the editor of a saved list moves it. %>
       <% elsif list.persisted? && @own_packs.present? %>
         <%# The only list of its pack, moved elsewhere, takes the pack with it (typle-r's packWillBeDeleted). %>
@@ -37,24 +37,24 @@
           <%= f.select :pack_id, @own_packs.map { |own| [own.name, own.id] } + [[tt("wordLists.editor.newPack"), ""]], { selected: list.pack_id },
                 class: select_classes(:form), "aria-describedby": "word_list_pack_help", data: { action: "lists--pack-move#changed" } %>
           <% if lone %>
-            <p id="word_list_pack_deleted" hidden data-lists--pack-move-target="note" class="flex gap-2 rounded-lg bg-amber-50 px-3 py-2 text-[13px] text-amber-900 dark:bg-amber-950/50 dark:text-amber-200">
+            <p id="word_list_pack_deleted" hidden data-lists--pack-move-target="note" class="flex gap-2 rounded-lg bg-warning/10 px-3 py-2 text-[13px] text-warning">
               <%= icon(:info, class: "mt-0.5 size-3.5 shrink-0") %><span class="[overflow-wrap:anywhere]"><%= tt("wordLists.editor.packWillBeDeleted", name: list.pack.name) %></span>
             </p>
           <% end %>
-          <p id="word_list_pack_help" class="pb-2 text-xs text-muted-foreground"><%= tt("wordLists.editor.packHelp") %></p>
+          <p id="word_list_pack_help" class="pb-2 text-xs text-base-content/60"><%= tt("wordLists.editor.packHelp") %></p>
       <% end %>
-      <%= f.label :name, class: label_classes do %><%= t("design.lists.editor.name") %><span aria-hidden="true" class="text-destructive">*</span><% end %>
+      <%= f.label :name, class: label_classes do %><%= t("design.lists.editor.name") %><span aria-hidden="true" class="text-error">*</span><% end %>
       <%= f.text_field :name, required: true, maxlength: 200, autofocus: true, class: input_classes("h-11"),
             "aria-invalid": (true if name_error), "aria-describedby": ["word_list_name_help", ("word_list_name_error" if name_error)].compact.join(" ") %>
       <% if name_error %><%= lists_field_error(name_error, id: "word_list_name_error") %><% end %>
-      <p id="word_list_name_help" class="text-xs text-muted-foreground"><%= t("design.lists.editor.name_help") %></p>
+      <p id="word_list_name_help" class="text-xs text-base-content/60"><%= t("design.lists.editor.name_help") %></p>
 
       <div class="space-y-2 pt-2">
         <%= f.label :level, t("design.lists.editor.levels"), class: label_classes %>
         <%= f.text_field :level, maxlength: 50, placeholder: t("design.lists.editor.level_placeholder"), class: input_classes("h-10"),
               "aria-invalid": (true if level_error), "aria-describedby": "word_list_level_help" %>
         <% if level_error %><%= lists_field_error(level_error) %><% end %>
-        <p id="word_list_level_help" class="text-xs text-muted-foreground"><%= t("design.lists.editor.levels_help") %></p>
+        <p id="word_list_level_help" class="text-xs text-base-content/60"><%= t("design.lists.editor.levels_help") %></p>
       </div>
 
       <div data-controller="lists--writing">
@@ -63,7 +63,7 @@
                  data-lists--writing-target="switch" data-action="lists--writing#toggle"<%= " checked" if writing %>>
           <label for="word_list_writing" class="<%= label_classes %>"><%= t("design.lists.editor.writing_toggle") %></label>
         </div>
-        <p id="word_list_writing_help" class="pt-2 text-xs text-muted-foreground"><%= t("design.lists.editor.writing_toggle_help") %></p>
+        <p id="word_list_writing_help" class="pt-2 text-xs text-base-content/60"><%= t("design.lists.editor.writing_toggle_help") %></p>
         <%= hidden_field_tag "word_list[writing_language]", "", id: nil %>
         <div class="space-y-2 pt-2" data-lists--writing-target="language"<%= " hidden" unless writing %>>
           <%= f.label :writing_language, t("design.lists.editor.writing_language"), class: label_classes %>
@@ -77,30 +77,30 @@
     <% rows = list.words.map { |word| { display: word.display, input: word.input == word.display ? "" : word.input, annotation: word.annotation, input_type: word.input_type } } %>
     <% rows = [{ display: "", input: "", annotation: "", input_type: nil }] if rows.empty? %>
     <% columns = "grid-cols-[auto_minmax(0,1fr)_auto] gap-2 md:grid-cols-[4.5rem_minmax(0,1fr)_minmax(0,1fr)_8rem_minmax(0,0.8fr)_5.25rem] md:items-center md:gap-3" %>
-    <% editor_kbd = "rounded border bg-background px-1.5 py-px font-sans text-[11px] font-medium text-foreground/70" %>
-    <section aria-labelledby="word_list_words_heading" class="md:overflow-hidden md:rounded-xl md:border md:bg-card">
+    <% editor_kbd = "rounded border bg-base-100 px-1.5 py-px font-sans text-[11px] font-medium text-base-content/70" %>
+    <section aria-labelledby="word_list_words_heading" class="md:overflow-hidden md:rounded-xl md:border md:bg-base-100">
       <div class="flex flex-wrap items-center gap-2 pb-3 md:px-6 md:py-4">
         <h2 id="word_list_words_heading" class="text-base font-bold"><%= tt("wordLists.editor.words") %></h2>
         <%= ui_badge(variant: :secondary, class: "tabular-nums") do %><span data-word-rows-target="count"><%= rows.size %></span> / <%= number_with_delimiter(1000) %><% end %>
         <div class="ml-auto">
           <%= render "word_lists/csv_import" %>
         </div>
-        <p role="status" class="basis-full text-sm text-muted-foreground empty:hidden" data-word-rows-target="notice"></p>
+        <p role="status" class="basis-full text-sm text-base-content/60 empty:hidden" data-word-rows-target="notice"></p>
       </div>
-      <div aria-hidden="true" class="<%= cn("hidden md:grid", columns, "border-y bg-muted px-6 py-2 text-xs font-medium text-muted-foreground") %>">
+      <div aria-hidden="true" class="<%= cn("hidden md:grid", columns, "border-y bg-base-200 px-6 py-2 text-xs font-medium text-base-content/60") %>">
         <span>#</span>
-        <span><%= tt("wordLists.editor.display") %><span class="text-destructive">*</span></span>
+        <span><%= tt("wordLists.editor.display") %><span class="text-error">*</span></span>
         <span><%= tt("wordLists.editor.input") %> <span class="font-normal"><%= tt("wordLists.editor.inputHint") %></span></span>
         <span><%= tt("wordLists.editor.inputType") %></span>
         <span><%= tt("wordLists.editor.annotationOptional") %></span>
         <span></span>
       </div>
       <% row_html = lambda do |row, index| %>
-        <div role="group" class="<%= cn("grid", columns, "rounded-xl border bg-card p-3 md:rounded-none md:border-0 md:border-b md:bg-transparent md:px-6 md:py-1.5 md:hover:bg-muted/40") %>" data-word-rows-target="row">
+        <div role="group" class="<%= cn("grid", columns, "rounded-xl border bg-base-100 p-3 md:rounded-none md:border-0 md:border-b md:bg-transparent md:px-6 md:py-1.5 md:hover:bg-base-200/40") %>" data-word-rows-target="row">
           <div class="col-start-1 row-start-1 flex items-center gap-1">
-            <button type="button" class="<%= button_classes(variant: :ghost, size: :icon, class: "touch-none cursor-grab text-muted-foreground active:cursor-grabbing") %>" title="<%= tt("wordLists.wordRow.dragTitle") %>" draggable="true"
+            <button type="button" class="<%= button_classes(variant: :ghost, size: :icon, class: "touch-none cursor-grab text-base-content/60 active:cursor-grabbing") %>" title="<%= tt("wordLists.wordRow.dragTitle") %>" draggable="true"
               data-action="dragstart->word-rows#dragStart dragend->word-rows#dragEnd" data-role="drag"><%= icon("grip-vertical") %></button>
-            <span class="text-sm text-muted-foreground tabular-nums" data-role="number"><%= index + 1 %></span>
+            <span class="text-sm text-base-content/60 tabular-nums" data-role="number"><%= index + 1 %></span>
           </div>
           <div class="col-span-3 row-start-2 md:col-span-1 md:col-start-2 md:row-start-1">
             <input type="text" name="word_list[words_rows][][display]" value="<%= row[:display] %>" placeholder="<%= tt("wordLists.editor.displayPlaceholder") %>" data-role="display"
@@ -108,19 +108,19 @@
           </div>
           <div class="col-span-3 row-start-3 grid grid-cols-2 gap-2 md:contents">
             <div class="space-y-1 md:col-start-3 md:row-start-1 md:space-y-0">
-              <span class="<%= label_classes("text-xs text-muted-foreground md:sr-only") %>"><%= tt("wordLists.editor.input") %></span>
+              <span class="<%= label_classes("text-xs text-base-content/60 md:sr-only") %>"><%= tt("wordLists.editor.input") %></span>
               <input type="text" name="word_list[words_rows][][input]" value="<%= row[:input] %>" placeholder="<%= row[:display] %>" data-role="input"
                 class="<%= input_classes("h-10") %>" data-action="input->word-rows#changed keydown->word-rows#keydown">
             </div>
             <div class="space-y-1 md:col-start-4 md:row-start-1 md:space-y-0">
-              <span class="<%= label_classes("text-xs text-muted-foreground md:sr-only") %>"><%= tt("wordLists.editor.inputType") %></span>
+              <span class="<%= label_classes("text-xs text-base-content/60 md:sr-only") %>"><%= tt("wordLists.editor.inputType") %></span>
               <select name="word_list[words_rows][][input_type]" data-role="inputType" data-action="change->word-rows#changed"
-                class="h-10 w-full min-w-0 rounded-md border border-input bg-background px-2 text-sm focus-visible:outline-2 focus-visible:outline-ring disabled:opacity-50">
+                class="h-10 w-full min-w-0 rounded-md border border-base-300 bg-base-100 px-2 text-sm focus-visible:outline-2 focus-visible:outline-primary disabled:opacity-50">
                 <% %w[word command code].each do |type| %><option value="<%= type %>" <%= "selected" if (row[:input_type] || "word") == type %>><%= tt("wordLists.editor.inputType#{type.capitalize}") %></option><% end %>
               </select>
             </div>
             <div class="col-span-2 space-y-1 md:col-span-1 md:col-start-5 md:row-start-1 md:space-y-0">
-              <span class="<%= label_classes("text-xs text-muted-foreground md:sr-only") %>"><%= tt("wordLists.editor.annotation") %></span>
+              <span class="<%= label_classes("text-xs text-base-content/60 md:sr-only") %>"><%= tt("wordLists.editor.annotation") %></span>
               <input type="text" name="word_list[words_rows][][annotation]" value="<%= row[:annotation] %>" placeholder="<%= tt("wordLists.editor.annotationPlaceholder") %>" data-role="annotation"
                 class="<%= input_classes("h-10") %>" data-action="input->word-rows#changed keydown->word-rows#keydown">
             </div>
@@ -128,18 +128,18 @@
           <div class="col-start-3 row-start-1 flex items-center justify-end gap-0.5 md:col-start-6">
             <div class="relative" data-controller="dropdown">
               <button type="button" data-dropdown-target="trigger" class="<%= button_classes(variant: :ghost, size: :icon, class: "list-none") %>" title="<%= tt("wordLists.editor.actions") %>" data-role="actions"><%= icon(:ellipsis) %></button>
-              <div class="absolute top-full right-0 z-50 mt-1 min-w-52 rounded-lg border bg-popover p-1 text-popover-foreground shadow-md">
+              <div class="absolute top-full right-0 z-50 mt-1 min-w-52 rounded-lg border bg-base-100 p-1 text-base-content shadow-md">
                 <% [["up", "arrow-up", "moveUp", "Alt+↑"], ["down", "arrow-down", "moveDown", "Alt+↓"], ["first", "arrow-up-to-line", "moveFirst", nil], ["last", "arrow-down-to-line", "moveLast", nil]].each do |where, icon_name, label, keys| %>
-                  <button type="button" class="relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none select-none hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:text-muted-foreground"
-                    data-action="word-rows#move" data-word-rows-where-param="<%= where %>" data-role="move-<%= where %>"><%= icon(icon_name) %><%= tt("wordLists.editor.#{label}") %><% if keys %><span aria-hidden="true" class="ml-auto text-xs text-muted-foreground"><%= keys %></span><% end %></button>
+                  <button type="button" class="relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none select-none hover:bg-base-200 hover:text-base-content disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:text-base-content/60"
+                    data-action="word-rows#move" data-word-rows-where-param="<%= where %>" data-role="move-<%= where %>"><%= icon(icon_name) %><%= tt("wordLists.editor.#{label}") %><% if keys %><span aria-hidden="true" class="ml-auto text-xs text-base-content/60"><%= keys %></span><% end %></button>
                 <% end %>
-                <div role="separator" class="my-1 h-px bg-border"></div>
-                <button type="button" class="relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm text-destructive outline-none select-none hover:bg-destructive/10 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4"
+                <div role="separator" class="my-1 h-px bg-base-300"></div>
+                <button type="button" class="relative flex w-full cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm text-error outline-none select-none hover:bg-error/10 disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4"
                   data-action="word-rows#remove" data-role="remove-menu"><%= icon("trash-2") %><%= tt("wordLists.editor.deleteWord") %></button>
               </div>
             </div>
             <span class="hidden md:inline-flex">
-              <button type="button" class="<%= button_classes(variant: :ghost, size: :icon, class: "text-muted-foreground hover:text-destructive") %>" title="<%= tt("wordLists.editor.delete") %>" data-action="word-rows#remove" data-role="remove"><%= icon("trash-2") %></button>
+              <button type="button" class="<%= button_classes(variant: :ghost, size: :icon, class: "text-base-content/60 hover:text-error") %>" title="<%= tt("wordLists.editor.delete") %>" data-action="word-rows#remove" data-role="remove"><%= icon("trash-2") %></button>
             </span>
           </div>
         </div>
@@ -152,8 +152,8 @@
       <template data-word-rows-target="template"><% row_html.call({ display: "", input: "", annotation: "", input_type: nil }, 0) %></template>
       <% words_errors.each do |message| %><div class="pt-3 md:px-6"><%= lists_field_error(message) %></div><% end %>
       <div class="space-y-3 pt-3 md:px-6 md:py-4">
-        <button type="button" class="<%= button_classes(variant: :outline, class: "w-full border-dashed text-muted-foreground") %>" data-action="word-rows#add"><%= icon(:plus) %><%= tt("wordLists.editor.addWord") %></button>
-        <p class="hidden flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground sm:flex">
+        <button type="button" class="<%= button_classes(variant: :outline, class: "w-full border-dashed text-base-content/60") %>" data-action="word-rows#add"><%= icon(:plus) %><%= tt("wordLists.editor.addWord") %></button>
+        <p class="hidden flex-wrap items-center gap-x-2 gap-y-1 text-xs text-base-content/60 sm:flex">
           <kbd class="<%= editor_kbd %>">Enter</kbd><%= tt("wordLists.editor.shortcutNext") %>
           <span aria-hidden="true">・</span><kbd class="<%= editor_kbd %>">Alt+↑↓</kbd><%= tt("wordLists.editor.shortcutMove") %>
           <span aria-hidden="true">・</span><kbd class="<%= editor_kbd %>">Ctrl（⌘）+Enter</kbd><%= tt("wordLists.editor.shortcutSave") %><span aria-hidden="true">・</span><%= icon("grip-vertical", class: "size-3.5") %><%= tt("wordLists.editor.shortcutDrag") %>

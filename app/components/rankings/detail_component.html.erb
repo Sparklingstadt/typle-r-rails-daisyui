@@ -3,7 +3,7 @@
   <div class="flex flex-wrap items-start justify-between gap-3">
     <div class="min-w-0 space-y-1">
       <h2 id="ranking-title" tabindex="-1" class="text-xl font-bold outline-none [overflow-wrap:anywhere]"><%= practice_name(list) %></h2>
-      <p class="flex flex-wrap items-center gap-x-2 text-[13px] text-muted-foreground tabular-nums">
+      <p class="flex flex-wrap items-center gap-x-2 text-[13px] text-base-content/60 tabular-nums">
         <span><%= records_t("rankings.detail.words", count: list.words.size) %></span><span aria-hidden="true">·</span><span><%= records_t("rankings.detail.records", count: mode_records.size) %></span>
         <% if last_practiced %><span aria-hidden="true">·</span><span><%= records_t("rankings.detail.last_practiced", day: records_day(last_practiced, now)) %></span><% end %>
       </p>
@@ -18,17 +18,17 @@
 
   <% if ranked.empty? %>
     <div class="flex flex-col items-center gap-3 rounded-xl border border-dashed px-6 py-10 text-center">
-      <span class="grid size-11 place-items-center rounded-full bg-muted text-muted-foreground"><%= icon(:trophy, class: "size-5") %></span>
+      <span class="grid size-11 place-items-center rounded-full bg-base-200 text-base-content/60"><%= icon(:trophy, class: "size-5") %></span>
       <% if device.nil? || mode_records.empty? %>
         <div class="space-y-1">
           <h3 class="font-bold"><%= records_t("rankings.detail.not_practised.title") %></h3>
-          <p class="max-w-sm text-sm text-balance text-muted-foreground"><%= records_t("rankings.detail.not_practised.description") %></p>
+          <p class="max-w-sm text-sm text-balance text-base-content/60"><%= records_t("rankings.detail.not_practised.description") %></p>
         </div>
         <%= link_button practice_path, variant: :outline do %><%= icon(:keyboard) %><%= records_t("rankings.detail.practice") %><% end %>
       <% else %>
         <div class="space-y-1">
           <h3 class="font-bold [overflow-wrap:anywhere]"><%= records_t("rankings.detail.no_device_records.title", device: device_name) %></h3>
-          <p class="max-w-sm text-sm text-balance text-muted-foreground"><%= records_t("rankings.detail.no_device_records.description", count: mode_records.size) %></p>
+          <p class="max-w-sm text-sm text-balance text-base-content/60"><%= records_t("rankings.detail.no_device_records.description", count: mode_records.size) %></p>
         </div>
         <%= link_button records_t("rankings.detail.no_device_records.show_all"), rankings_url({ device: nil }), variant: :outline %>
       <% end %>
@@ -36,43 +36,43 @@
   <% else %>
     <dl class="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
       <% tiles.each do |term, value, note, highlight| %>
-        <div class="<%= cn("grid min-w-0 content-start gap-0.5 rounded-xl border px-3 py-3 sm:px-4 sm:py-3.5", highlight && "border-amber-200 bg-amber-50/60 dark:border-amber-900 dark:bg-amber-950/30") %>">
-          <dt class="flex items-center gap-1 text-xs text-muted-foreground"><%= icon(:trophy, class: "size-3.5 text-amber-600 dark:text-amber-400") if highlight %><%= term %></dt>
+        <div class="<%= cn("grid min-w-0 content-start gap-0.5 rounded-xl border px-3 py-3 sm:px-4 sm:py-3.5", highlight && "border-warning/30 bg-warning/6") %>">
+          <dt class="flex items-center gap-1 text-xs text-base-content/60"><%= icon(:trophy, class: "size-3.5 text-warning") if highlight %><%= term %></dt>
           <dd class="text-xl font-medium tabular-nums sm:text-2xl"><%= value %></dd>
-          <dd class="text-xs text-muted-foreground tabular-nums [overflow-wrap:anywhere]"><%= note %></dd>
+          <dd class="text-xs text-base-content/60 tabular-nums [overflow-wrap:anywhere]"><%= note %></dd>
         </div>
       <% end %>
     </dl>
 
     <% points = ranking.trend %>
     <div class="space-y-2">
-      <h3 class="text-sm font-bold"><%= records_t("rankings.detail.trend.title") %> <span class="font-normal text-muted-foreground"><%= records_t("rankings.detail.trend.recent", count: points.size) %></span></h3>
+      <h3 class="text-sm font-bold"><%= records_t("rankings.detail.trend.title") %> <span class="font-normal text-base-content/60"><%= records_t("rankings.detail.trend.recent", count: points.size) %></span></h3>
       <% if points.size > 1 %>
         <%= trend_chart(points) %>
       <% else %>
-        <p class="rounded-lg bg-muted/50 px-3 py-4 text-sm text-muted-foreground"><%= records_t("rankings.detail.trend.need_two") %></p>
+        <p class="rounded-lg bg-base-200/50 px-3 py-4 text-sm text-base-content/60"><%= records_t("rankings.detail.trend.need_two") %></p>
       <% end %>
     </div>
 
     <div class="space-y-2">
       <div class="flex flex-wrap items-baseline justify-between gap-2">
-        <h3 class="text-sm font-bold"><%= records_t("rankings.detail.top.title") %> <span class="font-normal text-muted-foreground"><%= records_t("rankings.detail.top.#{order}") %><%= " · #{device_name}" if device %></span></h3>
-        <span class="text-xs text-muted-foreground tabular-nums"><%= records_t("rankings.detail.top.shown", shown: top.size, count: ranked.size) %></span>
+        <h3 class="text-sm font-bold"><%= records_t("rankings.detail.top.title") %> <span class="font-normal text-base-content/60"><%= records_t("rankings.detail.top.#{order}") %><%= " · #{device_name}" if device %></span></h3>
+        <span class="text-xs text-base-content/60 tabular-nums"><%= records_t("rankings.detail.top.shown", shown: top.size, count: ranked.size) %></span>
       </div>
-      <p class="text-xs text-muted-foreground sm:hidden"><%= records_t("rankings.order_notes.#{order}") %></p>
+      <p class="text-xs text-base-content/60 sm:hidden"><%= records_t("rankings.order_notes.#{order}") %></p>
       <%= render Rankings::TopRecordsComponent.new(records: top, list:, user: current_user) %>
       <% if ranked.size > ListRanking::TOP %>
         <%= link_to rankings_url({ list: list.id, all: (1 unless show_all?), others: (1 if include_others?) }), "aria-expanded": show_all?.to_s,
-              class: button_classes(variant: :ghost, size: :sm, class: "w-full text-muted-foreground") do %>
+              class: button_classes(variant: :ghost, size: :sm, class: "w-full text-base-content/60") do %>
           <%= show_all? ? records_t("rankings.detail.top.show_top", count: ListRanking::TOP) : records_t("rankings.detail.top.show_all", count: ranked.size) %><%= icon("chevron-down", class: cn("transition-transform motion-reduce:transition-none", show_all? && "rotate-180")) %>
         <% end %>
       <% end %>
     </div>
 
     <% if ranking.others.any? %>
-      <div class="flex flex-wrap items-start gap-x-2.5 gap-y-2 rounded-lg border border-dashed bg-muted/40 px-3.5 py-3 text-[13px]">
-        <%= icon(:history, class: "mt-0.5 size-4 shrink-0 text-muted-foreground") %>
-        <p class="min-w-0 flex-1 basis-52 text-muted-foreground">
+      <div class="flex flex-wrap items-start gap-x-2.5 gap-y-2 rounded-lg border border-dashed bg-base-200/40 px-3.5 py-3 text-[13px]">
+        <%= icon(:history, class: "mt-0.5 size-4 shrink-0 text-base-content/60") %>
+        <p class="min-w-0 flex-1 basis-52 text-base-content/60">
           <%= others_note %>
         </p>
         <% unless ranking.fallback? %>

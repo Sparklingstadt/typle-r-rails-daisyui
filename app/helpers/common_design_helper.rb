@@ -34,7 +34,7 @@ module CommonDesignHelper
     parts = tt("common.packList", pack: "\u0001", list: "\u0002").split(/(\u0001|\u0002)/)
     safe_join(parts.map { |part|
       case part
-      when "\u0001" then tag.span(pack, class: "font-normal text-muted-foreground")
+      when "\u0001" then tag.span(pack, class: "font-normal text-base-content/60")
       when "\u0002" then name
       else part
       end
@@ -51,11 +51,11 @@ module CommonDesignHelper
     return if category.blank? && tags.blank?
     tag.span(class: cn("relative flex min-w-0 flex-wrap items-center gap-1", binding.local_variable_get(:class)), "data-list-labels": "") do
       safe_join([
-        (tag.span(class: "inline-flex h-5 max-w-full items-center gap-1 rounded-md bg-secondary px-1.5 text-[11px] font-medium text-secondary-foreground") {
+        (tag.span(class: "inline-flex h-5 max-w-full items-center gap-1 rounded-md bg-base-200 px-1.5 text-[11px] font-medium text-base-content") {
           safe_join([icon(:folder, class: "size-3 shrink-0"), tag.span("#{tt("wordLists.labels.category")}: ", class: "sr-only"), tag.span(category, class: "truncate")])
         } if category.present?),
         *Array(tags).map { |name|
-          tag.span(class: "inline-flex h-5 max-w-full items-center rounded-full border px-1.5 text-[11px] text-muted-foreground") {
+          tag.span(class: "inline-flex h-5 max-w-full items-center rounded-full border px-1.5 text-[11px] text-base-content/60") {
             safe_join([tag.span("#{tt("wordLists.labels.tag")}: ", class: "sr-only"), tag.span("#", "aria-hidden": "true"), tag.span(name, class: "truncate")])
           }
         }

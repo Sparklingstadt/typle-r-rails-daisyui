@@ -63,7 +63,7 @@ class PracticeTest < ApplicationSystemTestCase
       type(word["input"])
     end
 
-    assert_selector "[data-practice-target=resultBody] p[role=status].text-green-700"
+    assert_selector "[data-practice-target=resultBody] p[role=status].text-success"
     record = PracticeRecord.sole
     assert_equal list.id, record.word_list_id
     assert_equal 1, record.mistakes
@@ -72,7 +72,7 @@ class PracticeTest < ApplicationSystemTestCase
     assert_operator record.accuracy, :<, 100
     within("[data-practice-target=resultMissed]") { assert_text missed }
     # The page's best records are fetched again, the new run marked.
-    assert_selector "#best-records tr.bg-green-50", count: 1, visible: :all
+    assert_selector "#best-records tr.bg-success\\/10", count: 1, visible: :all
   end
 
   test "recall hides the word until it is revealed" do

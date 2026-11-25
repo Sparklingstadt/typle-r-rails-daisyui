@@ -16,7 +16,7 @@
             variant: SidLogin.enabled? ? :outline : :default, form_class: "block", params: { origin: return_to }, data: { turbo: false } %>
     <% end %>
     <% if !SidLogin.enabled? && !GithubLogin.enabled? %>
-      <p class="text-sm text-muted-foreground"><%= tt("errors.authUnavailable") %></p>
+      <p class="text-sm text-base-content/60"><%= tt("errors.authUnavailable") %></p>
     <% end %>
     <% if @local_login %>
       <%= form_button t(".local_login"), local_session_path, method: :post, size: :lg, variant: :outline, class: "w-full",

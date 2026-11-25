@@ -1,10 +1,10 @@
-<article aria-labelledby="<%= id %>" class="flex flex-col gap-5 rounded-xl p-4 ring-1 ring-foreground/10 sm:p-5">
+<article aria-labelledby="<%= id %>" class="flex flex-col gap-5 rounded-xl p-4 ring-1 ring-base-content/10 sm:p-5">
   <header class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
     <h3 id="<%= id %>" class="font-medium break-words"><%= practice_name(trend.list) %></h3>
-    <p class="text-[13px] text-muted-foreground"><%= home_t("dashboard.trends.summary", count: trend.count, day: home_day(trend.last_practiced, now)) %></p>
+    <p class="text-[13px] text-base-content/60"><%= home_t("dashboard.trends.summary", count: trend.count, day: home_day(trend.last_practiced, now)) %></p>
   </header>
   <% if trend.count < 2 %>
-    <p class="text-sm text-muted-foreground"><%= home_t("dashboard.trends.need_two") %></p>
+    <p class="text-sm text-base-content/60"><%= home_t("dashboard.trends.need_two") %></p>
     <%= link_button home_t("dashboard.trends.practice"), play_path(list: trend.list.id), variant: :outline, class: "self-start", icon: "keyboard",
           aria: { label: home_t("dashboard.trends.practice_list", name: trend.list.full_name) } %>
   <% else %>
@@ -12,21 +12,21 @@
       <% latest = metric.points.last %>
       <div class="flex flex-col gap-2">
         <div class="flex flex-wrap items-baseline justify-between gap-x-2">
-          <h4 class="text-[13px] text-muted-foreground"><%= title %></h4>
+          <h4 class="text-[13px] text-base-content/60"><%= title %></h4>
           <% if latest %>
-            <p class="text-xs text-muted-foreground"><%= latest_text(metric, kind) %></p>
+            <p class="text-xs text-base-content/60"><%= latest_text(metric, kind) %></p>
           <% end %>
         </div>
         <% if metric.change %><%= home_delta(**home_change_delta(metric.change, kind)) %><% end %>
         <% if metric.points.size > 1 %>
           <%= chart(title, metric, kind) %>
         <% else %>
-          <p class="text-sm text-muted-foreground"><%= home_t("dashboard.trends.no_chart") %></p>
+          <p class="text-sm text-base-content/60"><%= home_t("dashboard.trends.no_chart") %></p>
         <% end %>
       </div>
     <% end %>
     <% if (best = trend.best) %>
-      <p class="border-t pt-3 text-[13px] text-muted-foreground">
+      <p class="border-t pt-3 text-[13px] text-base-content/60">
         <%= home_t("dashboard.trends.best", accuracy: format_accuracy(best.accuracy), time: format("%.2f", best.seconds), day: home_day(best.practiced_at, now)) %>
       </p>
     <% end %>

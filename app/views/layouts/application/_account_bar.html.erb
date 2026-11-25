@@ -3,20 +3,20 @@
       user" when it has none) and how it signs in. %>
   <% kind = account.login_kind %>
   <% name = account.display_name.presence || tt(kind == :sid ? "account.sidUser" : "account.githubUser") %>
-  <% item = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-2 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent [&_svg]:size-4 [&_svg]:text-muted-foreground" %>
+  <% item = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-3 py-2 text-sm outline-none hover:bg-base-200 hover:text-base-content focus-visible:bg-base-200 [&_svg]:size-4 [&_svg]:text-base-content/60" %>
   <div class="relative" data-controller="dropdown">
     <button type="button" data-dropdown-target="trigger" class="<%= button_classes(variant: :ghost, size: :icon, class: "size-10 rounded-full") %>" aria-label="<%= t("layouts.application.account_menu") %>" title="<%= name %>">
-      <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-secondary text-sm font-semibold text-secondary-foreground" aria-hidden="true"><%= name.first.upcase %></span>
+      <span class="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-base-200 text-sm font-semibold text-base-content" aria-hidden="true"><%= name.first.upcase %></span>
     </button>
-    <div class="absolute top-full right-0 z-50 mt-2 w-60 rounded-lg border border-border bg-popover p-1 text-popover-foreground shadow-md">
+    <div class="absolute top-full right-0 z-50 mt-2 w-60 rounded-lg border border-base-300 bg-base-100 p-1 text-base-content shadow-md">
       <div class="flex items-center gap-3 px-3 py-2">
-        <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-secondary text-sm font-semibold text-secondary-foreground" aria-hidden="true"><%= name.first.upcase %></span>
+        <span class="flex size-9 shrink-0 items-center justify-center rounded-full bg-base-200 text-sm font-semibold text-base-content" aria-hidden="true"><%= name.first.upcase %></span>
         <span class="grid min-w-0">
           <span class="truncate text-sm font-medium"><%= name %></span>
-          <span class="text-xs text-muted-foreground"><%= tt({ sid: "account.signedInWithSid", github: "account.signedInWithGitHub", password: "account.signedInWithPassword" }.fetch(kind)) %></span>
+          <span class="text-xs text-base-content/60"><%= tt({ sid: "account.signedInWithSid", github: "account.signedInWithGitHub", password: "account.signedInWithPassword" }.fetch(kind)) %></span>
         </span>
       </div>
-      <div class="my-1 h-px bg-border" role="separator"></div>
+      <div class="my-1 h-px bg-base-300" role="separator"></div>
       <%= link_to devices_path, class: item do %><%= icon(:monitor) %><%= t("layouts.application.manage_devices") %><% end %>
       <%= button_to session_path, method: :delete, class: item, form_class: "contents" do %><%= icon("log-out") %><%= t("layouts.application.sign_out") %><% end %>
     </div>

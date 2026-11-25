@@ -6,7 +6,7 @@
 <% adding = !editing && @adding %>
 <% full = @devices.size >= Device::MAX %>
 <%= page_main(width: :narrow) do %>
-  <%= page_header settings_t("devices.title"), settings_rich(settings_t("devices.description"), link: play_path, link_class: "underline underline-offset-3 hover:text-foreground") do %>
+  <%= page_header settings_t("devices.title"), settings_rich(settings_t("devices.description"), link: play_path, link_class: "underline underline-offset-3 hover:text-base-content") do %>
     <%= render "layouts/application/page_storage_badge" %>
   <% end %>
   <div class="space-y-8">
@@ -14,7 +14,7 @@
       <div class="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-3 gap-y-3 sm:grid-cols-[auto_minmax(0,1fr)_auto] sm:gap-x-4">
         <%= icon_tile(:monitor) %>
         <div class="min-w-0">
-          <h2 id="current-device-heading" class="text-[13px] text-muted-foreground"><%= settings_t("devices.current.heading") %></h2>
+          <h2 id="current-device-heading" class="text-[13px] text-base-content/60"><%= settings_t("devices.current.heading") %></h2>
           <p class="font-medium [overflow-wrap:anywhere]"><%= current_label %></p>
         </div>
         <div class="col-span-2 flex flex-wrap gap-2 sm:col-span-1">
@@ -23,7 +23,7 @@
               <%= settings_t("devices.current.change") %><%= icon("chevron-down") %>
             </button>
             <div class="<%= cn(UiHelper::MENU_CONTENT, "absolute top-full right-0 mt-1.5 w-72 max-w-[calc(100vw-2rem)]") %>">
-              <p class="px-2 pt-1.5 pb-1 text-xs text-muted-foreground"><%= settings_t("devices.current.heading") %></p>
+              <p class="px-2 pt-1.5 pb-1 text-xs text-base-content/60"><%= settings_t("devices.current.heading") %></p>
               <% @choice.options.each do |label, key| %>
                 <%= button_to choose_devices_path, params: { key: }, form_class: "contents", role: "menuitemradio", "aria-checked": (key == current_key).to_s,
                       class: UiHelper::MENU_INSET_ITEM do %>
@@ -36,7 +36,7 @@
           <%= link_button play_path, variant: :outline do %><%= icon(:keyboard) %><%= settings_t("devices.current.practice") %><% end %>
         </div>
       </div>
-      <p class="mt-3 text-[13px] text-muted-foreground sm:pl-14"><%= settings_t(@choice.none? ? "devices.current.noteUnselected" : "devices.current.noteSelected") %></p>
+      <p class="mt-3 text-[13px] text-base-content/60 sm:pl-14"><%= settings_t(@choice.none? ? "devices.current.noteUnselected" : "devices.current.noteSelected") %></p>
     </section>
 
     <section aria-labelledby="device-list-heading" class="space-y-3">
@@ -51,7 +51,7 @@
           <% end %>
         <% end %>
       </div>
-      <% if full %><p class="text-sm text-muted-foreground"><%= settings_t("devices.limit", max: Device::MAX) %></p><% end %>
+      <% if full %><p class="text-sm text-base-content/60"><%= settings_t("devices.limit", max: Device::MAX) %></p><% end %>
 
       <% if adding || editing %>
         <%= render Devices::FormDialogComponent.new(device: editing || @device, editing: !!editing, records: editing ? @usage[editing.key]&.dig(:count).to_i : 0, choice: @choice) %>
@@ -68,10 +68,10 @@
           <%= empty_state_icon(:monitor) %>
           <div class="space-y-1.5">
             <h3 class="font-bold"><%= settings_t("devices.empty.title") %></h3>
-            <p class="max-w-md text-sm text-balance text-muted-foreground"><%= settings_t("devices.empty.description") %></p>
+            <p class="max-w-md text-sm text-balance text-base-content/60"><%= settings_t("devices.empty.description") %></p>
           </div>
           <%= visit_button devices_path(add: 1) do %><%= icon(:plus) %><%= settings_t("devices.add") %><% end %>
-          <p class="text-xs text-muted-foreground"><%= settings_t("devices.empty.example") %></p>
+          <p class="text-xs text-base-content/60"><%= settings_t("devices.empty.example") %></p>
         <% end %>
       <% end %>
     </section>

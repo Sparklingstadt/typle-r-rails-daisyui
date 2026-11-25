@@ -6,10 +6,10 @@
 
   <% if !@practised %>
     <%= empty_state(class: "py-12 sm:py-16") do %>
-      <%= empty_state_icon(:trophy, class: "bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300") %>
+      <%= empty_state_icon(:trophy, class: "bg-warning/15 text-warning") %>
       <div class="space-y-1.5">
         <h2 class="font-bold"><%= records_t("rankings.empty.title") %></h2>
-        <p class="max-w-md text-sm text-balance text-muted-foreground"><%= records_t("rankings.empty.description") %></p>
+        <p class="max-w-md text-sm text-balance text-base-content/60"><%= records_t("rankings.empty.description") %></p>
       </div>
       <div class="flex flex-wrap justify-center gap-2">
         <%= link_button play_path, size: :lg do %><%= icon(:keyboard) %><%= records_t("rankings.empty.practice") %><% end %>
@@ -26,17 +26,17 @@
               [records_t("rankings.mode.#{mode || "normal"}"), rankings_url.({ mode: }), mode == @mode] }) %>
         <%= records_pill(label: records_t("rankings.order.label"), items: ListRanking::ORDERS.map { |order|
               [records_rich("rankings.order.#{order}", { wide: ->(chunks) { tag.span(chunks, class: "hidden sm:inline") } }), rankings_url.({ order: (order if order == "speed") }), order == @order] }) %>
-        <p class="hidden items-center gap-1.5 text-xs text-muted-foreground sm:flex">
+        <p class="hidden items-center gap-1.5 text-xs text-base-content/60 sm:flex">
           <%= icon(:info, class: "size-3.5 shrink-0") %><%= records_t("rankings.order_notes.#{@order}") %>
         </p>
       </div>
 
       <div class="xl:grid xl:grid-cols-[320px_minmax(0,1fr)] xl:items-start xl:gap-6">
-        <section aria-label="<%= records_t("rankings.lists") %>" data-ranking-list class="<%= cn("rounded-xl border bg-card xl:sticky xl:top-6", opened && "hidden xl:block") %>">
+        <section aria-label="<%= records_t("rankings.lists") %>" data-ranking-list class="<%= cn("rounded-xl border bg-base-100 xl:sticky xl:top-6", opened && "hidden xl:block") %>">
           <%= render "rankings/list", packs: @packs, selected: @detail&.list, rankings_url: %>
         </section>
         <% if @detail %>
-          <section aria-labelledby="ranking-title" class="<%= cn("min-w-0 rounded-xl border bg-card", !opened && "hidden xl:block") %>">
+          <section aria-labelledby="ranking-title" class="<%= cn("min-w-0 rounded-xl border bg-base-100", !opened && "hidden xl:block") %>">
             <%= render Rankings::DetailComponent.new(ranking: @detail, mode: @mode, device: @device, order: @order, show_all: @show_all, include_others: @include_others, rankings_url:) %>
           </section>
         <% end %>

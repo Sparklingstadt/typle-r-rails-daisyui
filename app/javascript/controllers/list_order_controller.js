@@ -43,7 +43,7 @@ export default class extends Controller {
   dragStart(event) {
     this.dragged = event.target.closest("[data-list-order-target=row]")
     event.dataTransfer.effectAllowed = "move"
-    this.dragged.classList.add("bg-muted", "shadow-md")
+    this.dragged.classList.add("bg-base-200", "shadow-md")
     this.over = over => {
       const row = over.target.closest?.("[data-list-order-target=row]")
       if (!row || !this.dragged) return
@@ -57,7 +57,7 @@ export default class extends Controller {
   }
 
   dragEnd() {
-    this.dragged?.classList.remove("bg-muted", "shadow-md")
+    this.dragged?.classList.remove("bg-base-200", "shadow-md")
     this.dragged = null
     this.rowsTarget.removeEventListener("dragover", this.over)
     this.update()

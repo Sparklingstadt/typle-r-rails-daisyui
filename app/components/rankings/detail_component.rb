@@ -44,7 +44,7 @@ class Rankings::DetailComponent < ApplicationComponent
     best = ranking.best
     recent = ranking.recent
     gap = ranking.recent_seconds - best.seconds
-    unit = ->(chunks) { tag.span(chunks, class: "ml-px text-[0.8em] font-normal text-muted-foreground") }
+    unit = ->(chunks) { tag.span(chunks, class: "ml-px text-[0.8em] font-normal text-base-content/60") }
     [
       [records_t("rankings.detail.stats.best"), records_time(best.seconds), records_t("rankings.detail.stats.best_note", accuracy: records_accuracy(best.accuracy), day: records_day(best.practiced_at, now)), true],
       [records_t("rankings.detail.stats.recent_average", count: recent.size), records_time(ranking.recent_seconds),
@@ -77,7 +77,7 @@ class Rankings::DetailComponent < ApplicationComponent
     detail = others_detail
     if ranking.fallback? then records_t("rankings.detail.others.fallback", count: list.words.size, detail:)
     elsif include_others? then records_t("rankings.detail.others.included", detail:)
-    else records_rich("rankings.detail.others.excluded", { strong: ->(chunks) { tag.span(chunks, class: "font-medium text-foreground") } }, count: ranking.others.size, detail:)
+    else records_rich("rankings.detail.others.excluded", { strong: ->(chunks) { tag.span(chunks, class: "font-medium text-base-content") } }, count: ranking.others.size, detail:)
     end
   end
 end

@@ -4,11 +4,11 @@ module ListsDesignHelper
   # typle-r's PackRow and ListRow: one grid row with the name, the numbers and the actions.
   LISTS_ROW = "grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 px-4 py-3.5 sm:grid-cols-[minmax(0,1fr)_11rem_auto] sm:gap-x-5 sm:px-5"
   # DropdownMenuContent and DropdownMenuItem.
-  LISTS_MENU = "absolute top-full right-0 z-50 mt-1 min-w-56 rounded-lg border bg-popover p-1 text-left text-popover-foreground shadow-md"
-  LISTS_MENU_ITEM = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-normal outline-none select-none hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-muted-foreground"
-  LISTS_MENU_DESTRUCTIVE = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-normal text-destructive outline-none select-none hover:bg-accent hover:text-destructive focus-visible:bg-accent [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-destructive"
+  LISTS_MENU = "absolute top-full right-0 z-50 mt-1 min-w-56 rounded-lg border bg-base-100 p-1 text-left text-base-content shadow-md"
+  LISTS_MENU_ITEM = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-normal outline-none select-none hover:bg-base-200 hover:text-base-content focus-visible:bg-base-200 focus-visible:text-base-content [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-base-content/60"
+  LISTS_MENU_DESTRUCTIVE = "flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-normal text-error outline-none select-none hover:bg-base-200 hover:text-error focus-visible:bg-base-200 [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-error"
   # The amber notes of the editor (the word count changing, a pack being deleted).
-  LISTS_HINT = "flex gap-2 rounded-lg bg-amber-50 px-3 py-2 text-[13px] text-amber-900 dark:bg-amber-950/50 dark:text-amber-200"
+  LISTS_HINT = "flex gap-2 rounded-lg bg-warning/10 px-3 py-2 text-[13px] text-warning"
 
   # 今日, 昨日 or the date, with the year only when it is not this year (typle-r's format.day).
   def lists_day(time, now = Time.current)
@@ -37,12 +37,12 @@ module ListsDesignHelper
     return if category.blank? && tags.empty?
     parts = []
     if category.present?
-      parts << tag.span(class: "inline-flex h-5 max-w-full items-center gap-1 rounded-md bg-secondary px-1.5 text-[11px] font-medium text-secondary-foreground") do
+      parts << tag.span(class: "inline-flex h-5 max-w-full items-center gap-1 rounded-md bg-base-200 px-1.5 text-[11px] font-medium text-base-content") do
         safe_join([icon(:folder, class: "size-3 shrink-0"), tag.span("#{t("design.lists.labels.category")}: ", class: "sr-only"), tag.span(category, class: "truncate")])
       end
     end
     tags.each do |name|
-      parts << tag.span(class: "inline-flex h-5 max-w-full items-center rounded-full border px-1.5 text-[11px] text-muted-foreground") do
+      parts << tag.span(class: "inline-flex h-5 max-w-full items-center rounded-full border px-1.5 text-[11px] text-base-content/60") do
         safe_join([tag.span("#{t("design.lists.labels.tag")}: ", class: "sr-only"), tag.span("#", "aria-hidden": "true"), tag.span(name, class: "truncate")])
       end
     end
@@ -53,18 +53,18 @@ module ListsDesignHelper
   def lists_menu(label:, title:, &block)
     tag.div(class: "relative", data: { controller: "dropdown" }) do
       safe_join([
-        tag.button(icon("ellipsis"), type: "button", data: { dropdown_target: "trigger" }, class: button_classes(variant: :ghost, size: "icon-lg", class: "size-10 text-muted-foreground"),
+        tag.button(icon("ellipsis"), type: "button", data: { dropdown_target: "trigger" }, class: button_classes(variant: :ghost, size: "icon-lg", class: "size-10 text-base-content/60"),
                     "aria-label": label, title:),
         tag.div(capture(&block), class: LISTS_MENU)
       ])
     end
   end
 
-  def lists_menu_separator(class: nil) = tag.div(class: cn("my-1 h-px bg-border", binding.local_variable_get(:class)), role: "separator")
+  def lists_menu_separator(class: nil) = tag.div(class: cn("my-1 h-px bg-base-300", binding.local_variable_get(:class)), role: "separator")
 
   # typle-r's FieldError: the message under a field.
   def lists_field_error(message, id: nil)
-    tag.p(safe_join([icon("circle-alert", class: "mt-0.5 size-4 shrink-0"), message]), id:, class: "flex items-start gap-1.5 text-sm text-destructive")
+    tag.p(safe_join([icon("circle-alert", class: "mt-0.5 size-4 shrink-0"), message]), id:, class: "flex items-start gap-1.5 text-sm text-error")
   end
 
   # The pack's category, taken from its lists (a followed pack's lists carry the official category).

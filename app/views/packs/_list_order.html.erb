@@ -1,23 +1,23 @@
 <%# typle-r's PackListOrder and SortableListRow: the pack's lists in order, sorted by dragging the grip or from each row's
     menu (list_order_controller.js); the order is sent as list_ids[]. %>
 <% lists = pack.word_lists.to_a %>
-<section aria-labelledby="pack-order-heading" class="space-y-3 rounded-xl border bg-card p-4 sm:p-6" data-controller="list-order">
+<section aria-labelledby="pack-order-heading" class="space-y-3 rounded-xl border bg-base-100 p-4 sm:p-6" data-controller="list-order">
   <div class="space-y-1">
     <h2 id="pack-order-heading" class="text-base font-bold"><%= tt("wordLists.packEditor.lists") %></h2>
-    <p class="text-xs text-muted-foreground"><%= tt("wordLists.packEditor.listsHelp") %></p>
+    <p class="text-xs text-base-content/60"><%= tt("wordLists.packEditor.listsHelp") %></p>
   </div>
   <ul class="space-y-2" data-list-order-target="rows">
     <% lists.each do |list| %>
-      <li role="group" aria-label="<%= list.name %>" class="flex items-center gap-2 rounded-xl border bg-card p-3" data-list-order-target="row">
+      <li role="group" aria-label="<%= list.name %>" class="flex items-center gap-2 rounded-xl border bg-base-100 p-3" data-list-order-target="row">
         <input type="hidden" name="list_ids[]" value="<%= list.id %>">
-        <button type="button" draggable="true" <%= "disabled" if lists.size < 2 %> class="<%= button_classes(variant: :ghost, size: :icon, class: "touch-none cursor-grab text-muted-foreground active:cursor-grabbing") %>"
+        <button type="button" draggable="true" <%= "disabled" if lists.size < 2 %> class="<%= button_classes(variant: :ghost, size: :icon, class: "touch-none cursor-grab text-base-content/60 active:cursor-grabbing") %>"
                 aria-label="<%= tt("wordLists.packEditor.drag", name: list.name) %>" title="<%= tt("wordLists.packEditor.dragTitle") %>"
                 data-action="dragstart->list-order#dragStart dragend->list-order#dragEnd keydown->list-order#gripKey"><%= icon("grip-vertical") %></button>
         <div class="min-w-0 flex-1">
           <p class="font-medium [overflow-wrap:anywhere]"><%= list.name %></p>
-          <p class="text-xs text-muted-foreground"><%= list.level.present? ? tt("wordLists.packEditor.levels", levels: list.level) : tt("wordLists.packEditor.noLevels") %></p>
+          <p class="text-xs text-base-content/60"><%= list.level.present? ? tt("wordLists.packEditor.levels", levels: list.level) : tt("wordLists.packEditor.noLevels") %></p>
         </div>
-        <span class="shrink-0 text-sm text-muted-foreground tabular-nums"><%= tt("wordLists.packEditor.wordCount", count: list.words.size) %></span>
+        <span class="shrink-0 text-sm text-base-content/60 tabular-nums"><%= tt("wordLists.packEditor.wordCount", count: list.words.size) %></span>
         <div class="relative" data-controller="dropdown">
           <button type="button" data-dropdown-target="trigger" class="<%= button_classes(variant: :ghost, size: :icon, class: "list-none#{" pointer-events-none opacity-50" if lists.size < 2}") %>"
                    aria-label="<%= tt("wordLists.packEditor.listActions", name: list.name) %>" title="<%= tt("wordLists.editor.actions") %>"><%= icon(:ellipsis) %></button>

@@ -3,10 +3,10 @@
   <% if notice.present? %>
     <div role="status" aria-live="polite" aria-atomic="true" data-controller="toast"
          data-action="mouseenter->toast#hold mouseleave->toast#release focusin->toast#hold focusout->toast#release"
-         class="<%= alert_classes(:default, "flex items-center gap-3 border-green-800 bg-green-800 px-4 py-4 text-white shadow-lg transition duration-300 motion-reduce:transition-none translate-y-4 opacity-0") %>">
+         class="<%= alert_classes(:success, "flex items-center gap-3 px-4 py-4 shadow-lg transition duration-300 motion-reduce:transition-none translate-y-4 opacity-0") %>">
       <span class="flex shrink-0 items-center"><%= icon(:check, class: "size-5") %></span>
       <span class="min-w-0 flex-1 break-words"><%= notice %></span>
-      <button type="button" class="<%= button_classes(variant: :ghost, size: "icon-sm", class: "shrink-0 text-white hover:bg-white/15 hover:text-white focus-visible:ring-white/70") %>"
+      <button type="button" class="<%= button_classes(variant: :ghost, size: "icon-sm", class: "shrink-0 text-success-content hover:bg-success-content/15 hover:text-success-content focus-visible:ring-success-content/70") %>"
               aria-label="<%= tt("common.closeNotification") %>" data-action="toast#close"><%= icon(:x) %></button>
     </div>
   <% end %>

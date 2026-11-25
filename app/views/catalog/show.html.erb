@@ -4,10 +4,10 @@
 <% code = @pack.category == "プログラミング" %>
 <main class="mx-auto w-full max-w-4xl px-4 pt-10 pb-16 sm:px-6 lg:px-8">
   <header class="mb-10 space-y-4">
-    <p class="text-sm text-muted-foreground"><%= [@pack.category, *@pack.tags].compact_blank.join(" · ") %></p>
+    <p class="text-sm text-base-content/60"><%= [@pack.category, *@pack.tags].compact_blank.join(" · ") %></p>
     <h1 class="text-3xl font-bold tracking-tight [overflow-wrap:anywhere]"><%= t("design.lists.official.title", name: @pack.name) %></h1>
-    <% if (description = OfficialCatalog.description(@pack.catalog_id)) %><p class="max-w-2xl text-base text-muted-foreground"><%= description %></p><% end %>
-    <p class="text-sm tabular-nums text-muted-foreground"><%= t("design.lists.official.stats", lists: t("design.lists.official.stats_lists", count: @pack.lists.size), words: t("design.lists.official.stats_words", count: @pack.word_count)) %></p>
+    <% if (description = OfficialCatalog.description(@pack.catalog_id)) %><p class="max-w-2xl text-base text-base-content/60"><%= description %></p><% end %>
+    <p class="text-sm tabular-nums text-base-content/60"><%= t("design.lists.official.stats", lists: t("design.lists.official.stats_lists", count: @pack.lists.size), words: t("design.lists.official.stats_words", count: @pack.word_count)) %></p>
     <%# typle-r's OfficialPackPractice: one button, which follows the pack if needed and starts practising it; it is
         disabled when the followed packs are full. %>
     <% full = !@followed && current_user && current_user.packs.where.not(catalog_id: nil).count >= Pack::MAX_FOLLOWED %>
@@ -17,9 +17,9 @@
       <% else %>
         <%= form_button t("design.lists.official.practice"), follow_catalog_path(@pack.catalog_id, practice: 1), size: :lg, icon: :keyboard, disabled: full %>
       <% end %>
-      <% if full %><p class="text-[13px] text-muted-foreground"><%= tt("officialPack.full", max: Pack::MAX_FOLLOWED) %></p><% end %>
+      <% if full %><p class="text-[13px] text-base-content/60"><%= tt("officialPack.full", max: Pack::MAX_FOLLOWED) %></p><% end %>
     </div>
-    <p class="text-[13px] text-muted-foreground"><%= t("design.lists.official.free") %></p>
+    <p class="text-[13px] text-base-content/60"><%= t("design.lists.official.free") %></p>
   </header>
 
   <section aria-labelledby="words-heading" class="space-y-8">
@@ -29,14 +29,14 @@
         <h3 class="font-bold"><%= list.name %></h3>
         <div class="overflow-x-auto rounded-xl border">
           <table class="w-full text-left text-sm">
-            <thead class="bg-muted/50 text-xs text-muted-foreground">
+            <thead class="bg-base-200/50 text-xs text-base-content/60">
               <tr><th scope="col" class="px-4 py-2 font-medium"><%= t("design.lists.official.input") %></th><th scope="col" class="px-4 py-2 font-medium"><%= t("design.lists.official.note") %></th></tr>
             </thead>
             <tbody class="divide-y">
               <% list.words.each do |word| %>
                 <tr class="align-top">
                   <td class="<%= cn("px-4 py-2 whitespace-pre-wrap [overflow-wrap:anywhere]", ("font-mono text-[13px]" if code)) %>"><%= word[:display] %></td>
-                  <td class="px-4 py-2 text-muted-foreground [overflow-wrap:anywhere]"><%= word[:annotation] %></td>
+                  <td class="px-4 py-2 text-base-content/60 [overflow-wrap:anywhere]"><%= word[:annotation] %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -46,5 +46,5 @@
     <% end %>
   </section>
 
-  <p class="mt-10"><%= link_to t("design.lists.official.catalog"), catalog_index_path, class: "text-sm underline underline-offset-3 hover:text-muted-foreground" %></p>
+  <p class="mt-10"><%= link_to t("design.lists.official.catalog"), catalog_index_path, class: "text-sm underline underline-offset-3 hover:text-base-content/60" %></p>
 </main>

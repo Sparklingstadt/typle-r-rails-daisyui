@@ -20,9 +20,9 @@
   best_match = path && all_paths.select { |item| path == item || path.start_with?("#{item}/") }.max_by(&:length)
   current_section = ->(path) { path == best_match }
   item_class = ->(current) {
-    cn("relative flex h-10 items-center gap-3 xl:h-8 rounded-md px-3 text-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-ring/50 [&_svg]:size-4 [&_svg]:shrink-0",
+    cn("relative flex h-10 items-center gap-3 xl:h-8 rounded-md px-3 text-sm outline-none transition-colors focus-visible:ring-3 focus-visible:ring-primary/50 [&_svg]:size-4 [&_svg]:shrink-0",
        current ? "bg-primary/10 font-medium text-primary before:absolute before:inset-y-2.5 before:left-0 before:w-[3px] before:rounded-full before:bg-primary"
-               : "text-foreground/80 hover:bg-accent/60 hover:text-foreground [&_svg]:text-muted-foreground hover:[&_svg]:text-foreground")
+               : "text-base-content/80 hover:bg-base-200/60 hover:text-base-content [&_svg]:text-base-content/60 hover:[&_svg]:text-base-content")
   }
   nav_item = ->(name, path, icon_name, external = false) {
     current = !external && current_section.(path)
@@ -34,14 +34,14 @@
   <nav aria-label="<%= t("layouts.application.main_navigation") %>">
     <% groups.each do |label, links| %>
       <div <% if label %>role="group" aria-label="<%= t("layouts.application.#{label}") %>"<% end %>>
-        <% if label %><p class="px-3 pt-4 pb-1 text-xs font-medium text-muted-foreground"><%= t("layouts.application.#{label}") %></p><% end %>
+        <% if label %><p class="px-3 pt-4 pb-1 text-xs font-medium text-base-content/60"><%= t("layouts.application.#{label}") %></p><% end %>
         <ul class="grid gap-0.5"><% links.each do |link| %><%= nav_item.(*link) %><% end %></ul>
       </div>
     <% end %>
   </nav>
   <nav aria-label="<%= t("layouts.application.help") %>" class="mt-auto border-t pt-1">
-    <p class="px-3 pt-4 pb-1 text-xs font-medium text-muted-foreground"><%= t("layouts.application.help") %></p>
+    <p class="px-3 pt-4 pb-1 text-xs font-medium text-base-content/60"><%= t("layouts.application.help") %></p>
     <ul class="grid gap-0.5"><% help.each do |link| %><%= nav_item.(*link) %><% end %></ul>
   </nav>
-  <p class="px-3 pb-1 text-xs text-muted-foreground tabular-nums">v<%= Typle::VERSION %></p>
+  <p class="px-3 pb-1 text-xs text-base-content/60 tabular-nums">v<%= Typle::VERSION %></p>
 </div>

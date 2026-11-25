@@ -1,42 +1,44 @@
 <dialog id="device-form" aria-labelledby="device-dialog-title" aria-describedby="device-dialog-description" data-controller="modal" data-modal-close-url-value="<%= devices_path %>"
-        class="fixed top-1/2 left-1/2 z-50 m-0 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-xl border-0 bg-popover p-5 text-popover-foreground ring-1 ring-foreground/10 outline-none open:grid sm:max-w-md backdrop:bg-black/10 backdrop:backdrop-blur-xs">
-  <%= form_with model: record, url: form_url, method: editing ? :patch : :post, class: "grid gap-5", html: { novalidate: true }, data: { turbo: true } do |f| %>
-    <div class="grid gap-1.5 pr-8">
-      <h2 id="device-dialog-title" class="font-heading text-lg font-bold"><%= settings_t(editing ? "devices.dialog.editTitle" : "devices.dialog.addTitle") %></h2>
-      <p id="device-dialog-description" class="text-sm text-muted-foreground"><%= settings_t(editing ? "devices.dialog.editDescription" : "devices.dialog.addDescription") %></p>
-    </div>
-    <% FIELDS.each do |attribute, id, label, placeholder, help, max, required| %>
-      <% error = field_error(attribute) %>
-      <div class="grid gap-2">
-        <label for="<%= id %>" class="<%= label_classes %>"><span><%= settings_t(label) %><% if required %><span aria-hidden="true" class="text-destructive">*</span><% else %><span class="font-normal text-muted-foreground"><%= settings_t("devices.dialog.optional") %></span><% end %></span></label>
-        <%= f.text_field attribute, id:, maxlength: max, autocomplete: "off", autofocus: attribute == :name, class: input_classes("h-11"), placeholder: settings_t(placeholder),
-              "aria-required": (required ? "true" : nil), "aria-invalid": (error ? true : nil), "aria-describedby": [("#{id}-error" if error), "#{id}-help"].compact.join(" ") %>
-        <% if error %><p id="<%= id %>-error" class="flex items-start gap-1.5 text-sm text-destructive"><%= icon("circle-alert", class: "mt-0.5 size-4 shrink-0") %><%= error %></p><% end %>
-        <p id="<%= id %>-help" class="text-xs text-muted-foreground"><%= settings_t(help) %></p>
+        class="modal">
+  <div class="modal-box grid max-w-md gap-4 p-5">
+    <%= form_with model: record, url: form_url, method: editing ? :patch : :post, class: "grid gap-5", html: { novalidate: true }, data: { turbo: true } do |f| %>
+      <div class="grid gap-1.5 pr-8">
+        <h2 id="device-dialog-title" class="font-heading text-lg font-bold"><%= settings_t(editing ? "devices.dialog.editTitle" : "devices.dialog.addTitle") %></h2>
+        <p id="device-dialog-description" class="text-sm text-base-content/60"><%= settings_t(editing ? "devices.dialog.editDescription" : "devices.dialog.addDescription") %></p>
       </div>
-    <% end %>
-    <% if editing && records.positive? %>
-      <p class="flex gap-2 rounded-lg bg-muted px-3 py-2.5 text-[13px] text-muted-foreground">
-        <%= icon(:info, class: "mt-0.5 size-4 shrink-0") %><span><%= settings_t("devices.dialog.renameNote", count: records) %></span>
-      </p>
-    <% end %>
-    <% unless editing %>
-      <div class="flex items-start gap-2.5 text-sm">
-        <%= check_box_tag :use, "1", use_by_default?, id: "device-use", class: "mt-0.5 size-4 shrink-0 cursor-pointer accent-primary", "aria-describedby": "device-use-help" %>
-        <div class="grid gap-0.5">
-          <label for="device-use" class="cursor-pointer"><%= settings_t("devices.dialog.use") %></label>
-          <p id="device-use-help" class="text-xs text-muted-foreground"><%= settings_t("devices.dialog.useHelp") %></p>
+      <% FIELDS.each do |attribute, id, label, placeholder, help, max, required| %>
+        <% error = field_error(attribute) %>
+        <div class="grid gap-2">
+          <label for="<%= id %>" class="<%= label_classes %>"><span><%= settings_t(label) %><% if required %><span aria-hidden="true" class="text-error">*</span><% else %><span class="font-normal text-base-content/60"><%= settings_t("devices.dialog.optional") %></span><% end %></span></label>
+          <%= f.text_field attribute, id:, maxlength: max, autocomplete: "off", autofocus: attribute == :name, class: input_classes("h-11"), placeholder: settings_t(placeholder),
+                "aria-required": (required ? "true" : nil), "aria-invalid": (error ? true : nil), "aria-describedby": [("#{id}-error" if error), "#{id}-help"].compact.join(" ") %>
+          <% if error %><p id="<%= id %>-error" class="flex items-start gap-1.5 text-sm text-error"><%= icon("circle-alert", class: "mt-0.5 size-4 shrink-0") %><%= error %></p><% end %>
+          <p id="<%= id %>-help" class="text-xs text-base-content/60"><%= settings_t(help) %></p>
         </div>
+      <% end %>
+      <% if editing && records.positive? %>
+        <p class="flex gap-2 rounded-lg bg-base-200 px-3 py-2.5 text-[13px] text-base-content/60">
+          <%= icon(:info, class: "mt-0.5 size-4 shrink-0") %><span><%= settings_t("devices.dialog.renameNote", count: records) %></span>
+        </p>
+      <% end %>
+      <% unless editing %>
+        <div class="flex items-start gap-2.5 text-sm">
+          <%= check_box_tag :use, "1", use_by_default?, id: "device-use", class: "mt-0.5 size-4 shrink-0 cursor-pointer accent-primary", "aria-describedby": "device-use-help" %>
+          <div class="grid gap-0.5">
+            <label for="device-use" class="cursor-pointer"><%= settings_t("devices.dialog.use") %></label>
+            <p id="device-use-help" class="text-xs text-base-content/60"><%= settings_t("devices.dialog.useHelp") %></p>
+          </div>
+        </div>
+      <% end %>
+      <% if form_error %>
+        <div role="alert" class="<%= alert_classes(:destructive, "border-error/40 bg-error/5") %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm"><%= form_error %></div></div>
+      <% end %>
+      <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+        <button type="button" class="<%= button_classes(variant: :outline) %>" data-action="modal#close"><%= settings_t("form.cancel") %></button>
+        <%= f.button settings_t(editing ? "form.save" : "form.add"), type: "submit", class: button_classes %>
       </div>
     <% end %>
-    <% if form_error %>
-      <div role="alert" class="<%= alert_classes(:destructive, "border-destructive/40 bg-destructive/5") %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm"><%= form_error %></div></div>
-    <% end %>
-    <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-      <button type="button" class="<%= button_classes(variant: :outline) %>" data-action="modal#close"><%= settings_t("form.cancel") %></button>
-      <%= f.button settings_t(editing ? "form.save" : "form.add"), type: "submit", class: button_classes %>
-    </div>
-  <% end %>
-  <button type="button" aria-label="<%= tt("common.close") %>" data-action="modal#close"
-          class="absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"><%= icon(:x) %></button>
+    <button type="button" aria-label="<%= tt("common.close") %>" data-action="modal#close"
+            class="btn btn-sm btn-circle btn-ghost absolute top-3 right-3 text-base-content/60"><%= icon(:x) %></button>
+  </div>
 </dialog>

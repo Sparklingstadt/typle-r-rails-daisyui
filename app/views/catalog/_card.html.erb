@@ -3,9 +3,9 @@
 <% name_id = "starter-#{pack.catalog_id}" %>
 <% first = pack.lists.first %>
 <%= card(class: "h-full gap-3 px-5 py-5", "data-catalog-id": pack.catalog_id) do %>
-  <p class="text-[13px] text-muted-foreground"><%= t("design.lists.official.stats", lists: t("design.lists.official.stats_lists", count: pack.lists.size), words: t("design.lists.official.stats_words", count: pack.word_count)) %></p>
+  <p class="text-[13px] text-base-content/60"><%= t("design.lists.official.stats", lists: t("design.lists.official.stats_lists", count: pack.lists.size), words: t("design.lists.official.stats_words", count: pack.word_count)) %></p>
   <h2 id="<%= name_id %>" class="text-lg font-bold"><%= link_to pack.name, catalog_path(pack.catalog_id), class: "hover:underline" %></h2>
-  <% if first %><p class="text-[13px] text-muted-foreground"><%= t("design.lists.starter.first", list: first.name) %></p><% end %>
+  <% if first %><p class="text-[13px] text-base-content/60"><%= t("design.lists.starter.first", list: first.name) %></p><% end %>
   <ul class="space-y-1 font-mono text-[15px]">
     <% pack.first_words.each do |word| %><li class="[overflow-wrap:anywhere]"><%= word[:display] %></li><% end %>
   </ul>

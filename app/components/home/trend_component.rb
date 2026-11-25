@@ -24,7 +24,7 @@ class Home::TrendComponent < ApplicationComponent
 
   def latest_text(metric, kind)
     home_rich("dashboard.trends.latest",
-      number: tag.span(home_t("dashboard.trends.latest_number", value: with_unit(metric.points.last.value, kind)), class: "text-base font-semibold text-foreground"))
+      number: tag.span(home_t("dashboard.trends.latest_number", value: with_unit(metric.points.last.value, kind)), class: "text-base font-semibold text-base-content"))
   end
 
   def chart(title, metric, kind)

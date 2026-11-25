@@ -1,6 +1,6 @@
 <figure class="flex flex-col gap-1">
   <div class="flex gap-1.5">
-    <div aria-hidden="true" class="relative my-2 w-8 shrink-0 text-[11px] text-muted-foreground tabular-nums">
+    <div aria-hidden="true" class="relative my-2 w-8 shrink-0 text-[11px] text-base-content/60 tabular-nums">
       <% scale.ticks.each do |tick| %>
         <span class="absolute right-0 -translate-y-1/2 leading-none" style="top: <%= y(tick) %>%"><%= tick_text(tick) %></span>
       <% end %>
@@ -9,18 +9,18 @@
       <div class="relative mx-1 h-full">
         <svg aria-hidden="true" viewBox="0 0 100 100" preserveAspectRatio="none" class="absolute inset-0 size-full overflow-visible">
           <% scale.ticks.each do |tick| %>
-            <line x1="0" x2="100" y1="<%= y(tick) %>" y2="<%= y(tick) %>" class="stroke-border" stroke-width="1" vector-effect="non-scaling-stroke" />
+            <line x1="0" x2="100" y1="<%= y(tick) %>" y2="<%= y(tick) %>" class="stroke-base-300" stroke-width="1" vector-effect="non-scaling-stroke" />
           <% end %>
-          <path d="<%= line %> L<%= x(last) %> 100 L0 100 Z" class="fill-trend/10" />
-          <path d="<%= line %>" class="stroke-trend" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
-          <line x1="0" x2="0" y1="0" y2="100" class="stroke-muted-foreground/60" stroke-width="1" vector-effect="non-scaling-stroke" style="display: none" data-trend-chart-target="cursor" />
+          <path d="<%= line %> L<%= x(last) %> 100 L0 100 Z" class="fill-info/10" />
+          <path d="<%= line %>" class="stroke-info" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+          <line x1="0" x2="0" y1="0" y2="100" class="stroke-base-content/36" stroke-width="1" vector-effect="non-scaling-stroke" style="display: none" data-trend-chart-target="cursor" />
         </svg>
-        <span aria-hidden="true" class="absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-trend ring-2 ring-card" style="left: <%= x(last) %>%; top: <%= y(latest.value) %>%" data-trend-chart-target="dot"></span>
+        <span aria-hidden="true" class="absolute size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-info ring-2 ring-base-100" style="left: <%= x(last) %>%; top: <%= y(latest.value) %>%" data-trend-chart-target="dot"></span>
         <%= trend_chart_tooltip %>
       </div>
     <% end %>
   </div>
-  <figcaption aria-hidden="true" class="flex justify-between pl-10 text-[11px] text-muted-foreground tabular-nums">
+  <figcaption aria-hidden="true" class="flex justify-between pl-10 text-[11px] text-base-content/60 tabular-nums">
     <span><%= dates.first %></span><span><%= dates.last %></span>
   </figcaption>
   <table class="sr-only">

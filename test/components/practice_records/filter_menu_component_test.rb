@@ -17,7 +17,7 @@ class PracticeRecords::FilterMenuComponentTest < ViewComponent::TestCase
   test "a chosen option reads in the pill, and is checked" do
     render_inline(menu("d2"))
 
-    assert_selector "button.bg-secondary span.truncate", text: "Desk"
+    assert_selector "button.bg-base-200 span.truncate", text: "Desk"
     assert_selector "a[aria-checked=true][href='/records?device=d2'] svg.lucide-check", visible: :all
     assert_selector "a[aria-checked=true]", count: 1, visible: :all
   end

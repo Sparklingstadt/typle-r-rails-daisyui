@@ -2,8 +2,11 @@ import { Controller } from "@hotwired/stimulus"
 
 const KEY = "typle-r:theme:v1"
 const DARK = "(prefers-color-scheme: dark)"
+// daisyUI's themes (app/assets/tailwind/application.css), set as data-theme on <html>.
+const LIGHT_THEME = "typle"
+const DARK_THEME = "typle-dark"
 
-// The top bar's dark mode button, as typle-r's ThemeSwitcher: toggles light and dark, kept in this browser.
+// The top bar's dark mode button: toggles daisyUI's light and dark themes, kept in this browser.
 export default class extends Controller {
   static targets = ["button", "failed"]
 
@@ -16,6 +19,8 @@ export default class extends Controller {
 
   disconnect() { this.media.removeEventListener("change", this.sync) }
 
+  get dark() { return document.documentElement.dataset.theme === DARK_THEME }
+
   preference() {
     const value = document.documentElement.dataset.themePreference
     return value === "light" || value === "dark" ? value : "system"
@@ -24,11 +29,11 @@ export default class extends Controller {
   apply(preference) {
     const root = document.documentElement
     root.dataset.themePreference = preference
-    root.classList.toggle("dark", preference === "dark" || (preference === "system" && this.media.matches))
+    root.dataset.theme = preference === "dark" || (preference === "system" && this.media.matches) ? DARK_THEME : LIGHT_THEME
   }
 
   toggle() {
-    const preference = document.documentElement.classList.contains("dark") ? "light" : "dark"
+    const preference = this.dark ? "light" : "dark"
     this.apply(preference)
     let saved = true
     try { localStorage.setItem(KEY, preference) } catch { saved = false }
@@ -37,7 +42,7 @@ export default class extends Controller {
   }
 
   show() {
-    const dark = document.documentElement.classList.contains("dark")
+    const dark = this.dark
     this.buttonTarget.setAttribute("aria-pressed", String(dark))
     this.buttonTarget.title = dark ? this.buttonTarget.dataset.toLight : this.buttonTarget.dataset.toDark
   }

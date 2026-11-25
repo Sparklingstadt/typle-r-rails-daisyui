@@ -3,64 +3,66 @@
 <% i = ->(key, **values) { tt("wordLists.import.#{key}", **values) } %>
 <button type="button" class="<%= button_classes(variant: :outline, size: :sm) %>" data-action="word-rows#openImport"><%= icon(:upload) %><%= i.(:open) %></button>
 <dialog aria-labelledby="csv-import-title" aria-describedby="csv-import-help" data-word-rows-target="importDialog" data-action="close->word-rows#resetImport"
-        class="fixed top-1/2 left-1/2 z-50 m-0 max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 overflow-y-auto rounded-xl border-0 bg-popover p-5 text-left text-popover-foreground ring-1 ring-foreground/10 outline-none open:grid backdrop:bg-black/10 backdrop:backdrop-blur-xs">
-  <div class="grid gap-1.5 pr-8">
-    <h2 id="csv-import-title" class="font-heading text-lg font-bold"><%= i.(:title) %></h2>
-    <p id="csv-import-help" class="text-sm text-muted-foreground"><%= i.(:description) %></p>
-  </div>
-  <input type="file" accept=".csv,text/csv" class="sr-only" tabindex="-1" aria-label="<%= i.(:fileLabel) %>" aria-describedby="csv-import-help" data-word-rows-target="importFile" data-action="change->word-rows#chooseImport">
-  <div class="contents" data-word-rows-target="importEmpty">
-    <div class="flex flex-col items-center gap-2 rounded-xl border-2 border-dashed bg-muted/40 px-4 py-7 text-center transition-colors data-[dragging=true]:border-ring data-[dragging=true]:bg-muted"
-         data-word-rows-target="importDrop" data-action="dragover->word-rows#dragOverImport dragleave->word-rows#dragLeaveImport drop->word-rows#dropImport">
-      <%= icon("file-spreadsheet", class: "size-8 text-muted-foreground") %>
-      <p class="text-sm font-medium"><%= i.(:drop) %></p>
-      <button type="button" class="<%= button_classes(variant: :outline, size: :sm) %>" data-action="word-rows#pickImport"><%= i.(:choose) %></button>
-      <p class="text-xs text-muted-foreground"><%= i.(:limits) %></p>
+        class="modal">
+  <div class="modal-box grid max-w-lg gap-4 p-5 text-left">
+    <div class="grid gap-1.5 pr-8">
+      <h2 id="csv-import-title" class="font-heading text-lg font-bold"><%= i.(:title) %></h2>
+      <p id="csv-import-help" class="text-sm text-base-content/60"><%= i.(:description) %></p>
     </div>
-    <div class="space-y-2">
-      <p class="text-sm font-medium"><%= i.(:example) %></p>
-      <pre class="overflow-x-auto rounded-lg bg-muted px-3 py-2 text-xs leading-5"><%= i.(:sample) %></pre>
-    </div>
-  </div>
-  <div class="contents" data-word-rows-target="importLoaded" hidden>
-    <div class="flex items-center gap-3 rounded-lg border p-3">
-      <%= icon("file-spreadsheet", class: "size-5 shrink-0 text-muted-foreground") %>
-      <div class="min-w-0 flex-1">
-        <p class="truncate text-sm font-medium" data-word-rows-target="importName"></p>
-        <p class="text-xs text-muted-foreground" data-word-rows-target="importSummary"></p>
+    <input type="file" accept=".csv,text/csv" class="sr-only" tabindex="-1" aria-label="<%= i.(:fileLabel) %>" aria-describedby="csv-import-help" data-word-rows-target="importFile" data-action="change->word-rows#chooseImport">
+    <div class="contents" data-word-rows-target="importEmpty">
+      <div class="flex flex-col items-center gap-2 rounded-xl border-2 border-dashed bg-base-200/40 px-4 py-7 text-center transition-colors data-[dragging=true]:border-primary data-[dragging=true]:bg-base-200"
+           data-word-rows-target="importDrop" data-action="dragover->word-rows#dragOverImport dragleave->word-rows#dragLeaveImport drop->word-rows#dropImport">
+        <%= icon("file-spreadsheet", class: "size-8 text-base-content/60") %>
+        <p class="text-sm font-medium"><%= i.(:drop) %></p>
+        <button type="button" class="<%= button_classes(variant: :outline, size: :sm) %>" data-action="word-rows#pickImport"><%= i.(:choose) %></button>
+        <p class="text-xs text-base-content/60"><%= i.(:limits) %></p>
       </div>
-      <button type="button" class="<%= button_classes(variant: :ghost, size: :icon) %>" aria-label="<%= i.(:chooseAnother) %>" title="<%= i.(:chooseAnother) %>" data-action="word-rows#resetImport"><%= icon(:x) %></button>
+      <div class="space-y-2">
+        <p class="text-sm font-medium"><%= i.(:example) %></p>
+        <pre class="overflow-x-auto rounded-lg bg-base-200 px-3 py-2 text-xs leading-5"><%= i.(:sample) %></pre>
+      </div>
     </div>
-    <div class="overflow-hidden rounded-lg border">
-      <table class="w-full table-fixed text-left text-sm" aria-label="<%= i.(:previewLabel) %>">
-        <thead class="bg-muted text-xs text-muted-foreground"><tr>
-          <th scope="col" class="px-3 py-2 font-medium"><%= i.(:display) %></th>
-          <th scope="col" class="px-3 py-2 font-medium"><%= i.(:input) %></th>
-          <th scope="col" class="px-3 py-2 font-medium"><%= i.(:annotation) %></th>
-        </tr></thead>
-        <tbody data-word-rows-target="importPreview"></tbody>
-      </table>
-      <p class="border-t px-3 py-2 text-xs text-muted-foreground" data-word-rows-target="importMore" hidden></p>
+    <div class="contents" data-word-rows-target="importLoaded" hidden>
+      <div class="flex items-center gap-3 rounded-lg border p-3">
+        <%= icon("file-spreadsheet", class: "size-5 shrink-0 text-base-content/60") %>
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-sm font-medium" data-word-rows-target="importName"></p>
+          <p class="text-xs text-base-content/60" data-word-rows-target="importSummary"></p>
+        </div>
+        <button type="button" class="<%= button_classes(variant: :ghost, size: :icon) %>" aria-label="<%= i.(:chooseAnother) %>" title="<%= i.(:chooseAnother) %>" data-action="word-rows#resetImport"><%= icon(:x) %></button>
+      </div>
+      <div class="overflow-hidden rounded-lg border">
+        <table class="w-full table-fixed text-left text-sm" aria-label="<%= i.(:previewLabel) %>">
+          <thead class="bg-base-200 text-xs text-base-content/60"><tr>
+            <th scope="col" class="px-3 py-2 font-medium"><%= i.(:display) %></th>
+            <th scope="col" class="px-3 py-2 font-medium"><%= i.(:input) %></th>
+            <th scope="col" class="px-3 py-2 font-medium"><%= i.(:annotation) %></th>
+          </tr></thead>
+          <tbody data-word-rows-target="importPreview"></tbody>
+        </table>
+        <p class="border-t px-3 py-2 text-xs text-base-content/60" data-word-rows-target="importMore" hidden></p>
+      </div>
+      <fieldset class="space-y-3" data-word-rows-target="importModes" hidden>
+        <legend class="mb-3 text-sm font-medium"><%= i.(:existing) %></legend>
+        <% %w[append replace].each do |mode| %>
+          <label class="flex cursor-pointer items-start gap-3">
+            <input type="radio" name="import-mode" value="<%= mode %>" <%= "checked" if mode == "append" %> class="mt-0.5 size-4 accent-primary" data-word-rows-target="importMode" data-action="word-rows#importModeChanged">
+            <span><span class="block text-sm font-medium"><%= i.(mode) %></span><span class="block text-xs text-base-content/60" data-word-rows-target="importHint" data-mode="<%= mode %>"></span></span>
+          </label>
+        <% end %>
+      </fieldset>
     </div>
-    <fieldset class="space-y-3" data-word-rows-target="importModes" hidden>
-      <legend class="mb-3 text-sm font-medium"><%= i.(:existing) %></legend>
-      <% %w[append replace].each do |mode| %>
-        <label class="flex cursor-pointer items-start gap-3">
-          <input type="radio" name="import-mode" value="<%= mode %>" <%= "checked" if mode == "append" %> class="mt-0.5 size-4 accent-primary" data-word-rows-target="importMode" data-action="word-rows#importModeChanged">
-          <span><span class="block text-sm font-medium"><%= i.(mode) %></span><span class="block text-xs text-muted-foreground" data-word-rows-target="importHint" data-mode="<%= mode %>"></span></span>
-        </label>
-      <% end %>
-    </fieldset>
+    <p role="status" class="sr-only" data-word-rows-target="importStatus"></p>
+    <div role="alert" class="<%= alert_classes(:destructive, "border-error/40 bg-error/5") %>" data-word-rows-target="importError" hidden>
+      <%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm" data-word-rows-target="importErrorText"></div>
+    </div>
+    <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+      <button type="button" class="<%= button_classes(variant: :ghost) %>" data-action="word-rows#closeImport"><%= tt("common.form.cancel") %></button>
+      <button type="button" class="<%= button_classes %>" data-word-rows-target="importConfirm" data-action="word-rows#confirmImport" hidden></button>
+    </div>
+    <%# Last, as Radix renders DialogContent's close button after the content. %>
+    <button type="button" aria-label="<%= tt("common.close") %>" data-action="word-rows#closeImport"
+            class="btn btn-sm btn-circle btn-ghost absolute top-3 right-3 text-base-content/60"><%= icon(:x) %></button>
   </div>
-  <p role="status" class="sr-only" data-word-rows-target="importStatus"></p>
-  <div role="alert" class="<%= alert_classes(:destructive, "border-destructive/40 bg-destructive/5") %>" data-word-rows-target="importError" hidden>
-    <%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm" data-word-rows-target="importErrorText"></div>
-  </div>
-  <div class="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-    <button type="button" class="<%= button_classes(variant: :ghost) %>" data-action="word-rows#closeImport"><%= tt("common.form.cancel") %></button>
-    <button type="button" class="<%= button_classes %>" data-word-rows-target="importConfirm" data-action="word-rows#confirmImport" hidden></button>
-  </div>
-  <%# Last, as Radix renders DialogContent's close button after the content. %>
-  <button type="button" aria-label="<%= tt("common.close") %>" data-action="word-rows#closeImport"
-          class="absolute top-3 right-3 inline-flex size-8 items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"><%= icon(:x) %></button>
 </dialog>

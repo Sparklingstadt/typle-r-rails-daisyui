@@ -6,7 +6,7 @@
   <template data-icon-template="trophy"><%= icon("trophy", class: "size-3.5") %></template>
   <%# typle-r's ErrorAlert with its action: the run could not be saved, and the button saves it again. %>
   <template data-save-failed-template>
-    <div data-slot="alert" role="alert" class="<%= alert_classes(:destructive, "border-destructive/40 bg-destructive/5") %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm text-balance text-muted-foreground md:text-pretty flex flex-wrap items-center gap-x-3 gap-y-2"><span class="min-w-0 flex-1 basis-64" data-save-failed-text></span><button type="button" data-retry class="<%= button_classes(variant: :outline, size: :lg) %>"></button></div></div>
+    <div data-slot="alert" role="alert" class="<%= alert_classes(:destructive, "border-error/40 bg-error/5") %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm text-balance text-base-content/60 md:text-pretty flex flex-wrap items-center gap-x-3 gap-y-2"><span class="min-w-0 flex-1 basis-64" data-save-failed-text></span><button type="button" data-retry class="<%= button_classes(variant: :outline, size: :lg) %>"></button></div></div>
   </template>
   <div class="flex flex-wrap items-center gap-3" data-result-badges>
     <h2 class="text-[22px] font-bold sm:text-[26px]"><%= tt("practice.result.title") %></h2>

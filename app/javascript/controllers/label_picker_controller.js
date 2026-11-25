@@ -12,7 +12,7 @@ const ICONS = {
   x: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x size-4" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
   xSmall: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x size-3.5" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
 }
-const ITEM = "relative flex w-full cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none select-none hover:bg-muted data-[active=true]:bg-muted disabled:pointer-events-none disabled:opacity-50"
+const ITEM = "relative flex w-full cursor-pointer items-center gap-2 rounded-sm px-2 py-1.5 text-left text-sm outline-none select-none hover:bg-base-200 data-[active=true]:bg-base-200 disabled:pointer-events-none disabled:opacity-50"
 
 export default class extends Controller {
   static targets = ["trigger", "triggerText", "panel", "query", "options", "chips", "inputs"]
@@ -96,7 +96,7 @@ export default class extends Controller {
       if (rest.length) groups.push(rest.join(""))
     }
     this.optionsTarget.innerHTML = groups.length
-      ? groups.map(group => `<div class="overflow-hidden p-1 text-foreground">${group}</div>`).join('<div class="-mx-1 h-px bg-border"></div>')
+      ? groups.map(group => `<div class="overflow-hidden p-1 text-base-content">${group}</div>`).join('<div class="-mx-1 h-px bg-base-300"></div>')
       : `<p class="py-6 text-center text-sm">${escapeHtml(l.noLabels)}</p>`
   }
 
@@ -137,16 +137,16 @@ export default class extends Controller {
     if (this.multi) {
       this.triggerTextTarget.textContent = this.full ? l.tagsFull : l.addTag
       this.chipsTarget.hidden = !this.chosen.length
-      this.chipsTarget.innerHTML = this.chosen.map(tag => `<li class="inline-flex h-7 max-w-full items-center gap-0.5 rounded-full bg-secondary pr-0.5 pl-2.5 text-[13px] text-secondary-foreground">
+      this.chipsTarget.innerHTML = this.chosen.map(tag => `<li class="inline-flex h-7 max-w-full items-center gap-0.5 rounded-full bg-base-200 pr-0.5 pl-2.5 text-[13px] text-base-content">
         <span class="truncate">${escapeHtml(tag)}</span>
         <button type="button" aria-label="${escapeHtml(l.removeTag.replace("%{tag}", tag))}" title="${escapeHtml(l.removeTag.replace("%{tag}", tag))}" data-tag="${escapeHtml(tag)}" data-action="label-picker#remove"
-          class="grid size-6 shrink-0 place-items-center rounded-full text-muted-foreground outline-none hover:bg-background hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50">${ICONS.xSmall}</button></li>`).join("")
+          class="grid size-6 shrink-0 place-items-center rounded-full text-base-content/60 outline-none hover:bg-base-100 hover:text-base-content focus-visible:ring-3 focus-visible:ring-primary/50">${ICONS.xSmall}</button></li>`).join("")
       // A blank tag keeps the field in the form when none is chosen, so clearing them saves.
       this.inputsTarget.innerHTML = (this.chosen.length ? this.chosen : [""]).map(tag => `<input type="hidden" name="${this.nameValue}" value="${escapeHtml(tag)}">`).join("")
     } else {
       const current = this.chosen[0] ?? ""
       this.triggerTextTarget.textContent = current || l.chooseCategory
-      this.triggerTextTarget.classList.toggle("text-muted-foreground", !current)
+      this.triggerTextTarget.classList.toggle("text-base-content/60", !current)
       this.inputsTarget.innerHTML = `<input type="hidden" name="${this.nameValue}" value="${escapeHtml(current)}">`
     }
     this.element.dispatchEvent(new Event("input", { bubbles: true }))

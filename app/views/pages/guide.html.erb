@@ -3,14 +3,14 @@
 <%= page_main(width: :medium) do %>
   <header class="mb-8 space-y-1">
     <h1 class="text-2xl font-bold"><%= guide_t("title") %></h1>
-    <p class="text-sm text-muted-foreground"><%= guide_t("intro") %></p>
+    <p class="text-sm text-base-content/60"><%= guide_t("intro") %></p>
   </header>
   <div class="xl:grid xl:grid-cols-[minmax(0,1fr)_11rem] xl:items-start xl:gap-10">
-    <nav aria-labelledby="guide-contents" class="mb-10 rounded-xl border bg-card p-4 xl:sticky xl:top-20 xl:order-2 xl:mb-0 xl:border-0 xl:bg-transparent xl:p-0">
-      <h2 id="guide-contents" class="mb-2 text-xs font-bold text-muted-foreground"><%= guide_t("contentsLabel") %></h2>
+    <nav aria-labelledby="guide-contents" class="mb-10 rounded-xl border bg-base-100 p-4 xl:sticky xl:top-20 xl:order-2 xl:mb-0 xl:border-0 xl:bg-transparent xl:p-0">
+      <h2 id="guide-contents" class="mb-2 text-xs font-bold text-base-content/60"><%= guide_t("contentsLabel") %></h2>
       <ol class="grid grid-cols-2 gap-x-4 gap-y-1 text-sm sm:grid-cols-3 xl:grid-cols-1 xl:gap-0 xl:border-l">
         <% %w[practice lists records devices storage shortcuts].each do |id| %>
-          <li><a href="#<%= id %>" class="-ml-px flex min-h-9 items-center rounded-md px-2 text-muted-foreground outline-none hover:bg-muted hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 xl:rounded-none xl:border-l xl:border-transparent xl:px-3 xl:hover:border-foreground xl:hover:bg-transparent"><%= guide_t("contents.#{id}") %></a></li>
+          <li><a href="#<%= id %>" class="-ml-px flex min-h-9 items-center rounded-md px-2 text-base-content/60 outline-none hover:bg-base-200 hover:text-base-content focus-visible:ring-3 focus-visible:ring-primary/50 xl:rounded-none xl:border-l xl:border-transparent xl:px-3 xl:hover:border-base-content xl:hover:bg-transparent"><%= guide_t("contents.#{id}") %></a></li>
         <% end %>
       </ol>
     </nav>
@@ -30,7 +30,7 @@
 
       <%= render "pages/guide/shortcuts" %>
 
-      <div class="flex flex-col items-start gap-3 rounded-xl border bg-card p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex flex-col items-start gap-3 rounded-xl border bg-base-100 p-5 sm:flex-row sm:items-center sm:justify-between">
         <p class="font-bold"><%= guide_t("cta.text") %></p>
         <%= link_button play_path do %><%= icon(:keyboard) %><%= guide_t("cta.action") %><% end %>
       </div>

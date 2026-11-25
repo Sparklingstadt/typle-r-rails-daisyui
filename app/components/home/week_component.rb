@@ -13,12 +13,12 @@ class Home::WeekComponent < ApplicationComponent
   # One figure: its label, its value in parts (number and unit), and the change under it (home_delta's arguments).
   def stat(label, parts, delta)
     spaced = home_unit_space?
-    tag.div(class: "flex flex-col gap-2 rounded-xl p-3 ring-1 ring-foreground/10 sm:p-4") do
+    tag.div(class: "flex flex-col gap-2 rounded-xl p-3 ring-1 ring-base-content/10 sm:p-4") do
       safe_join([
-        tag.dt(label, class: "text-[13px] text-muted-foreground"),
+        tag.dt(label, class: "text-[13px] text-base-content/60"),
         tag.dd(class: "flex flex-wrap items-baseline gap-x-0.5") {
           safe_join(parts.flat_map { |value, unit|
-            [tag.span(value, class: "text-2xl font-semibold xl:text-3xl"), tag.span(unit, class: cn("mr-1 text-sm text-muted-foreground", ("ml-1" if spaced && unit != "%")))]
+            [tag.span(value, class: "text-2xl font-semibold xl:text-3xl"), tag.span(unit, class: cn("mr-1 text-sm text-base-content/60", ("ml-1" if spaced && unit != "%")))]
           })
         },
         tag.dd(home_delta(**delta))

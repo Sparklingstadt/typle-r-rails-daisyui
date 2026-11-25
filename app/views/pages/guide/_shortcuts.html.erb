@@ -8,14 +8,14 @@
                  [[%w[Ctrl Enter]], guide_t("shortcuts.actions.save")]]]
    ] %>
 <%= guide_section("shortcuts", :command, guide_t("contents.shortcuts"), guide_t("shortcuts.lead")) do %>
-  <div class="divide-y overflow-hidden rounded-xl border bg-card text-sm">
+  <div class="divide-y overflow-hidden rounded-xl border bg-base-100 text-sm">
     <% shortcuts.each do |screen, rows| %>
       <div>
-        <h3 class="bg-muted/50 px-4 py-2 text-xs font-bold text-muted-foreground"><%= guide_t("shortcuts.screens.#{screen}") %></h3>
+        <h3 class="bg-base-200/50 px-4 py-2 text-xs font-bold text-base-content/60"><%= guide_t("shortcuts.screens.#{screen}") %></h3>
         <dl class="divide-y">
           <% rows.each do |keys, action| %>
             <div class="grid grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] items-center gap-3 px-4 py-2.5 sm:grid-cols-[10rem_minmax(0,1fr)]">
-              <dt class="flex flex-wrap items-center gap-x-2 gap-y-1"><% keys.each_with_index do |combo, index| %><span class="inline-flex items-center gap-2"><% if index.positive? %><span class="text-xs text-muted-foreground">/</span><% end %><%= guide_keys(*combo) %></span><% end %></dt>
+              <dt class="flex flex-wrap items-center gap-x-2 gap-y-1"><% keys.each_with_index do |combo, index| %><span class="inline-flex items-center gap-2"><% if index.positive? %><span class="text-xs text-base-content/60">/</span><% end %><%= guide_keys(*combo) %></span><% end %></dt>
               <dd><%= action %></dd>
             </div>
           <% end %>

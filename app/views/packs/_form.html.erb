@@ -3,18 +3,18 @@
 <%= form_with model: pack, data: { controller: "pack-form", action: "input->pack-form#changed change->pack-form#changed submit->pack-form#submitting turbo:before-visit@document->pack-form#leave beforeunload@window->pack-form#unload",
       "pack-form-labels-value": { discard: tt("wordLists.editor.discardTitle"), discardDescription: tt("wordLists.editor.discardDescription"),
                                   keepEditing: tt("wordLists.editor.keepEditing"), discardAction: tt("wordLists.editor.discard") }.to_json } do |f| %>
-  <%= visit_button pack.persisted? ? packs_path(pack: pack.id) : packs_path, variant: :ghost, size: :lg, class: "-ml-2.5 mb-2 text-muted-foreground" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
+  <%= visit_button pack.persisted? ? packs_path(pack: pack.id) : packs_path, variant: :ghost, size: :lg, class: "-ml-2.5 mb-2 text-base-content/60" do %><%= icon("chevron-left") %><%= t("design.lists.editor.back") %><% end %>
   <%= page_header(title, description) do %>
     <%= render "layouts/application/page_storage_badge" %>
   <% end %>
 
   <div class="space-y-6">
-    <section class="space-y-2 rounded-xl border bg-card p-4 sm:p-6" aria-label="<%= t("design.lists.pack_editor.info") %>">
-      <%= f.label :name, class: label_classes do %><%= t("design.lists.pack_editor.name") %><span aria-hidden="true" class="text-destructive">*</span><% end %>
+    <section class="space-y-2 rounded-xl border bg-base-100 p-4 sm:p-6" aria-label="<%= t("design.lists.pack_editor.info") %>">
+      <%= f.label :name, class: label_classes do %><%= t("design.lists.pack_editor.name") %><span aria-hidden="true" class="text-error">*</span><% end %>
       <%= f.text_field :name, required: true, maxlength: 200, autofocus: true, class: input_classes("h-11"),
             "aria-invalid": (true if name_error), "aria-describedby": ["pack_name_help", ("pack_name_error" if name_error)].compact.join(" ") %>
       <% if name_error %><%= lists_field_error(name_error, id: "pack_name_error") %><% end %>
-      <p id="pack_name_help" class="text-xs text-muted-foreground"><%= t("design.lists.pack_editor.name_help") %></p>
+      <p id="pack_name_help" class="text-xs text-base-content/60"><%= t("design.lists.pack_editor.name_help") %></p>
       <%= f.label :description, tt("wordLists.packEditor.descriptionLabel"), class: label_classes("pt-2") %>
       <%= f.text_area :description, maxlength: 500, placeholder: tt("wordLists.packEditor.descriptionPlaceholder"), class: textarea_classes %>
       <%= render "packs/label_fields", pack:, suggestions: pack_label_suggestions %>
@@ -22,36 +22,36 @@
     <% if pack.persisted? %><%= render "packs/list_order", pack: %><% end %>
     <% if pack.new_record? %>
       <%# PackListChoices: the lists the new pack is made of. %>
-      <section aria-labelledby="pack-lists-heading" class="space-y-3 rounded-xl border bg-card p-4 sm:p-6" data-controller="pack-choices"
+      <section aria-labelledby="pack-lists-heading" class="space-y-3 rounded-xl border bg-base-100 p-4 sm:p-6" data-controller="pack-choices"
         data-pack-choices-chosen-value="<%= tt_forms("wordLists.packEditor.chosen") %>">
         <div class="space-y-1">
           <div class="flex flex-wrap items-baseline gap-x-2">
             <h2 id="pack-lists-heading" class="text-base font-bold"><%= tt("wordLists.packEditor.choose") %></h2>
-            <span aria-live="polite" class="text-xs text-muted-foreground tabular-nums" data-pack-choices-target="count"><%= tt("wordLists.packEditor.chosen", count: 0) %></span>
+            <span aria-live="polite" class="text-xs text-base-content/60 tabular-nums" data-pack-choices-target="count"><%= tt("wordLists.packEditor.chosen", count: 0) %></span>
           </div>
-          <p id="pack-lists-help" class="text-xs text-muted-foreground"><%= tt("wordLists.packEditor.chooseHelp") %></p>
+          <p id="pack-lists-help" class="text-xs text-base-content/60"><%= tt("wordLists.packEditor.chooseHelp") %></p>
         </div>
         <label class="<%= cn(UiHelper::SEARCH_FIELD, "h-10") %>">
           <%= icon(:search, class: "size-4 shrink-0") %>
           <input type="search" autocomplete="off" placeholder="<%= tt("wordLists.packEditor.chooseFilter") %>" aria-label="<%= tt("wordLists.packEditor.chooseFilter") %>" data-action="input->pack-choices#filter" data-pack-choices-target="query"
-            class="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground">
+            class="min-w-0 flex-1 bg-transparent text-sm text-base-content outline-none placeholder:text-base-content/60">
         </label>
         <ul aria-labelledby="pack-lists-heading" aria-describedby="pack-lists-help" class="grid max-h-[28rem] gap-1 overflow-y-auto overscroll-contain">
           <% (@choices || []).each do |list| %>
             <% in_pack = list.pack.word_lists.size > 1 ? list.pack.name : nil %>
             <li data-pack-choices-target="item" data-search="<%= [list.name, list.level, list.pack.name, *list.words.map(&:display)].compact.join("\n").downcase %>">
-              <label class="flex min-h-12 cursor-pointer items-center gap-3 rounded-lg px-3 py-2 hover:bg-muted/60 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-ring/50 has-[:checked]:bg-muted">
+              <label class="flex min-h-12 cursor-pointer items-center gap-3 rounded-lg px-3 py-2 hover:bg-base-200/60 has-[:focus-visible]:ring-3 has-[:focus-visible]:ring-primary/50 has-[:checked]:bg-base-200">
                 <input type="checkbox" name="list_ids[]" value="<%= list.id %>" aria-labelledby="pack-list-<%= list.id %>" aria-describedby="pack-list-<%= list.id %>-about"
                   class="size-4 shrink-0 accent-primary outline-none" data-action="pack-choices#count" <%= "checked" if Array(params[:list_ids]).map(&:to_s).include?(list.id.to_s) %>>
                 <span class="grid min-w-0">
                   <span id="pack-list-<%= list.id %>" class="text-sm font-medium [overflow-wrap:anywhere]"><%= list.name %></span>
-                  <span id="pack-list-<%= list.id %>-about" class="text-xs text-muted-foreground [overflow-wrap:anywhere]"><%= [(tt("wordLists.packEditor.inPack", name: in_pack) if in_pack), (tt("wordLists.packEditor.levels", levels: list.level) if list.level.present?), tt("wordLists.packEditor.wordCount", count: list.words.size)].compact.join(" · ") %></span>
+                  <span id="pack-list-<%= list.id %>-about" class="text-xs text-base-content/60 [overflow-wrap:anywhere]"><%= [(tt("wordLists.packEditor.inPack", name: in_pack) if in_pack), (tt("wordLists.packEditor.levels", levels: list.level) if list.level.present?), tt("wordLists.packEditor.wordCount", count: list.words.size)].compact.join(" · ") %></span>
                 </span>
               </label>
             </li>
           <% end %>
         </ul>
-        <p class="px-1 py-2 text-sm text-muted-foreground" data-pack-choices-target="empty" hidden><%= tt("wordLists.packEditor.noMatch") %></p>
+        <p class="px-1 py-2 text-sm text-base-content/60" data-pack-choices-target="empty" hidden><%= tt("wordLists.packEditor.noMatch") %></p>
       </section>
     <% end %>
   </div>

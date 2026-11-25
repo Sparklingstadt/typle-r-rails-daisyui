@@ -16,7 +16,7 @@ class Rankings::TopRecordsComponentTest < ViewComponent::TestCase
     render_inline(Rankings::TopRecordsComponent.new(records:, list: @list, user: @user))
 
     assert_selector "table tbody tr", count: 2
-    assert_selector "table tbody tr:first-child.bg-amber-50\\/50"
+    assert_selector "table tbody tr:first-child.bg-warning\\/5"
     assert_selector "ol li", count: 2
   end
 

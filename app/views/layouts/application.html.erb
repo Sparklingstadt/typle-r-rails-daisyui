@@ -7,14 +7,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <% if content_for?(:noindex) || (signed_in? && !current_page?(root_path)) %><meta name="robots" content="noindex, follow"><% end %>
-    <%# Runs before the first paint, as typle-r's THEME_BOOTSTRAP_SCRIPT: the .dark class from the stored choice or the OS. %>
+    <%# Runs before the first paint: daisyUI's theme (data-theme) from the stored choice or the OS. %>
     <script nonce="<%= content_security_policy_nonce %>">
       (() => {
         let preference = "system"
         try { const stored = localStorage.getItem("typle-r:theme:v1"); if (stored === "light" || stored === "dark") preference = stored } catch {}
         const root = document.documentElement
         root.dataset.themePreference = preference
-        root.classList.toggle("dark", preference === "dark" || (preference === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches))
+        root.dataset.theme = preference === "dark" || (preference === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "typle-dark" : "typle"
       })()
     </script>
     <%= yield :head %>
@@ -26,10 +26,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-muted/40 font-sans text-foreground antialiased" data-controller="drawer">
+  <body class="bg-base-200/40 font-sans text-base-content antialiased" data-controller="drawer">
     <%= render "layouts/application/navbar" %>
     <div class="flex min-h-[calc(100dvh-3.5rem)]">
-      <div id="sidebar" class="sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-60 shrink-0 overflow-y-auto border-r bg-background p-3 xl:block">
+      <div id="sidebar" class="sticky top-14 hidden h-[calc(100dvh-3.5rem)] w-60 shrink-0 overflow-y-auto border-r bg-base-100 p-3 xl:block">
         <%= render "layouts/application/nav_list" %>
       </div>
       <div id="main-content" tabindex="-1" class="min-w-0 flex-1 outline-none">

@@ -1,24 +1,24 @@
 # The parts of typle-r's guide (src/components/Guide/GuideParts.tsx): its sections, topics, points, keys, rich-text
 # tags and the colour legend. The class strings are typle-r's.
 module GuideDesignHelper
-  GUIDE_LINK = "font-medium underline decoration-foreground/30 underline-offset-3 hover:decoration-foreground"
+  GUIDE_LINK = "font-medium underline decoration-base-content/30 underline-offset-3 hover:decoration-base-content"
 
   # TargetText's classes for each state of a letter (the practice screen's colours).
   GUIDE_CARET = "relative after:absolute after:inset-x-0 after:-bottom-[0.08em] after:h-[max(3px,0.06em)] after:rounded-full motion-safe:after:animate-pulse"
   GUIDE_LETTER = {
-    done: "text-green-700 dark:text-green-400",
-    current: "#{GUIDE_CARET} text-foreground after:bg-primary",
-    error: "rounded-sm bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
-    current_error: "#{GUIDE_CARET} text-red-700 after:bg-destructive dark:text-red-400",
-    pending: "text-foreground"
+    done: "text-success",
+    current: "#{GUIDE_CARET} text-base-content after:bg-primary",
+    error: "rounded-sm bg-error/10 text-error",
+    current_error: "#{GUIDE_CARET} text-error after:bg-error",
+    pending: "text-base-content"
   }.freeze
 
   # The legend's swatches (GuideParts' `swatch`).
   GUIDE_SWATCH = {
-    done: "text-green-700 dark:text-green-400",
-    current: "underline decoration-foreground decoration-2 underline-offset-4",
-    pending: "text-foreground",
-    error: "text-red-700 underline decoration-destructive decoration-2 underline-offset-4 dark:text-red-400"
+    done: "text-success",
+    current: "underline decoration-base-content decoration-2 underline-offset-4",
+    pending: "text-base-content",
+    error: "text-error underline decoration-error decoration-2 underline-offset-4"
   }.freeze
 
   # The legend's examples: the word, what was pressed (a wrong last key is not taken) and the states it explains.
@@ -64,9 +64,9 @@ module GuideDesignHelper
     tag.section(id:, "aria-labelledby": "#{id}-heading", class: "border-t pt-8") do
       safe_join([
         tag.h2(id: "#{id}-heading", class: "flex items-center gap-2.5 text-xl font-bold") do
-          safe_join([tag.span(icon(icon_name, class: "size-4.5"), class: "grid size-8 shrink-0 place-items-center rounded-lg bg-muted text-muted-foreground"), title])
+          safe_join([tag.span(icon(icon_name, class: "size-4.5"), class: "grid size-8 shrink-0 place-items-center rounded-lg bg-base-200 text-base-content/60"), title])
         end,
-        tag.p(lead, class: "mt-3 text-muted-foreground"),
+        tag.p(lead, class: "mt-3 text-base-content/60"),
         tag.div(capture(&block), class: "mt-5 space-y-5")
       ])
     end
@@ -79,7 +79,7 @@ module GuideDesignHelper
 
   # Points: a bulleted list of the items (each a string or HTML, or [content, li options]).
   def guide_points(*items)
-    tag.ul(class: "list-disc space-y-1 pl-5 marker:text-muted-foreground/60") do
+    tag.ul(class: "list-disc space-y-1 pl-5 marker:text-base-content/36") do
       safe_join(items.compact.map { |item| item.is_a?(Array) ? tag.li(item[0], **item[1]) : tag.li(item) })
     end
   end
@@ -89,8 +89,8 @@ module GuideDesignHelper
     tag.span(class: "inline-flex flex-wrap items-center gap-1") do
       safe_join(keys.each_with_index.map { |key, index|
         tag.span(class: "inline-flex items-center gap-1") do
-          safe_join([(tag.span("+", class: "text-xs text-muted-foreground", "aria-hidden": "true") if index.positive?),
-                     kbd(key, class: "h-6 px-2 text-xs text-foreground/80")].compact)
+          safe_join([(tag.span("+", class: "text-xs text-base-content/60", "aria-hidden": "true") if index.positive?),
+                     kbd(key, class: "h-6 px-2 text-xs text-base-content/80")].compact)
         end
       })
     end

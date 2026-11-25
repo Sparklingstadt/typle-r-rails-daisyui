@@ -11,7 +11,7 @@
       </div>
       <% Interests::OPTIONS.select { |option| @ids.include?(option.id) }.each do |option| %>
         <% parent = chip_label.(option.id) %>
-        <section role="group" aria-label="<%= settings_t("interests.childrenLabel", parent:) %>" class="space-y-2 rounded-xl border bg-card p-4">
+        <section role="group" aria-label="<%= settings_t("interests.childrenLabel", parent:) %>" class="space-y-2 rounded-xl border bg-base-100 p-4">
           <h2 class="text-sm font-bold"><%= parent %></h2>
           <div class="flex flex-wrap gap-2">
             <% option.children.each do |child| %><%= settings_interest_chip(child.id, chip_label.(child.id), @ids.include?(child.id)) %><% end %>
@@ -26,7 +26,7 @@
       <section aria-labelledby="interest-packs" class="space-y-3">
         <div class="space-y-1">
           <h2 id="interest-packs" class="text-base font-bold"><%= settings_t("interests.packs.title") %></h2>
-          <p class="text-sm text-muted-foreground"><%= settings_t("interests.packs.description") %></p>
+          <p class="text-sm text-base-content/60"><%= settings_t("interests.packs.description") %></p>
         </div>
         <% if @packs.empty? %>
           <%= empty_note settings_t("interests.packs.none") %>
@@ -52,10 +52,10 @@
                     data-catalog-id="<%= pack.catalog_id %>" data-settings-packs-target="check" data-action="settings-packs#update">
                   <div class="min-w-0 flex-1 space-y-1">
                     <h3 class="font-bold [overflow-wrap:anywhere]"><%= pack.name %></h3>
-                    <p class="text-[13px] text-muted-foreground [overflow-wrap:anywhere]">
+                    <p class="text-[13px] text-base-content/60 [overflow-wrap:anywhere]">
                       <span class="sr-only"><%= settings_t("interests.packs.lists") %>: </span><%= pack.lists.map(&:name).join(settings_t("interests.packs.separator")) %>
                     </p>
-                    <p class="text-[13px] text-muted-foreground tabular-nums"><%= settings_t("interests.wordCount", count: pack.word_count) %></p>
+                    <p class="text-[13px] text-base-content/60 tabular-nums"><%= settings_t("interests.wordCount", count: pack.word_count) %></p>
                   </div>
                   <%= check_box_tag "follow[]", pack.catalog_id, followed, id: "follow-#{pack.catalog_id}", role: "switch", class: UiHelper::SWITCH,
                         "aria-label": settings_t("interests.packs.switch", name: pack.name),
@@ -63,11 +63,11 @@
                 </li>
               <% end %>
             </ul>
-            <div class="sticky bottom-0 -mx-4 flex flex-wrap items-center justify-end gap-x-4 gap-y-2 border-t bg-background/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-b-xl">
+            <div class="sticky bottom-0 -mx-4 flex flex-wrap items-center justify-end gap-x-4 gap-y-2 border-t bg-base-100/95 px-4 py-3 backdrop-blur sm:mx-0 sm:rounded-b-xl">
               <label class="mr-auto flex cursor-pointer items-center gap-2.5 text-sm">
                 <input type="checkbox" class="<%= SettingsDesignHelper::SETTINGS_CHECKBOX %>" data-settings-packs-target="all" data-action="settings-packs#toggleAll">
                 <span><%= settings_t("interests.packs.selectAll") %></span>
-                <span class="text-muted-foreground tabular-nums" aria-live="polite" data-settings-packs-target="count"><%= settings_t("interests.packs.selected", count: 0) %></span>
+                <span class="text-base-content/60 tabular-nums" aria-live="polite" data-settings-packs-target="count"><%= settings_t("interests.packs.selected", count: 0) %></span>
               </label>
               <div class="flex flex-wrap justify-end gap-2">
                 <button type="button" class="<%= button_classes(variant: :outline) %>" data-settings-packs-target="follow" data-action="settings-packs#followSelected">

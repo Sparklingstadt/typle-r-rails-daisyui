@@ -1,6 +1,6 @@
-# typle-r-rails
+# typle-r-rails-daisyui
 
-typle-r（Next.js）を Ruby on Rails 8.1 で作り直した版です。コマンド・構文・外国語の単語を、打って覚えます。
+typle-r（Next.js）を Ruby on Rails 8.1 で作り直した [typle-r-rails](https://github.com/Sparklingstadt/typle-r-rails) の、UI を shadcn/ui から [daisyUI](https://daisyui.com/) に置き換えた版です。コマンド・構文・外国語の単語を、打って覚えます。機能は typle-r-rails と同じで、見た目だけが daisyUI のものになっています。
 
 ## 動かす
 
@@ -44,10 +44,15 @@ bin/rails server -p 3010
 
 ## デザイン
 
-見た目は typle-r と同じです。typle-r と同じ Tailwind CSS v4 と shadcn/ui のトークン（`app/assets/tailwind/application.css` は typle-r の `globals.css` の写し）、lucide のアイコン、Noto Sans JP を使います。
+UI は Tailwind CSS v4 と daisyUI 5 で作っています。Node は使いません。
+
+- **daisyUI の組み込み**：`app/assets/tailwind/daisyui.mjs` / `daisyui-theme.mjs` は daisyUI のスタンドアロン版（5.8.2）で、`tailwindcss-rails` がそのまま読み込みます。更新するときは daisyUI のリリースから同じ名前のファイルを取り直します。
+- **テーマ**：`app/assets/tailwind/application.css` で、明るい `typle` と暗い `typle-dark` の2つを定義しています。トップバーのボタン（`theme_controller.js`）が `<html data-theme>` を切り替えます。
+- **色**：ビューでは daisyUI の色の名前を使います（`base-100/200/300`、`base-content`、`primary`、`success`、`warning`、`error`、`info`）。
+- **アイコンとフォント**：lucide のアイコンと Noto Sans JP を使います。
 
 - 文言の多くは typle-r の `src/messages` をそのまま使います（`config/locales/typle/`、ICU の `{name}`・plural を Rails の形に直したもの。ビューでは `tt("practice.result.title")` のように読みます）
-- `app/helpers/ui_helper.rb`: typle-r の `src/components/ui`（Button・Card・Badge・Input・Switch・Table など）を、同じクラスの文字列のヘルパーにしたもの。クラスの重なりは `cn`（tailwind_merge）で typle-r と同じように解きます
+- `app/components/ui/`（ViewComponent）と `app/helpers/ui_helper.rb`：ボタン・カード・バッジ・入力欄・トグル・表などの部品です。中身は daisyUI のクラス（`btn`、`card`、`badge`、`input`、`toggle`、`table`、`modal` など）で、`Ui::Classes` に集めています。ページから渡すクラスとの重なりは `cn`（tailwind_merge）で解きます
 - `app/views/layouts/application/`: トップバー・サイドバー・ドロワー（typle-r の Navbar・Sidebar・MobileNav）
 - 画面ごとの追加の部品は `app/helpers/*_design_helper.rb`、文言は `config/locales/design/*.yml`（多くは typle-r の `src/messages` から取り込み）
 - CSS は `bin/rails tailwindcss:build` で `app/assets/builds/tailwind.css` に作ります。開発中は Puma が監視して作り直します

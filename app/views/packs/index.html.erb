@@ -19,7 +19,7 @@
       <%= empty_state_icon("list-plus") %>
       <div class="space-y-1.5">
         <h2 id="empty-heading" class="font-bold"><%= t("design.lists.empty.pack_title") %></h2>
-        <p class="max-w-md text-sm text-balance text-muted-foreground"><%= t("design.lists.empty.pack_description") %></p>
+        <p class="max-w-md text-sm text-balance text-base-content/60"><%= t("design.lists.empty.pack_description") %></p>
       </div>
       <div class="flex flex-wrap justify-center gap-2">
         <%= link_button catalog_index_path do %><%= icon(:library) %><%= t("design.lists.empty.catalog_link") %><% end %>
@@ -34,7 +34,7 @@
     <% categories = @packs.map(&:category).compact.tally.sort_by { |name, _| Collation.key(name) }.to_h %>
     <% uncategorized = @packs.count { |pack| pack.category.blank? } %>
     <% tags = @packs.flat_map(&:tags).tally %>
-    <% trigger = "inline-flex h-10 max-w-full shrink-0 items-center gap-1.5 rounded-lg border bg-background px-3 text-sm outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted dark:bg-input/30" %>
+    <% trigger = "inline-flex h-10 max-w-full shrink-0 items-center gap-1.5 rounded-lg border bg-base-100 px-3 text-sm outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 aria-expanded:bg-base-200" %>
     <% menu = cn(UiHelper::MENU_CONTENT, "absolute top-full left-0 mt-1.5 max-h-96 w-60 overflow-y-auto") %>
     <% item = UiHelper::MENU_INSET_ITEM %>
     <section aria-labelledby="list-heading" class="space-y-3" data-controller="packs-filter"
@@ -53,22 +53,22 @@
       <div class="flex flex-wrap items-center gap-2">
         <label class="relative min-w-0 flex-1 basis-60 sm:max-w-sm">
           <span class="sr-only"><%= tt("wordLists.manager.search") %></span>
-          <%= icon(:search, class: "pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground") %>
+          <%= icon(:search, class: "pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-base-content/60") %>
           <input type="search" placeholder="<%= tt("wordLists.manager.search") %>" data-packs-filter-target="query" data-action="input->packs-filter#apply"
-            class="h-10 w-full rounded-lg border border-input bg-background pr-9 pl-9 text-sm outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 dark:bg-input/30 [&::-webkit-search-cancel-button]:hidden">
+            class="h-10 w-full rounded-lg border border-base-300 bg-base-100 pr-9 pl-9 text-sm outline-none placeholder:text-base-content/60 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-primary/50 [&::-webkit-search-cancel-button]:hidden">
         </label>
         <% if categories.any? %>
           <div class="relative" data-controller="dropdown">
             <button type="button" data-dropdown-target="trigger" class="<%= trigger %>" data-packs-filter-target="categoryTrigger" aria-label="<%= tt("wordLists.filter.categoryCurrent", category: tt("wordLists.filter.allCategories")) %>">
-              <%= icon(:folder, class: "size-4 shrink-0 text-muted-foreground") %><span class="truncate" data-packs-filter-target="categoryText"><%= tt("wordLists.filter.allCategories") %></span>
-              <%= icon("chevron-down", class: "size-3.5 shrink-0 text-muted-foreground") %>
+              <%= icon(:folder, class: "size-4 shrink-0 text-base-content/60") %><span class="truncate" data-packs-filter-target="categoryText"><%= tt("wordLists.filter.allCategories") %></span>
+              <%= icon("chevron-down", class: "size-3.5 shrink-0 text-base-content/60") %>
             </button>
             <div class="<%= menu %>" role="radiogroup">
               <% [["", tt("wordLists.filter.allCategories"), nil], *categories.map { |name, count| ["category:#{name}", name, count] }, *(uncategorized.positive? ? [["none", tt("wordLists.filter.noCategory"), uncategorized]] : [])].each do |value, text, count| %>
                 <label class="<%= item %>">
                   <input type="radio" name="pack-category" value="<%= value %>" class="peer sr-only" <%= "checked" if value.empty? %> data-action="packs-filter#apply" data-packs-filter-target="category" data-text="<%= text %>">
                   <%= menu_check(peer: true) %>
-                  <span class="min-w-0 [overflow-wrap:anywhere]"><%= text %></span><% if count %><span class="ml-auto pl-2 text-xs text-muted-foreground tabular-nums"><%= count %></span><% end %>
+                  <span class="min-w-0 [overflow-wrap:anywhere]"><%= text %></span><% if count %><span class="ml-auto pl-2 text-xs text-base-content/60 tabular-nums"><%= count %></span><% end %>
                 </label>
               <% end %>
             </div>
@@ -77,25 +77,25 @@
         <% if tags.any? %>
           <div class="relative" data-controller="dropdown">
             <button type="button" data-dropdown-target="trigger" class="<%= trigger %>" data-packs-filter-target="tagsTrigger" aria-label="<%= tt("wordLists.filter.allTags") %>">
-              <%= icon(:tag, class: "size-4 shrink-0 text-muted-foreground") %><span class="truncate" data-packs-filter-target="tagsText"><%= tt("wordLists.filter.allTags") %></span>
-              <%= icon("chevron-down", class: "size-3.5 shrink-0 text-muted-foreground") %>
+              <%= icon(:tag, class: "size-4 shrink-0 text-base-content/60") %><span class="truncate" data-packs-filter-target="tagsText"><%= tt("wordLists.filter.allTags") %></span>
+              <%= icon("chevron-down", class: "size-3.5 shrink-0 text-base-content/60") %>
             </button>
             <div class="<%= menu %>">
-              <p class="px-3 py-1.5 text-xs text-muted-foreground"><%= tt("wordLists.filter.tagsHint") %></p>
+              <p class="px-3 py-1.5 text-xs text-base-content/60"><%= tt("wordLists.filter.tagsHint") %></p>
               <% tags.each do |name, count| %>
                 <label class="<%= item %>">
                   <input type="checkbox" value="<%= name %>" class="peer sr-only" data-action="packs-filter#apply" data-packs-filter-target="tag">
                   <%= menu_check(peer: true) %>
-                  <span class="min-w-0 [overflow-wrap:anywhere]"><%= name %></span><span class="ml-auto pl-2 text-xs text-muted-foreground tabular-nums"><%= count %></span>
+                  <span class="min-w-0 [overflow-wrap:anywhere]"><%= name %></span><span class="ml-auto pl-2 text-xs text-base-content/60 tabular-nums"><%= count %></span>
                 </label>
               <% end %>
             </div>
           </div>
         <% end %>
         <div class="relative" data-controller="dropdown">
-          <button type="button" data-dropdown-target="trigger" class="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border bg-background px-3 text-sm outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted dark:bg-input/30"
+          <button type="button" data-dropdown-target="trigger" class="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border bg-base-100 px-3 text-sm outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 aria-expanded:bg-base-200"
             aria-label="<%= tt("wordLists.order.current", order: tt("wordLists.order.#{@order}")) %>">
-            <span class="text-muted-foreground"><%= tt("wordLists.order.label") %></span><%= tt("wordLists.order.#{@order}") %><%= icon("chevron-down", class: "size-3.5 text-muted-foreground") %>
+            <span class="text-base-content/60"><%= tt("wordLists.order.label") %></span><%= tt("wordLists.order.#{@order}") %><%= icon("chevron-down", class: "size-3.5 text-base-content/60") %>
           </button>
           <div class="<%= cn(menu, "w-48") %>">
             <% %w[added practiced name words].each do |order| %>
@@ -106,19 +106,19 @@
             <% end %>
           </div>
         </div>
-        <button type="button" class="<%= button_classes(variant: :ghost, size: :lg, class: "text-muted-foreground") %>" data-packs-filter-target="clear" data-action="packs-filter#clear" hidden><%= tt("wordLists.filter.clear") %></button>
-        <p aria-live="polite" class="ml-auto text-sm text-muted-foreground tabular-nums" data-packs-filter-target="count"><%= tt("wordLists.manager.count", total: @packs.size) %></p>
+        <button type="button" class="<%= button_classes(variant: :ghost, size: :lg, class: "text-base-content/60") %>" data-packs-filter-target="clear" data-action="packs-filter#clear" hidden><%= tt("wordLists.filter.clear") %></button>
+        <p aria-live="polite" class="ml-auto text-sm text-base-content/60 tabular-nums" data-packs-filter-target="count"><%= tt("wordLists.manager.count", total: @packs.size) %></p>
       </div>
       <ul class="<%= cn(UiHelper::CARD_LIST, "overflow-visible") %>" data-packs-filter-target="list">
         <% @packs.each do |pack| %>
           <%= render Packs::PackRowComponent.new(pack:, pointed: pack.id == @pointed_pack_id, open: pack.id == @open_pack_id, pointed_list_id: @pointed_list_id) %>
         <% end %>
       </ul>
-      <div class="flex flex-col items-start gap-3 rounded-xl border border-dashed bg-card px-5 py-6" data-packs-filter-target="empty" hidden>
-        <p class="text-sm text-muted-foreground [overflow-wrap:anywhere]"><%= tt("wordLists.filter.noMatch") %></p>
+      <div class="flex flex-col items-start gap-3 rounded-xl border border-dashed bg-base-100 px-5 py-6" data-packs-filter-target="empty" hidden>
+        <p class="text-sm text-base-content/60 [overflow-wrap:anywhere]"><%= tt("wordLists.filter.noMatch") %></p>
         <button type="button" class="<%= button_classes(variant: :outline) %>" data-action="packs-filter#clear"><%= tt("wordLists.filter.clearAll") %></button>
       </div>
-      <p class="text-xs text-muted-foreground"><%= tt("wordLists.manager.csvNote") %></p>
+      <p class="text-xs text-base-content/60"><%= tt("wordLists.manager.csvNote") %></p>
     </section>
   <% end %>
 <% end %>

@@ -4,7 +4,7 @@
     <%# typle-r's Notice: a pack is made of the user's own lists, and there are none yet. %>
     <div role="alert" class="<%= alert_classes %>">
       <%= icon("circle-alert") %>
-      <div data-slot="alert-description" class="flex flex-wrap items-center gap-x-3 text-sm text-balance text-muted-foreground">
+      <div data-slot="alert-description" class="flex flex-wrap items-center gap-x-3 text-sm text-balance text-base-content/60">
         <span><%= tt("wordLists.packEditor.noLists") %></span>
         <%= link_to tt("wordLists.packEditor.createList"), create_list_path, class: "underline underline-offset-4" %>
       </div>

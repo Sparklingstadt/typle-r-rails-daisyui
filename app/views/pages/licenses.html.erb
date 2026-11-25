@@ -2,10 +2,10 @@
 <% content_for :bare_title, tt("about.licenses.meta.title") %>
 <%= page_main(width: :narrow) do %>
   <header class="mb-8 space-y-4">
-    <%= link_to about_path, class: "inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground" do %><%= icon("chevron-left", class: "size-4") %><%= tt("about.licenses.back") %><% end %>
+    <%= link_to about_path, class: "inline-flex items-center gap-1 text-sm text-base-content/60 hover:text-base-content" do %><%= icon("chevron-left", class: "size-4") %><%= tt("about.licenses.back") %><% end %>
     <div class="space-y-1">
       <h1 class="text-2xl font-bold"><%= tt("about.licenses.title") %></h1>
-      <p class="max-w-2xl text-sm text-muted-foreground"><%= tt("about.licenses.intro") %></p>
+      <p class="max-w-2xl text-sm text-base-content/60"><%= tt("about.licenses.intro") %></p>
     </div>
     <%= link_button licenses_path(format: :txt), variant: :outline, target: "_blank", rel: "noopener" do %><%= icon("file-text") %><%= tt("about.licenses.fullText") %><% end %>
   </header>
@@ -14,22 +14,22 @@
       <label class="<%= cn(UiHelper::SEARCH_FIELD, "h-9 w-full sm:w-72") %>">
         <%= icon(:search, class: "size-4 shrink-0") %>
         <input type="search" placeholder="<%= tt("about.licenses.filter") %>" aria-label="<%= tt("about.licenses.filter") %>" autocomplete="off"
-               class="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground" data-license-filter-target="query" data-action="input->license-filter#apply">
+               class="min-w-0 flex-1 bg-transparent text-sm text-base-content outline-none placeholder:text-base-content/60" data-license-filter-target="query" data-action="input->license-filter#apply">
       </label>
-      <p class="text-sm text-muted-foreground" aria-live="polite" data-license-filter-target="count"><%= tt("about.licenses.count", total: @entries.size, shown: @entries.size) %></p>
+      <p class="text-sm text-base-content/60" aria-live="polite" data-license-filter-target="count"><%= tt("about.licenses.count", total: @entries.size, shown: @entries.size) %></p>
     </div>
-    <ul class="divide-y rounded-xl border bg-card text-sm">
+    <ul class="divide-y rounded-xl border bg-base-100 text-sm">
       <% @entries.each do |entry| %>
         <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5 px-4 py-2.5" data-license-filter-target="entry" data-search="<%= "#{entry.name} #{entry.license}".downcase %>">
           <span class="min-w-0 break-all">
             <% if entry.url.present? %>
-              <a href="<%= entry.url %>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-medium underline-offset-3 hover:underline"><%= entry.name %><span class="sr-only"><%= tt("about.licenses.newTab") %></span><%= icon("external-link", class: "size-3 shrink-0 text-muted-foreground") %></a>
+              <a href="<%= entry.url %>" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 font-medium underline-offset-3 hover:underline"><%= entry.name %><span class="sr-only"><%= tt("about.licenses.newTab") %></span><%= icon("external-link", class: "size-3 shrink-0 text-base-content/60") %></a>
             <% else %>
               <span class="font-medium"><%= entry.name %></span>
             <% end %>
-            <% if entry.version.present? %><span class="ml-1.5 text-muted-foreground tabular-nums"><%= entry.version %></span><% end %>
+            <% if entry.version.present? %><span class="ml-1.5 text-base-content/60 tabular-nums"><%= entry.version %></span><% end %>
           </span>
-          <span class="text-muted-foreground"><%= entry.license %><%= " #{tt("about.licenses.noText")}" unless entry.text %></span>
+          <span class="text-base-content/60"><%= entry.license %><%= " #{tt("about.licenses.noText")}" unless entry.text %></span>
         </li>
       <% end %>
     </ul>

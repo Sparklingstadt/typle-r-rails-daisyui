@@ -6,13 +6,13 @@
      ["languages", "languages", counts[:languages], home_first_words(PagesController::TRY_CATALOG_ID, 2) + home_first_words("pack-chinese-hsk5-words-1", 1)]
    ] %>
 <% features = [["own", "list-plus"], ["recall", "eye"], ["records", "trending-up"]] %>
-<% link_class = "underline underline-offset-3 hover:text-muted-foreground" %>
+<% link_class = "underline underline-offset-3 hover:text-base-content/60" %>
 <main class="mx-auto w-full max-w-5xl px-4 pt-10 pb-16 sm:px-6 lg:px-8">
   <header class="mb-14 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">
     <div class="space-y-5">
-      <p class="text-sm font-medium text-muted-foreground"><%= home_t("landing.hero.eyebrow") %></p>
+      <p class="text-sm font-medium text-base-content/60"><%= home_t("landing.hero.eyebrow") %></p>
       <h1 class="text-3xl font-bold tracking-tight sm:text-4xl"><%= home_t("landing.hero.title") %></h1>
-      <p class="max-w-2xl text-base text-muted-foreground"><%= home_t("landing.hero.lead") %></p>
+      <p class="max-w-2xl text-base text-base-content/60"><%= home_t("landing.hero.lead") %></p>
       <div class="flex flex-wrap items-center gap-3">
         <%= link_button home_t("landing.hero.play"), play_path, size: :lg, icon: "keyboard" %>
         <%= link_button home_t("landing.hero.catalog"), catalog_index_path, size: :lg, variant: :outline, icon: "library" %>
@@ -23,28 +23,28 @@
     <% if @try_words.any? %>
       <%# typle-r's src/components/Landing/TryWord.tsx. Nothing typed here is recorded. %>
       <% words = @try_words.map { |w| { input: w[:input], meaning: home_word_meaning(w[:display], w[:annotation]) } } %>
-      <div class="space-y-5 rounded-2xl border bg-card p-6 shadow-xs sm:p-7" data-controller="try-word"
+      <div class="space-y-5 rounded-2xl border bg-base-100 p-6 shadow-xs sm:p-7" data-controller="try-word"
         data-try-word-words-value="<%= words.to_json %>" data-try-word-total-value="<%= @try_list.word_count %>" data-try-word-name-value="<%= @try_list.name %>"
         data-try-word-progress-value="<%= tt("landing.try.progress") %>" data-try-word-hint-value="<%= tt("landing.try.hint") %>"
         data-try-word-done-value="<%= tt_forms("landing.try.done") %>">
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
           <span class="rounded-full bg-primary/10 px-2.5 py-1 text-[13px] font-bold text-primary"><%= tt("landing.try.badge") %></span>
-          <span class="text-[13px] tabular-nums text-muted-foreground" data-try-word-target="progress"></span>
+          <span class="text-[13px] tabular-nums text-base-content/60" data-try-word-target="progress"></span>
         </div>
-        <div class="h-1.5 overflow-hidden rounded-full bg-muted" aria-hidden="true">
+        <div class="h-1.5 overflow-hidden rounded-full bg-base-200" aria-hidden="true">
           <div class="h-full rounded-full bg-primary transition-[width] motion-reduce:transition-none" data-try-word-target="bar"></div>
         </div>
         <div class="space-y-1 py-2 text-center">
           <p id="try-target" class="mx-auto my-0 w-4/5 max-h-[min(5lh,28dvh)] max-w-full overflow-y-auto overscroll-contain py-[0.25em] text-center text-[40px] leading-tight font-medium whitespace-pre-wrap [overflow-wrap:anywhere] [scrollbar-width:none] sm:text-[52px] [&::-webkit-scrollbar]:hidden" data-try-word-target="letters"></p>
-          <p class="text-muted-foreground" data-try-word-target="meaning"></p>
+          <p class="text-base-content/60" data-try-word-target="meaning"></p>
         </div>
         <div class="space-y-1.5">
           <label for="try-field" class="text-[13px] font-medium"><%= tt("landing.try.label") %></label>
           <input id="try-field" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" lang="en"
             aria-describedby="try-target" data-try-word-target="field" data-action="input->try-word#input"
-            class="h-12 w-full rounded-lg border-2 border-input bg-background px-4 font-mono text-xl outline-none focus-visible:border-primary aria-invalid:border-destructive">
+            class="h-12 w-full rounded-lg border-2 border-base-300 bg-base-100 px-4 font-mono text-xl outline-none focus-visible:border-primary aria-invalid:border-error">
         </div>
-        <p aria-live="polite" class="min-h-5 text-[13px] text-muted-foreground" data-try-word-target="note"></p>
+        <p aria-live="polite" class="min-h-5 text-[13px] text-base-content/60" data-try-word-target="note"></p>
         <%= button_to follow_catalog_path(@try_pack.catalog_id, practice: 1), class: button_classes(variant: :outline, size: :lg, class: "w-full"), form_class: "block", "data-try-word-target": "button" do %>
           <%= tt("landing.try.continue") %><%= icon("arrow-right") %>
         <% end %>
@@ -55,17 +55,17 @@
   <div class="space-y-12">
     <section aria-labelledby="packs-heading" class="space-y-3">
       <h2 id="packs-heading" class="text-lg font-bold"><%= home_t("landing.packs.title") %></h2>
-      <p class="max-w-2xl text-sm text-muted-foreground"><%= home_t("landing.packs.lead", total: counts[:total]) %></p>
+      <p class="max-w-2xl text-sm text-base-content/60"><%= home_t("landing.packs.lead", total: counts[:total]) %></p>
       <ul class="grid gap-3 sm:grid-cols-2">
         <% pack_groups.each do |key, icon_name, count, samples| %>
-          <li class="rounded-xl border bg-card p-5">
+          <li class="rounded-xl border bg-base-100 p-5">
             <div class="mb-3 flex items-center gap-3">
-              <span aria-hidden="true" class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground"><%= icon(icon_name) %></span>
+              <span aria-hidden="true" class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-base-200 text-base-content"><%= icon(icon_name) %></span>
               <h3 class="font-bold"><%= home_t("landing.packs.#{key}.title") %></h3>
-              <span class="ml-auto text-sm tabular-nums text-muted-foreground"><%= home_t("landing.packs.#{key}.count", count:) %></span>
+              <span class="ml-auto text-sm tabular-nums text-base-content/60"><%= home_t("landing.packs.#{key}.count", count:) %></span>
             </div>
             <p lang="und" class="mb-2 truncate font-mono text-[15px]"><%= samples.join(" · ") %></p>
-            <p class="text-sm text-muted-foreground"><%= home_t("landing.packs.#{key}.text") %></p>
+            <p class="text-sm text-base-content/60"><%= home_t("landing.packs.#{key}.text") %></p>
           </li>
         <% end %>
       </ul>
@@ -75,10 +75,10 @@
       <h2 id="features-heading" class="text-lg font-bold"><%= home_t("landing.features.title") %></h2>
       <ul class="grid gap-3 sm:grid-cols-3">
         <% features.each do |key, icon_name| %>
-          <li class="rounded-xl border bg-card p-4">
-            <span aria-hidden="true" class="mb-3 flex size-9 items-center justify-center rounded-lg bg-muted text-foreground"><%= icon(icon_name) %></span>
+          <li class="rounded-xl border bg-base-100 p-4">
+            <span aria-hidden="true" class="mb-3 flex size-9 items-center justify-center rounded-lg bg-base-200 text-base-content"><%= icon(icon_name) %></span>
             <h3 class="font-bold"><%= home_t("landing.features.#{key}.title") %></h3>
-            <p class="mt-1 text-sm text-muted-foreground"><%= home_t("landing.features.#{key}.text") %></p>
+            <p class="mt-1 text-sm text-base-content/60"><%= home_t("landing.features.#{key}.text") %></p>
           </li>
         <% end %>
       </ul>
@@ -86,7 +86,7 @@
 
     <section aria-labelledby="storage-heading" class="space-y-3">
       <h2 id="storage-heading" class="text-lg font-bold"><%= home_t("landing.storage.title") %></h2>
-      <p class="max-w-2xl text-sm text-muted-foreground"><%= home_t("landing.storage.text") %></p>
+      <p class="max-w-2xl text-sm text-base-content/60"><%= home_t("landing.storage.text") %></p>
       <p class="text-sm"><%= home_rich("landing.storage.more", guide: link_to(home_t("landing.storage.more_guide"), guide_path, class: link_class),
                                                               about: link_to(home_t("landing.storage.more_about"), about_path, class: link_class)) %></p>
     </section>

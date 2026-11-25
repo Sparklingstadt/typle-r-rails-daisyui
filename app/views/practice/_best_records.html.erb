@@ -5,35 +5,35 @@
 <%= card(class: "gap-2 px-4 pt-4 pb-3") do %>
   <div class="flex min-w-0 items-baseline gap-2">
     <h2 class="shrink-0 text-[15px] font-bold"><%= t("design.practice.aside.best") %></h2>
-    <span class="truncate text-xs text-muted-foreground"><%= practice_name(list) %></span>
+    <span class="truncate text-xs text-base-content/60"><%= practice_name(list) %></span>
   </div>
-  <p class="text-xs text-muted-foreground"><%= records.size < of_mode ? t("design.practice.aside.best_order_at_count", count: list.words.size) : t("design.practice.aside.best_order") %></p>
+  <p class="text-xs text-base-content/60"><%= records.size < of_mode ? t("design.practice.aside.best_order_at_count", count: list.words.size) : t("design.practice.aside.best_order") %></p>
   <table aria-label="<%= t("design.practice.best.label") %>" class="w-full text-sm tabular-nums">
     <thead class="sr-only"><tr><th scope="col"><%= t("design.practice.best.rank") %></th><th scope="col"><%= t("design.practice.best.time") %></th><th scope="col"><%= t("design.practice.best.accuracy") %></th><th scope="col"><%= t("design.practice.best.device") %></th></tr></thead>
     <tbody>
       <% if records.any? %>
         <% records.first(5).each_with_index do |record, index| %>
           <% current = highlight && record.id == highlight.id %>
-          <tr class="<%= cn("border-b border-border/60 last:border-0", ("bg-green-50 dark:bg-green-950/50" if current)) %>">
+          <tr class="<%= cn("border-b border-base-300/60 last:border-0", ("bg-success/10" if current)) %>">
             <th scope="row" class="py-2 pr-2 pl-2 text-left font-normal">
-              <span class="<%= cn("grid size-[22px] place-items-center rounded-full bg-muted text-xs font-bold text-muted-foreground", ("bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300" if index.zero?)) %>"><%= index + 1 %></span>
+              <span class="<%= cn("grid size-[22px] place-items-center rounded-full bg-base-200 text-xs font-bold text-base-content/60", ("bg-warning/15 text-warning" if index.zero?)) %>"><%= index + 1 %></span>
             </th>
             <td class="py-2 pr-3 font-medium whitespace-nowrap"><%= t("design.practice.best.seconds", time: practice_design_seconds(record.seconds)) %></td>
             <td class="py-2 pr-3 whitespace-nowrap"><%= format_accuracy(record.accuracy) %></td>
             <td class="w-full max-w-0 py-2 pr-2">
               <span class="flex items-center gap-2">
-                <span class="truncate text-xs text-muted-foreground"><%= record.device_label %></span>
-                <% if current %><span class="ml-auto shrink-0 text-[10px] font-bold tracking-wider text-green-700 dark:text-green-400"><span aria-hidden="true">NEW</span><span class="sr-only"><%= t("design.practice.best.current") %></span></span><% end %>
+                <span class="truncate text-xs text-base-content/60"><%= record.device_label %></span>
+                <% if current %><span class="ml-auto shrink-0 text-[10px] font-bold tracking-wider text-success"><span aria-hidden="true">NEW</span><span class="sr-only"><%= t("design.practice.best.current") %></span></span><% end %>
               </span>
             </td>
           </tr>
         <% end %>
       <% else %>
-        <tr><td colspan="4" class="px-2 py-3 text-muted-foreground"><%= t("design.practice.best.empty") %></td></tr>
+        <tr><td colspan="4" class="px-2 py-3 text-base-content/60"><%= t("design.practice.best.empty") %></td></tr>
       <% end %>
     </tbody>
   </table>
-  <%= link_to rankings_path(list: list.id, mode:), class: "inline-flex w-fit items-center gap-1 rounded-sm px-2 pt-1 text-[13px] font-medium outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50" do %>
+  <%= link_to rankings_path(list: list.id, mode:), class: "inline-flex w-fit items-center gap-1 rounded-sm px-2 pt-1 text-[13px] font-medium outline-none hover:underline focus-visible:ring-3 focus-visible:ring-primary/50" do %>
     <%= t("design.practice.aside.all_best") %><%= icon("arrow-right", class: "size-3.5") %>
   <% end %>
 <% end %>

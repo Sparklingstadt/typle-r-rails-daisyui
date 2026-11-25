@@ -1,26 +1,26 @@
 <%# typle-r's RecordDeleteDetails: what the dialog removes, and what becomes the best when it is the list's best. %>
 <% details = tag.div(class: "space-y-3") do %>
-  <dl class="grid gap-1 rounded-lg border bg-muted/40 px-3.5 py-3 text-sm">
+  <dl class="grid gap-1 rounded-lg border bg-base-200/40 px-3.5 py-3 text-sm">
     <dt class="sr-only"><%= tt("records.delete.list") %></dt><dd class="font-medium [overflow-wrap:anywhere]"><%= practice_name(list) %></dd>
     <dt class="sr-only"><%= tt("records.delete.when") %></dt>
-    <dd class="text-[13px] text-muted-foreground"><%= records_day_heading(record.practiced_at.to_date) %> <%= time %> · <%= device %></dd>
+    <dd class="text-[13px] text-base-content/60"><%= records_day_heading(record.practiced_at.to_date) %> <%= time %> · <%= device %></dd>
     <dt class="sr-only"><%= tt("records.delete.result") %></dt>
     <dd class="tabular-nums"><%= records_time(record.seconds, class: "font-bold") %><span class="ml-3"><%= tt("records.delete.accuracy", value: records_accuracy(record.accuracy)) %></span><span class="ml-3"><%= tt("records.delete.mistakes", value: record.mistakes) %></span></dd>
   </dl>
   <% if (note = best_note) %>
-    <p class="flex gap-2 rounded-lg bg-amber-50 px-3.5 py-2.5 text-[13px] text-amber-900 dark:bg-amber-950/50 dark:text-amber-200"><%= icon(:trophy, class: "mt-0.5 size-3.5 shrink-0") %><span><%= note %></span></p>
+    <p class="flex gap-2 rounded-lg bg-warning/10 px-3.5 py-2.5 text-[13px] text-warning"><%= icon(:trophy, class: "mt-0.5 size-3.5 shrink-0") %><span><%= note %></span></p>
   <% end %>
 <% end %>
 <% confirm = confirm_data(details) %>
 <li data-record-key="<%= record.id %>" class="<%= cn("grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1.5 px-4 py-3 sm:gap-y-0 sm:px-5", RecordsDesignHelper::RECORDS_COLUMNS) %>">
-  <span class="hidden text-sm text-muted-foreground tabular-nums sm:block"><%= time %></span>
+  <span class="hidden text-sm text-base-content/60 tabular-nums sm:block"><%= time %></span>
   <div class="min-w-0">
     <div class="flex min-w-0 items-center gap-2">
-      <h3 class="<%= cn("truncate font-medium", !show_list? && record.device_key.nil? && "text-muted-foreground") %>" title="<%= title %>"><%= title %></h3>
+      <h3 class="<%= cn("truncate font-medium", !show_list? && record.device_key.nil? && "text-base-content/60") %>" title="<%= title %>"><%= title %></h3>
       <%= records_mode_badge(record) %>
       <%= records_best_badge if best? %>
     </div>
-    <p class="truncate text-[13px] text-muted-foreground">
+    <p class="truncate text-[13px] text-base-content/60">
       <span class="tabular-nums sm:hidden"><%= time %> · </span>
       <span class="tabular-nums"><%= records_t("history.row.words", count: record.word_count) %><%= " · " if show_list? %></span>
       <%= device if show_list? %>
@@ -28,19 +28,19 @@
   </div>
   <p class="col-start-1 row-start-2 flex flex-wrap items-baseline gap-x-3 gap-y-0.5 text-sm tabular-nums sm:contents">
     <span class="sm:text-right"><span class="sr-only"><%= records_t("history.row.duration") %> </span><%= records_time(record.seconds, class: "text-base font-bold sm:text-[15px]") %></span>
-    <span class="<%= cn("sm:text-right", low_accuracy? && "font-medium text-amber-700 dark:text-amber-400") %>" <%= tag.attributes(title: (records_t("history.row.low_accuracy", limit: RecordsDesignHelper::LOW_ACCURACY) if low_accuracy?)) %>>
+    <span class="<%= cn("sm:text-right", low_accuracy? && "font-medium text-warning") %>" <%= tag.attributes(title: (records_t("history.row.low_accuracy", limit: RecordsDesignHelper::LOW_ACCURACY) if low_accuracy?)) %>>
       <span class="sr-only"><%= records_t("history.row.accuracy") %> </span><%= records_accuracy(record.accuracy) %>
     </span>
     <span class="hidden sm:inline sm:text-right">
-      <span class="sr-only"><%= records_t("history.row.per_word") %> </span><%= format("%.2f", record.seconds_per_word) %><%= records_unit_space %><span class="ml-px text-[0.8em] text-muted-foreground"><%= records_t("history.row.per_word_unit") %></span>
+      <span class="sr-only"><%= records_t("history.row.per_word") %> </span><%= format("%.2f", record.seconds_per_word) %><%= records_unit_space %><span class="ml-px text-[0.8em] text-base-content/60"><%= records_t("history.row.per_word_unit") %></span>
     </span>
-    <span class="text-muted-foreground sm:text-right sm:text-foreground">
+    <span class="text-base-content/60 sm:text-right sm:text-base-content">
       <span class="sm:sr-only"><%= records_t("history.row.mistakes") %> </span><%= record.mistakes %>
     </span>
   </p>
   <div class="col-start-2 row-span-2 row-start-1 -mr-2 sm:col-start-7 sm:row-span-1 sm:mr-0 sm:justify-self-end">
     <%= button_to practice_record_path(record), method: :delete, form_class: "contents", form: { data: confirm },
-          class: button_classes(variant: :ghost, size: "icon-lg", class: "size-10 text-muted-foreground hover:bg-destructive/10 hover:text-destructive dark:hover:bg-destructive/20"),
+          class: button_classes(variant: :ghost, size: "icon-lg", class: "size-10 text-base-content/60 hover:bg-error/10 hover:text-error"),
           "data-delete-record": true, title: records_t("history.row.delete"),
           "aria-label": records_t("history.row.delete_label", name: list.full_name, date: records_numeric_date(record.practiced_at), time:) do %>
       <%= icon("trash-2") %>

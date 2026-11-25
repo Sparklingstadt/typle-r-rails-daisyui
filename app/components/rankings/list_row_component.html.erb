@@ -2,25 +2,25 @@
   <% if ranking.practised? %>
     <% best = ranking.best %>
     <%= tag.button **button_options,
-          class: cn("relative grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-0.5 rounded-lg px-2.5 py-2 text-left outline-none hover:bg-muted/60 focus-visible:ring-3 focus-visible:ring-ring/50",
-                    current? && "bg-muted before:absolute before:inset-y-2 before:left-0 before:w-[3px] before:rounded-full before:bg-foreground hover:bg-muted") do %>
+          class: cn("relative grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-0.5 rounded-lg px-2.5 py-2 text-left outline-none hover:bg-base-200/60 focus-visible:ring-3 focus-visible:ring-primary/50",
+                    current? && "bg-base-200 before:absolute before:inset-y-2 before:left-0 before:w-[3px] before:rounded-full before:bg-base-content hover:bg-base-200") do %>
       <span class="line-clamp-2 text-sm font-medium [overflow-wrap:anywhere]" title="<%= list.full_name %>"><%= name %></span>
-      <span class="text-xs text-muted-foreground tabular-nums"><% if ranking.last_practiced %><span class="sr-only"><%= records_t("rankings.list.last_practiced") %> </span><%= records_day(ranking.last_practiced, now) %><% end %></span>
+      <span class="text-xs text-base-content/60 tabular-nums"><% if ranking.last_practiced %><span class="sr-only"><%= records_t("rankings.list.last_practiced") %> </span><%= records_day(ranking.last_practiced, now) %><% end %></span>
       <span class="flex min-w-0 items-center gap-1.5 text-[13px] tabular-nums">
-        <%= icon(:trophy, class: "size-3.5 shrink-0 text-amber-600 dark:text-amber-400") %>
+        <%= icon(:trophy, class: "size-3.5 shrink-0 text-warning") %>
         <span class="sr-only"><%= records_t("rankings.list.best") %> </span><%= records_time(best.seconds, class: "font-medium") %>
-        <span class="text-muted-foreground"><%= records_accuracy(best.accuracy) %></span>
+        <span class="text-base-content/60"><%= records_accuracy(best.accuracy) %></span>
         <% if ranking.improved? %>
-          <span class="inline-flex items-center gap-0.5 text-xs font-medium text-green-700 dark:text-green-400" title="<%= records_t("rankings.list.improved_title", count: ListRanking::IMPROVED_DAYS) %>">
+          <span class="inline-flex items-center gap-0.5 text-xs font-medium text-success" title="<%= records_t("rankings.list.improved_title", count: ListRanking::IMPROVED_DAYS) %>">
             <%= icon("trending-up", class: "size-3") %><%= records_t("rankings.list.improved") %>
           </span>
         <% end %>
       </span>
-      <span class="flex items-center gap-1 text-xs text-muted-foreground tabular-nums"><%= records_t("rankings.list.runs", count: ranking.records.size) %><%= icon("chevron-right", class: "size-4 xl:hidden") %></span>
+      <span class="flex items-center gap-1 text-xs text-base-content/60 tabular-nums"><%= records_t("rankings.list.runs", count: ranking.records.size) %><%= icon("chevron-right", class: "size-4 xl:hidden") %></span>
     <% end %>
   <% else %>
     <%= tag.button **button_options,
-          class: cn("flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-muted-foreground outline-none hover:bg-muted/60 focus-visible:ring-3 focus-visible:ring-ring/50", current? && "bg-muted text-foreground") do %>
+          class: cn("flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-base-content/60 outline-none hover:bg-base-200/60 focus-visible:ring-3 focus-visible:ring-primary/50", current? && "bg-base-200 text-base-content") do %>
       <span class="line-clamp-2 min-w-0 flex-1 [overflow-wrap:anywhere]" title="<%= list.full_name %>"><%= name %></span>
       <span class="shrink-0 text-xs tabular-nums"><%= records_t("rankings.list.words", count: list.words.size) %></span>
       <%= icon("chevron-right", class: "size-4 shrink-0 xl:hidden") %>

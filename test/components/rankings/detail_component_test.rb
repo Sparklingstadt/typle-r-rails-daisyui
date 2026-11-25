@@ -35,7 +35,7 @@ class Rankings::DetailComponentTest < ViewComponent::TestCase
     run_at(4)
     render_inline(detail)
 
-    assert_selector "dl > div.border-amber-200", count: 1, text: "4.00"
+    assert_selector "dl > div.border-warning\\/30", count: 1, text: "4.00"
     assert_selector "[data-controller=trend-chart]"
     assert_selector "table.table-fixed tbody tr", count: 2
     assert_selector "a[href='/records?list=#{@list.id}']"

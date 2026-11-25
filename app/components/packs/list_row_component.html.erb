@@ -1,21 +1,21 @@
-<li data-list-id="<%= list.id %>" class="<%= cn(ListsDesignHelper::LISTS_ROW, "transition-colors duration-700 motion-reduce:transition-none", pointed? && "bg-green-50 duration-0 dark:bg-green-950/40") %>"
-    <%= tag.attributes(data: { controller: "row-highlight", "row-highlight-classes-value": "bg-green-50 duration-0 dark:bg-green-950/40" }) if pointed? %>>
+<li data-list-id="<%= list.id %>" class="<%= cn(ListsDesignHelper::LISTS_ROW, "transition-colors duration-700 motion-reduce:transition-none", pointed? && "bg-success/10 duration-0") %>"
+    <%= tag.attributes(data: { controller: "row-highlight", "row-highlight-classes-value": "bg-success/10 duration-0" }) if pointed? %>>
   <div class="min-w-0 space-y-0.5">
     <div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
       <h3 class="font-medium [overflow-wrap:anywhere]"><%= list.name %></h3>
       <%= list_labels(list.category, list.tags) %>
     </div>
-    <p class="truncate text-sm text-muted-foreground" title="<%= list.words.map(&:display).join(t("design.lists.row.separator")) %>">
+    <p class="truncate text-sm text-base-content/60" title="<%= list.words.map(&:display).join(t("design.lists.row.separator")) %>">
       <span class="sr-only"><%= t("design.lists.row.examples") %> </span><%= lists_word_preview(list.words) %>
     </p>
-    <p class="pt-0.5 text-xs text-muted-foreground tabular-nums sm:hidden"><%= count_text %> · <%= lists_practice_text(records) %></p>
+    <p class="pt-0.5 text-xs text-base-content/60 tabular-nums sm:hidden"><%= count_text %> · <%= lists_practice_text(records) %></p>
   </div>
   <div class="hidden space-y-0.5 text-[13px] tabular-nums sm:block">
     <p class="font-medium"><%= count_text %></p>
-    <p class="flex items-center gap-1.5 text-xs text-muted-foreground"><%= icon(:history, class: "size-3.5 shrink-0") %><%= lists_practice_text(records) %></p>
+    <p class="flex items-center gap-1.5 text-xs text-base-content/60"><%= icon(:history, class: "size-3.5 shrink-0") %><%= lists_practice_text(records) %></p>
   </div>
   <div class="-mr-2 flex items-center gap-1 sm:mr-0">
-    <%= link_button play_path(list: list.id), variant: :ghost, size: :lg, class: "hidden h-10 px-3 text-muted-foreground sm:inline-flex",
+    <%= link_button play_path(list: list.id), variant: :ghost, size: :lg, class: "hidden h-10 px-3 text-base-content/60 sm:inline-flex",
           title: t("design.lists.row.practice"), "aria-label": t("design.lists.row.practice_list", name: list.name) do %><%= icon(:keyboard) %><%= t("design.lists.row.practice") %><% end %>
     <% if list.editable? %>
       <%= visit_button edit_word_list_path(list), variant: :outline, size: :lg, class: "size-10 px-0 sm:w-auto sm:px-3",
@@ -25,7 +25,7 @@
       <%= link_to play_path(list: list.id), class: cn(ListsDesignHelper::LISTS_MENU_ITEM, "sm:hidden") do %><%= icon(:keyboard) %><%= t("design.lists.row.practice_this") %><% end %>
       <% if records.any? %>
         <%= link_to rankings_path(list: list.id), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:trophy) %><%= tt("wordLists.row.rankings") %><% end %>
-        <%= link_to practice_records_path(list: list.id), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:history) %><%= t("design.lists.row.records") %><span class="ml-auto text-xs text-muted-foreground tabular-nums"><%= t("design.lists.row.record_count", count: records.size) %></span><% end %>
+        <%= link_to practice_records_path(list: list.id), class: ListsDesignHelper::LISTS_MENU_ITEM do %><%= icon(:history) %><%= t("design.lists.row.records") %><span class="ml-auto text-xs text-base-content/60 tabular-nums"><%= t("design.lists.row.record_count", count: records.size) %></span><% end %>
       <% end %>
       <%= lists_menu_separator(class: ("sm:hidden" if records.empty?)) %>
       <%= link_to export_word_list_path(list), class: ListsDesignHelper::LISTS_MENU_ITEM, data: { turbo: false } do %><%= icon(:download) %><%= t("design.lists.row.export") %><% end %>

@@ -217,7 +217,7 @@ export default class extends RunController {
       const text = [prompt, hint].filter(Boolean).join("\n")
       this.annotationTarget.textContent = text || this.messagesValue.recallNoHint || ""
       this.annotationTarget.classList.toggle("text-sm", !text)
-      this.annotationTarget.classList.toggle("text-muted-foreground", !text)
+      this.annotationTarget.classList.toggle("text-base-content/60", !text)
       this.annotationTarget.classList.toggle("whitespace-pre-line", !!text)
     } else {
       this.annotationTarget.textContent = word.annotation || ""
@@ -296,9 +296,9 @@ export default class extends RunController {
     const remaining = words.length - index - 1 - next.length
     const oneLine = word => word.display.replace(/\r\n|\r|\n/g, "  ")
     this.upcomingTarget.innerHTML = next.map(word =>
-      `<span class="inline-flex h-7 max-w-full items-center rounded-full border px-3 text-[13px] text-muted-foreground" title="${escapeHtml(word.display)}"><span class="truncate whitespace-pre">${escapeHtml(oneLine(word))}</span></span>`).join("")
-      + (next.length ? "" : `<span class="text-xs text-muted-foreground">${escapeHtml(this.upcomingTarget.dataset.last ?? "")}</span>`)
-      + (remaining > 0 ? `<span class="text-xs text-neutral-400 dark:text-neutral-500">${escapeHtml(message(m.upcomingMore, { count: remaining }))}</span>` : "")
+      `<span class="inline-flex h-7 max-w-full items-center rounded-full border px-3 text-[13px] text-base-content/60" title="${escapeHtml(word.display)}"><span class="truncate whitespace-pre">${escapeHtml(oneLine(word))}</span></span>`).join("")
+      + (next.length ? "" : `<span class="text-xs text-base-content/60">${escapeHtml(this.upcomingTarget.dataset.last ?? "")}</span>`)
+      + (remaining > 0 ? `<span class="text-xs text-base-content/40">${escapeHtml(message(m.upcomingMore, { count: remaining }))}</span>` : "")
     if (!this.hasAllWordsTarget) return
     const items = this.allWordsTarget.children
     // Moving on in the same words changes only the words from the last one to this one; anything else draws them all.
@@ -318,10 +318,10 @@ export default class extends RunController {
     const done = wordIndex < index
     const current = wordIndex === index
     const paragraph = Array.from(word.display).length > 24 || word.display.includes("\n")
-    const classes = ["min-h-7 max-w-full border px-3 text-[13px] text-muted-foreground",
+    const classes = ["min-h-7 max-w-full border px-3 text-[13px] text-base-content/60",
       paragraph ? "block rounded-lg py-2 text-left leading-relaxed whitespace-pre-wrap [overflow-wrap:anywhere]" : "inline-flex items-center rounded-full break-all whitespace-pre-wrap",
-      done ? "border-transparent bg-green-100 text-green-800 dark:bg-green-950 dark:text-green-300" : "",
-      current ? "border-transparent bg-primary text-primary-foreground" : ""].join(" ")
+      done ? "border-transparent bg-success/15 text-success" : "",
+      current ? "border-transparent bg-primary text-primary-content" : ""].join(" ")
     const state = done ? m.upcomingDone : current ? m.upcomingCurrent : m.upcomingPending
     return `<li class="max-w-full${paragraph ? " w-full" : ""}"><span class="${classes}"${current ? ' aria-current="step"' : ""}>${escapeHtml(word.display)}<span class="sr-only">${escapeHtml(state ?? "")}</span></span></li>`
   }

@@ -64,7 +64,7 @@ module HomeDesignHelper
   # --- changes (typle-r's Delta.tsx) ---
 
   def home_delta(icon:, good:, text:)
-    tag.p(class: cn("flex gap-1 text-xs", good ? "text-green-700 dark:text-green-400" : "text-muted-foreground")) do
+    tag.p(class: cn("flex gap-1 text-xs", good ? "text-success" : "text-base-content/60")) do
       safe_join([icon(icon, class: "mt-0.5 size-3.5 shrink-0"), text])
     end
   end

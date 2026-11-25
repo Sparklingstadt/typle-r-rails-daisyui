@@ -3,14 +3,14 @@
   <h2 id="start-heading" class="mb-3 text-base font-bold"><%= guide_t("start.title") %></h2>
   <ol class="grid gap-3 sm:grid-cols-3">
     <% [[:library, "follow", catalog_index_path], [:plus, "create", new_pack_path], [:trophy, "review", rankings_path]].each_with_index do |(icon_name, key, path), index| %>
-      <li class="flex flex-col gap-2 rounded-xl border bg-card p-4">
+      <li class="flex flex-col gap-2 rounded-xl border bg-base-100 p-4">
         <div class="flex items-center gap-2">
-          <span class="grid size-6 place-items-center rounded-full bg-primary text-xs font-bold text-primary-foreground" aria-hidden="true"><%= index + 1 %></span>
-          <%= icon(icon_name, class: "size-4 text-muted-foreground") %>
+          <span class="grid size-6 place-items-center rounded-full bg-primary text-xs font-bold text-primary-content" aria-hidden="true"><%= index + 1 %></span>
+          <%= icon(icon_name, class: "size-4 text-base-content/60") %>
         </div>
         <h3 class="text-[15px] font-bold leading-6"><%= guide_t("start.#{key}.title") %></h3>
-        <p class="text-sm leading-6 text-muted-foreground"><%= guide_t("start.#{key}.text") %></p>
-        <%= link_to path, class: "mt-auto inline-flex w-fit items-center gap-1 rounded-sm pt-1 text-sm font-medium outline-none hover:underline focus-visible:ring-3 focus-visible:ring-ring/50" do %><%= guide_t("start.#{key}.action") %><%= icon("arrow-right", class: "size-3.5") %><% end %>
+        <p class="text-sm leading-6 text-base-content/60"><%= guide_t("start.#{key}.text") %></p>
+        <%= link_to path, class: "mt-auto inline-flex w-fit items-center gap-1 rounded-sm pt-1 text-sm font-medium outline-none hover:underline focus-visible:ring-3 focus-visible:ring-primary/50" do %><%= guide_t("start.#{key}.action") %><%= icon("arrow-right", class: "size-3.5") %><% end %>
       </li>
     <% end %>
   </ol>

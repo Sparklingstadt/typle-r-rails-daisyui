@@ -1,4 +1,4 @@
-# typle-r's Card (shadcn/ui): a block of the page, with its parts in Ui::Card.
+# A card (daisyUI's card with a border): a block of the page, with its parts in Ui::Card.
 class Ui::CardComponent < ApplicationComponent
   def initialize(size: :default, class: nil, tag_name: :div, **options)
     @size = size

@@ -9,14 +9,14 @@
       <%= empty_state_icon("list-plus") %>
       <div class="space-y-1.5">
         <h2 class="font-bold"><%= tt("wordLists.empty.title") %></h2>
-        <p class="max-w-md text-sm text-balance text-muted-foreground"><%= tt("wordLists.empty.description") %></p>
+        <p class="max-w-md text-sm text-balance text-base-content/60"><%= tt("wordLists.empty.description") %></p>
       </div>
       <%= link_button new_pack_path do %><%= icon(:plus) %><%= tt("wordLists.manager.create") %><% end %>
     <% end %>
   <% else %>
     <div class="space-y-4">
       <% if @requested && @list.id.to_s != @requested %>
-        <div role="alert" class="<%= alert_classes %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm text-balance text-muted-foreground"><%= tt("wordLists.page.notFound") %></div></div>
+        <div role="alert" class="<%= alert_classes %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm text-balance text-base-content/60"><%= tt("wordLists.page.notFound") %></div></div>
       <% end %>
       <div class="grid items-start gap-6 lg:grid-cols-[20rem_minmax(0,1fr)]">
         <%= render "practice/aside", lists: @lists, selected: @list, mode: nil, id: "words-aside",
@@ -29,7 +29,7 @@
             <div class="grid min-w-0 flex-1 basis-60 gap-1">
               <h2 id="words-title" class="text-lg font-bold [overflow-wrap:anywhere]"><%= practice_name(@list) %></h2>
               <%= list_labels(@list.category, @list.tags) %>
-              <p class="text-sm text-muted-foreground [overflow-wrap:anywhere]"><%= tt("wordLists.words.wordCount", count: @list.words.size) %></p>
+              <p class="text-sm text-base-content/60 [overflow-wrap:anywhere]"><%= tt("wordLists.words.wordCount", count: @list.words.size) %></p>
             </div>
             <div class="flex flex-wrap items-center gap-2">
               <%# Under lg, where the side panel is not shown, the lists are chosen in typle-r's picker dialog. %>
@@ -60,8 +60,8 @@
             <tbody class="<%= UiHelper::TABLE_BODY %>">
               <% @list.words.each_with_index do |word, index| %>
                 <tr class="<%= cn(UiHelper::TABLE_ROW, "align-top") %>">
-                  <td class="<%= cn(UiHelper::TABLE_CELL, "py-2.5 pl-4 text-right align-top text-muted-foreground tabular-nums sm:pl-6") %>"><%= index + 1 %></td>
-                  <td class="<%= cn(UiHelper::TABLE_CELL, "py-2.5 pr-4 align-top sm:pr-6 whitespace-pre-wrap [overflow-wrap:anywhere]") %>"><span class="font-mono font-medium"><%= word.input %></span><% if word.display != word.input %><p class="mt-1 text-sm"><%= word.display %></p><% end %><% if word.annotation.present? %><p class="mt-1 text-[13px] text-muted-foreground"><%= word.annotation %></p><% end %></td>
+                  <td class="<%= cn(UiHelper::TABLE_CELL, "py-2.5 pl-4 text-right align-top text-base-content/60 tabular-nums sm:pl-6") %>"><%= index + 1 %></td>
+                  <td class="<%= cn(UiHelper::TABLE_CELL, "py-2.5 pr-4 align-top sm:pr-6 whitespace-pre-wrap [overflow-wrap:anywhere]") %>"><span class="font-mono font-medium"><%= word.input %></span><% if word.display != word.input %><p class="mt-1 text-sm"><%= word.display %></p><% end %><% if word.annotation.present? %><p class="mt-1 text-[13px] text-base-content/60"><%= word.annotation %></p><% end %></td>
                 </tr>
               <% end %>
             </tbody>

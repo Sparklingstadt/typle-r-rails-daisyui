@@ -49,6 +49,6 @@ class PracticeRecords::RowComponentTest < ViewComponent::TestCase
     low = record(time_ms: 7000, accuracy: RecordsDesignHelper::LOW_ACCURACY - 1, practiced_at: Time.zone.local(2026, 11, 20, 10))
     render_inline(PracticeRecords::RowComponent.new(record: low, show_list: true, in_pack: false, best: false))
 
-    assert_selector "span.text-amber-700[title]"
+    assert_selector "span.text-warning[title]"
   end
 end

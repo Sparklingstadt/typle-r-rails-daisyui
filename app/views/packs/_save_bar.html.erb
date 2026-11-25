@@ -1,21 +1,21 @@
 <%# The sticky bar at the end of typle-r's editors (WordListSaveBar, PackEditor): the state on the left, キャンセル and 保存. %>
 <% error_count = record.errors.count %>
-<div class="sticky bottom-0 z-20 -mx-4 mt-6 border-t bg-background/95 px-4 py-3 shadow-[0_-4px_12px_rgb(0_0_0/0.05)] backdrop-blur sm:bottom-4 sm:mx-0 sm:mb-4 sm:rounded-xl sm:border sm:px-5 sm:shadow-lg">
+<div class="sticky bottom-0 z-20 -mx-4 mt-6 border-t bg-base-100/95 px-4 py-3 shadow-[0_-4px_12px_rgb(0_0_0/0.05)] backdrop-blur sm:bottom-4 sm:mx-0 sm:mb-4 sm:rounded-xl sm:border sm:px-5 sm:shadow-lg">
   <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
     <div class="flex min-w-0 basis-full flex-wrap items-center gap-x-2 gap-y-1 text-sm sm:flex-1 sm:basis-auto">
       <% if error_count.positive? %>
-        <%= icon("circle-alert", class: "size-4 shrink-0 text-destructive") %>
-        <span role="alert" class="font-medium text-destructive"><%= t("design.lists.editor.error_count", count: error_count) %></span>
+        <%= icon("circle-alert", class: "size-4 shrink-0 text-error") %>
+        <span role="alert" class="font-medium text-error"><%= t("design.lists.editor.error_count", count: error_count) %></span>
       <% end %>
       <% tracker = local_assigns[:editor] ? "word-rows" : local_assigns[:tracker] %>
       <% if tracker && error_count.zero? %>
         <%# WordListSaveBar and PackEditor: whether anything changed (then, for a list, the word total). %>
-        <span class="size-2 shrink-0 rounded-full bg-amber-500" aria-hidden="true" data-<%= tracker %>-target="dirtyDot" hidden></span>
+        <span class="size-2 shrink-0 rounded-full bg-warning" aria-hidden="true" data-<%= tracker %>-target="dirtyDot" hidden></span>
         <span class="font-medium" data-<%= tracker %>-target="dirty" hidden><%= tt("wordLists.editor.unsaved") %></span>
-        <span class="text-muted-foreground" data-<%= tracker %>-target="clean"><%= tt("wordLists.editor.noChanges") %></span>
+        <span class="text-base-content/60" data-<%= tracker %>-target="clean"><%= tt("wordLists.editor.noChanges") %></span>
       <% end %>
       <% if local_assigns[:word_count] %>
-        <span class="<%= cn("text-muted-foreground", ("max-sm:hidden" if error_count.positive?)) %>" data-word-rows-target="total"><%= local_assigns[:editor] ? tt("wordLists.editor.wordTotal", count: word_count) : t("design.lists.editor.word_total", count: word_count) %></span>
+        <span class="<%= cn("text-base-content/60", ("max-sm:hidden" if error_count.positive?)) %>" data-word-rows-target="total"><%= local_assigns[:editor] ? tt("wordLists.editor.wordTotal", count: word_count) : t("design.lists.editor.word_total", count: word_count) %></span>
       <% end %>
     </div>
     <%= visit_button t("design.lists.form.cancel"), cancel_url, variant: :ghost %>

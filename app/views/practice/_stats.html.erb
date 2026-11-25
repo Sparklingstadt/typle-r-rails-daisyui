@@ -1,10 +1,10 @@
 <%# LiveStats: the elapsed time, speed, accuracy and mistakes of the run going on. %>
-<dl data-live-stats-panel aria-label="<%= t("design.practice.stats.label") %>" class="mx-4 mb-4 grid grid-cols-4 rounded-xl border bg-muted/40 px-1 py-2.5 text-center sm:mx-6 sm:mb-5 sm:px-2 sm:py-3">
+<dl data-live-stats-panel aria-label="<%= t("design.practice.stats.label") %>" class="mx-4 mb-4 grid grid-cols-4 rounded-xl border bg-base-200/40 px-1 py-2.5 text-center sm:mx-6 sm:mb-5 sm:px-2 sm:py-3">
   <% stats.each do |name, term, target, unit| %>
     <div class="grid gap-0.5">
-      <dt class="inline-flex items-center justify-center gap-1 text-[11px] text-muted-foreground sm:text-xs"><%= icon(name, class: "size-3") %><%= term %></dt>
+      <dt class="inline-flex items-center justify-center gap-1 text-[11px] text-base-content/60 sm:text-xs"><%= icon(name, class: "size-3") %><%= term %></dt>
       <% if unit %>
-        <dd class="text-base font-medium tabular-nums sm:text-xl"><span data-<%= controller %>-target="<%= target %>"></span><span class="ml-0.5 text-[11px] font-normal text-muted-foreground sm:text-xs"><%= unit %></span></dd>
+        <dd class="text-base font-medium tabular-nums sm:text-xl"><span data-<%= controller %>-target="<%= target %>"></span><span class="ml-0.5 text-[11px] font-normal text-base-content/60 sm:text-xs"><%= unit %></span></dd>
       <% else %>
         <dd class="text-base font-medium tabular-nums sm:text-xl" data-<%= controller %>-target="<%= target %>"></dd>
       <% end %>

@@ -296,18 +296,18 @@ export function renderResult(controller, run, outcome) {
   ]
   const badges = controller.resultTarget.querySelector("[data-result-badges]")
   badges.querySelector("[data-new-best]")?.remove()
-  if (best) badges.insertAdjacentHTML("beforeend", `<span data-new-best class="inline-flex h-7 items-center gap-1.5 rounded-full bg-amber-100 px-2.5 text-[13px] font-bold text-amber-800 dark:bg-amber-950 dark:text-amber-300">${iconHtml(controller, "trophy")}${escapeHtml(r.newBest)}</span>`)
+  if (best) badges.insertAdjacentHTML("beforeend", `<span data-new-best class="inline-flex h-7 items-center gap-1.5 rounded-full bg-warning/15 px-2.5 text-[13px] font-bold text-warning">${iconHtml(controller, "trophy")}${escapeHtml(r.newBest)}</span>`)
 
-  const status = outcome.review ? `<p role="status" class="text-[13px] text-muted-foreground">${escapeHtml(outcome.weak ? r.reviewNoteWeak : r.reviewNote)}</p>`
-    : outcome.unsaved ? `<p role="status" class="text-[13px] text-muted-foreground">${escapeHtml(m.notSaved)}</p>`
+  const status = outcome.review ? `<p role="status" class="text-[13px] text-base-content/60">${escapeHtml(outcome.weak ? r.reviewNoteWeak : r.reviewNote)}</p>`
+    : outcome.unsaved ? `<p role="status" class="text-[13px] text-base-content/60">${escapeHtml(m.notSaved)}</p>`
     : outcome.failed ? saveFailedHtml(controller, r)
-    : `<p role="status" class="${outcome.saved ? "flex items-center gap-2 text-[13px] text-green-700 dark:text-green-400" : "flex items-center gap-2 text-[13px] text-muted-foreground"}">${outcome.saved ? iconHtml(controller, "circle-check") + escapeHtml(message(r.saved, { rank: compared.rank })) : escapeHtml(r.saving)}</p>`
+    : `<p role="status" class="${outcome.saved ? "flex items-center gap-2 text-[13px] text-success" : "flex items-center gap-2 text-[13px] text-base-content/60"}">${outcome.saved ? iconHtml(controller, "circle-check") + escapeHtml(message(r.saved, { rank: compared.rank })) : escapeHtml(r.saving)}</p>`
   controller.resultBodyTarget.innerHTML = `
     <dl class="grid grid-cols-2 gap-2 sm:gap-3 md:grid-cols-4">
       ${tiles.map(tile => `<div class="grid min-w-0 content-start gap-0.5 rounded-xl border px-3 py-3 sm:px-4 sm:py-3.5">
-        <dt class="text-xs text-muted-foreground">${escapeHtml(tile.term)}</dt>
-        <dd class="text-2xl font-medium tabular-nums sm:text-[28px]">${escapeHtml(tile.value)}<span class="ml-0.5 text-sm font-normal text-muted-foreground">${escapeHtml(tile.unit)}</span></dd>
-        <dd class="flex min-w-0 items-center gap-1 text-xs text-muted-foreground [overflow-wrap:anywhere]${tile.good ? " font-medium text-green-700 dark:text-green-400" : ""}">${tile.icon ?? ""}<span class="min-w-0">${escapeHtml(tile.note)}</span></dd>
+        <dt class="text-xs text-base-content/60">${escapeHtml(tile.term)}</dt>
+        <dd class="text-2xl font-medium tabular-nums sm:text-[28px]">${escapeHtml(tile.value)}<span class="ml-0.5 text-sm font-normal text-base-content/60">${escapeHtml(tile.unit)}</span></dd>
+        <dd class="flex min-w-0 items-center gap-1 text-xs text-base-content/60 [overflow-wrap:anywhere]${tile.good ? " font-medium text-success" : ""}">${tile.icon ?? ""}<span class="min-w-0">${escapeHtml(tile.note)}</span></dd>
       </div>`).join("")}
     </dl>
     ${status}`
@@ -336,7 +336,7 @@ export function renderResult(controller, run, outcome) {
     const word = words[index]
     const characters = Array.from(word.input)
     const marked = !writing && entry.position !== undefined && entry.position < characters.length
-      ? `${escapeHtml(characters.slice(0, entry.position).join(""))}<mark class="rounded-[2px] bg-transparent text-red-700 underline decoration-[3px] underline-offset-4 dark:text-red-400">${escapeHtml(characters[entry.position])}</mark>${escapeHtml(characters.slice(entry.position + 1).join(""))}`
+      ? `${escapeHtml(characters.slice(0, entry.position).join(""))}<mark class="rounded-[2px] bg-transparent text-error underline decoration-[3px] underline-offset-4">${escapeHtml(characters[entry.position])}</mark>${escapeHtml(characters.slice(entry.position + 1).join(""))}`
       : escapeHtml(word.input)
     const how = entry.skipped ? r.missed.skipped : entry.revealed ? r.missed.revealed : entry.typed === undefined ? ""
       : writing ? message(r.missed.wrote, { typed: entry.typed })
@@ -344,14 +344,14 @@ export function renderResult(controller, run, outcome) {
     const display = word.display !== word.input ? `<span class="mr-2 font-sans">${escapeHtml(word.display)}</span>` : ""
     return `<li class="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-4 gap-y-1 py-3 sm:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_auto_3.5rem]">
       <p lang="und" class="min-w-0 font-mono text-lg break-words">${display}${writing ? (word.display === word.input ? escapeHtml(word.input) : "") : marked}</p>
-      <p class="min-w-0 text-sm break-words text-muted-foreground max-sm:col-span-2 max-sm:row-start-2">${escapeHtml(word.annotation ? wordMeaning(word.display, word.annotation) : "")}</p>
-      <p class="text-[13px] text-muted-foreground max-sm:col-start-1 max-sm:row-start-3">${escapeHtml(how)}</p>
-      <p class="text-right text-sm font-bold text-red-700 tabular-nums max-sm:col-start-2 max-sm:row-start-1 dark:text-red-400">${entry.count > 0 ? escapeHtml(message(r.missed.count, { count: entry.count })) : ""}</p>
+      <p class="min-w-0 text-sm break-words text-base-content/60 max-sm:col-span-2 max-sm:row-start-2">${escapeHtml(word.annotation ? wordMeaning(word.display, word.annotation) : "")}</p>
+      <p class="text-[13px] text-base-content/60 max-sm:col-start-1 max-sm:row-start-3">${escapeHtml(how)}</p>
+      <p class="text-right text-sm font-bold text-error tabular-nums max-sm:col-start-2 max-sm:row-start-1">${entry.count > 0 ? escapeHtml(message(r.missed.count, { count: entry.count })) : ""}</p>
     </li>`
   }).join("")
   controller.resultMissedTarget.innerHTML = rows
     ? `<section aria-labelledby="result-missed-heading" class="flex flex-col"><h3 id="result-missed-heading" class="mb-2 text-base font-bold">${escapeHtml(r.missed.title)}</h3><ul class="divide-y border-y">${rows}</ul></section>`
-    : `<p class="text-sm text-muted-foreground">${escapeHtml(r.missed.none)}</p>`
+    : `<p class="text-sm text-base-content/60">${escapeHtml(r.missed.none)}</p>`
   if (!outcome.saved && !outcome.failed) controller.resultTarget.querySelector("[data-autofocus]")?.focus({ preventScroll: true })
 }
 

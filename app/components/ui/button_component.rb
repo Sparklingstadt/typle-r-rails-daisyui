@@ -1,5 +1,5 @@
-# typle-r's Button (shadcn/ui), as the element that does what it does:
-#   :link  — an <a> (typle-r's <Button asChild><Link/></Button>);
+# A button (daisyUI's btn, in Ui::Classes' variants and sizes), as the element that does what it does:
+#   :link  — an <a> that looks like a button;
 #   :visit — a <button> that opens a page, for typle-r's buttons that navigate (戻る, キャンセル): read as a button, not a
 #            link. The click is handled in application.js; an editor's unsaved-changes check still runs (turbo:before-visit);
 #   :form  — button_to's form, for a request that changes something.

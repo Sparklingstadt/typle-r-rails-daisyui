@@ -5,7 +5,7 @@ class Ui::PartsComponentTest < ViewComponent::TestCase
   test "a badge shows its text or block in its variant" do
     render_inline(Ui::BadgeComponent.new("公式", variant: :secondary, title: "t"))
     assert_selector "span[data-slot=badge][title=t]", text: "公式"
-    assert_includes page.find("span")[:class].split, "bg-secondary"
+    assert_includes page.find("span")[:class].split, "badge-ghost"
 
     render_inline(Ui::BadgeComponent.new) { "新着" }
     assert_selector "span[data-slot=badge]", text: "新着"
@@ -27,7 +27,7 @@ class Ui::PartsComponentTest < ViewComponent::TestCase
 
   test "an icon tile is the icon in a rounded square" do
     render_inline(Ui::IconTileComponent.new("folder"))
-    assert_selector "span[data-slot=icon-tile].rounded-lg svg.lucide-folder.size-5"
+    assert_selector "span[data-slot=icon-tile].rounded-field svg.lucide-folder.size-5"
   end
 
   test "a key" do

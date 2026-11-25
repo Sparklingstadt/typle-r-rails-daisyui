@@ -4,8 +4,8 @@
   <div class="min-w-0 flex-1 basis-64 space-y-1.5">
     <%= content_tag heading, pack.name, class: "font-bold [overflow-wrap:anywhere]" %>
     <%= lists_labels(category: pack.category, tags: pack.tags) %>
-    <p class="text-[13px] text-muted-foreground tabular-nums"><%= t("design.lists.pack.lists", count: pack.lists.size) %> · <%= t("design.lists.pack.word_count", count: pack.word_count) %></p>
-    <%= link_to catalog_path(pack.catalog_id), class: "text-[13px] underline underline-offset-3 hover:text-muted-foreground" do %><%= t("design.lists.official.details") %><span class="sr-only"> <%= pack.name %></span><% end %>
+    <p class="text-[13px] text-base-content/60 tabular-nums"><%= t("design.lists.pack.lists", count: pack.lists.size) %> · <%= t("design.lists.pack.word_count", count: pack.word_count) %></p>
+    <%= link_to catalog_path(pack.catalog_id), class: "text-[13px] underline underline-offset-3 hover:text-base-content/60" do %><%= t("design.lists.official.details") %><span class="sr-only"> <%= pack.name %></span><% end %>
   </div>
   <div class="flex flex-wrap items-center gap-2">
     <% if owned %>

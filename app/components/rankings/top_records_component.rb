@@ -34,6 +34,6 @@ class Rankings::TopRecordsComponent < ApplicationComponent
   end
 
   def word_count(cell)
-    tag.span(cell.words, class: "ml-1.5 rounded border px-1 text-[11px] font-normal text-muted-foreground", title: records_t("rankings.top.other_words")) if cell.words
+    tag.span(cell.words, class: "ml-1.5 rounded border px-1 text-[11px] font-normal text-base-content/60", title: records_t("rankings.top.other_words")) if cell.words
   end
 end

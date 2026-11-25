@@ -1,13 +1,13 @@
 <% if picks.empty? %>
-  <p class="rounded-xl p-4 text-sm ring-1 ring-foreground/10"><%= home_t("dashboard.next.all_practised") %></p>
+  <p class="rounded-xl p-4 text-sm ring-1 ring-base-content/10"><%= home_t("dashboard.next.all_practised") %></p>
 <% else %>
-  <ul class="divide-y overflow-hidden rounded-xl ring-1 ring-foreground/10">
+  <ul class="divide-y overflow-hidden rounded-xl ring-1 ring-base-content/10">
     <% picks.each do |list, (reason, args)| %>
       <% badge_icon, badge_text = reason_badge(reason, args) %>
       <li class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-2 p-4 sm:px-5 md:grid-cols-[minmax(0,1fr)_auto_auto]">
         <div class="min-w-0">
           <p class="font-medium break-words"><%= practice_name(list) %></p>
-          <p class="text-[13px] text-muted-foreground"><%= home_t("dashboard.next.words", count: list.words.size) %> · <%= last_practiced(list) %></p>
+          <p class="text-[13px] text-base-content/60"><%= home_t("dashboard.next.words", count: list.words.size) %> · <%= last_practiced(list) %></p>
         </div>
         <%= ui_badge(variant: :outline, class: "col-span-2 justify-self-start md:col-span-1") do %><%= icon(badge_icon) %><%= badge_text %><% end %>
         <%= link_button home_t("dashboard.next.practice"), play_path(list: list.id), variant: :outline, class: "col-start-2 row-start-1 md:col-start-3",

@@ -18,7 +18,7 @@ class Rankings::ListRowComponentTest < ViewComponent::TestCase
     render_inline(row)
 
     button = page.find("button[data-list-id='#{@list.id}'][data-visit-url='/rankings?list=#{@list.id}']")
-    assert_includes button[:class].split, "text-muted-foreground"
+    assert_includes button[:class].split, "text-base-content/60"
     assert_no_selector "svg.lucide-trophy"
     assert_nil button["aria-current"]
   end

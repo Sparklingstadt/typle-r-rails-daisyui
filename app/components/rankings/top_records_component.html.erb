@@ -1,5 +1,5 @@
 <table class="hidden w-full table-fixed text-sm tabular-nums sm:table" aria-label="<%= label %>">
-  <thead class="text-xs text-muted-foreground">
+  <thead class="text-xs text-base-content/60">
     <tr class="border-b">
       <th scope="col" class="w-12 py-2 pl-2 text-left font-medium"><%= records_t("rankings.top.rank") %></th>
       <th scope="col" class="w-36 py-2 text-left font-medium"><%= records_t("rankings.top.time") %></th>
@@ -12,18 +12,18 @@
   <tbody>
     <% cells.each do |cell| %>
       <% record = cell.record %>
-      <tr class="<%= cn("border-b border-border/60 last:border-0", cell.rank == 1 && "bg-amber-50/50 dark:bg-amber-950/20") %>">
+      <tr class="<%= cn("border-b border-base-300/60 last:border-0", cell.rank == 1 && "bg-warning/5") %>">
         <th scope="row" class="py-2.5 pl-2 text-left font-normal"><%= records_rank_badge(cell.rank) %></th>
         <td class="py-2.5 whitespace-nowrap"><%= records_time(record.seconds, class: "font-medium") %><%= word_count(cell) %></td>
         <td class="py-2.5"><%= records_accuracy(record.accuracy) %></td>
-        <td class="py-2.5 text-muted-foreground"><%= record.mistakes %></td>
+        <td class="py-2.5 text-base-content/60"><%= record.mistakes %></td>
         <td class="py-2.5 pr-3" title="<%= cell.device[:title] %>">
           <span class="flex min-w-0 items-center gap-1.5">
-            <span class="<%= cn("truncate", record.device_key.nil? && "text-muted-foreground") %>"><%= cell.device[:name] %></span>
-            <% if cell.device[:removed] %><span class="shrink-0 text-[11px] text-muted-foreground"><%= records_t("rankings.top.deleted") %></span><% end %>
+            <span class="<%= cn("truncate", record.device_key.nil? && "text-base-content/60") %>"><%= cell.device[:name] %></span>
+            <% if cell.device[:removed] %><span class="shrink-0 text-[11px] text-base-content/60"><%= records_t("rankings.top.deleted") %></span><% end %>
           </span>
         </td>
-        <td class="<%= cn("py-2.5 pr-2 text-right whitespace-nowrap text-muted-foreground", cell.today && "font-medium text-green-700 dark:text-green-400") %>"><%= cell.date %></td>
+        <td class="<%= cn("py-2.5 pr-2 text-right whitespace-nowrap text-base-content/60", cell.today && "font-medium text-success") %>"><%= cell.date %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,12 +31,12 @@
 <ol class="divide-y rounded-lg border sm:hidden" aria-label="<%= label %>">
   <% cells.each do |cell| %>
     <% record = cell.record %>
-    <li class="<%= cn("grid grid-cols-[auto_minmax(0,1fr)_6.5rem] items-center gap-x-3 gap-y-0.5 px-3 py-2.5 tabular-nums", cell.rank == 1 && "bg-amber-50/50 dark:bg-amber-950/20") %>">
+    <li class="<%= cn("grid grid-cols-[auto_minmax(0,1fr)_6.5rem] items-center gap-x-3 gap-y-0.5 px-3 py-2.5 tabular-nums", cell.rank == 1 && "bg-warning/5") %>">
       <span class="row-span-2"><span class="sr-only"><%= records_t("rankings.top.rank_number", rank: cell.rank) %> </span><span aria-hidden="true"><%= records_rank_badge(cell.rank) %></span></span>
       <span><span class="sr-only"><%= records_t("rankings.top.time") %> </span><%= records_time(record.seconds, class: "text-[15px] font-medium") %><%= word_count(cell) %></span>
       <span class="text-right text-sm"><span class="sr-only"><%= records_t("rankings.top.accuracy") %> </span><%= records_accuracy(record.accuracy) %></span>
-      <span class="truncate text-xs text-muted-foreground" title="<%= cell.device[:title] %>"><%= cell.device[:name] %><%= records_t("rankings.top.deleted_suffix") if cell.device[:removed] %></span>
-      <span class="<%= cn("text-right text-xs text-muted-foreground", cell.today && "font-medium text-green-700 dark:text-green-400") %>"><%= cell.date %></span>
+      <span class="truncate text-xs text-base-content/60" title="<%= cell.device[:title] %>"><%= cell.device[:name] %><%= records_t("rankings.top.deleted_suffix") if cell.device[:removed] %></span>
+      <span class="<%= cn("text-right text-xs text-base-content/60", cell.today && "font-medium text-success") %>"><%= cell.date %></span>
     </li>
   <% end %>
 </ol>

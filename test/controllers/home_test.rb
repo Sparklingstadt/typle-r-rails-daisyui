@@ -26,7 +26,7 @@ class HomeTest < ActionDispatch::IntegrationTest
       assert_response :success
       assert_select "h2", other.full_name
       assert_select "article h3", list.full_name
-      assert_select "article svg path.stroke-trend", 2
+      assert_select "article svg path.stroke-info", 2
       get root_path
       assert_response :success
       assert_select "[data-controller=try-word] [data-try-word-target=letters]"

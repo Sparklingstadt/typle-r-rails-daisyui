@@ -38,7 +38,7 @@ class TrendChartComponent < ApplicationComponent
   def latest = points.last
 
   def slider_options
-    { class: "relative h-[72px] min-w-0 flex-1 cursor-crosshair touch-pan-y rounded-sm py-2 outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+    { class: "relative h-[72px] min-w-0 flex-1 cursor-crosshair touch-pan-y rounded-sm py-2 outline-none focus-visible:ring-3 focus-visible:ring-primary/50",
       role: "slider", tabindex: 0, "aria-label": message("label", label:), "aria-valuemin": 1, "aria-valuemax": points.size,
       "aria-valuenow": points.size, "aria-valuetext": "#{latest.date_text} #{latest.value_text}",
       data: { controller: "trend-chart",

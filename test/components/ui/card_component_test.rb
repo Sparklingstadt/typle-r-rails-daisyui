@@ -1,14 +1,14 @@
 require "test_helper"
 
 class Ui::CardComponentTest < ViewComponent::TestCase
-  test "a card holds its block, with typle-r's classes merged with the page's" do
+  test "a card holds its block, with daisyUI's card merged with the page's" do
     render_inline(Ui::CardComponent.new(class: "gap-2 px-4", "data-pack-id": 7)) { "中身" }
 
     assert_selector "div[data-slot=card][data-size=default][data-pack-id='7']", text: "中身"
     classes = page.find("[data-slot=card]")[:class].split
     assert_includes classes, "gap-2", "the page's class wins over the card's gap"
     assert_not_includes classes, "gap-(--card-spacing)"
-    assert_includes classes, "rounded-xl"
+    assert_includes classes, "card"
   end
 
   test "a card can be another element, and small" do

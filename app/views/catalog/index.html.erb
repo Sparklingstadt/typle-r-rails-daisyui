@@ -9,7 +9,7 @@
   <%= page_header(t("catalog.index.title"), t("design.lists.catalog.description")) do %>
     <%= render "layouts/application/page_storage_badge" %>
   <% end %>
-  <%= link_button packs_path, variant: :ghost, class: "mb-3 -ml-2 text-muted-foreground" do %><%= icon("arrow-left") %><%= t("design.lists.catalog.back") %><% end %>
+  <%= link_button packs_path, variant: :ghost, class: "mb-3 -ml-2 text-base-content/60" do %><%= icon("arrow-left") %><%= t("design.lists.catalog.back") %><% end %>
 
 
   <% if !split %>
@@ -19,7 +19,7 @@
       <section aria-labelledby="catalog-matching" class="space-y-3">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <h2 id="catalog-matching" class="text-base font-bold"><%= t("design.lists.catalog.matching") %></h2>
-          <%= link_to t("design.lists.catalog.change_interests"), interests_path, class: "text-sm underline underline-offset-3 hover:text-foreground" %>
+          <%= link_to t("design.lists.catalog.change_interests"), interests_path, class: "text-sm underline underline-offset-3 hover:text-base-content" %>
         </div>
         <% if matching.any? %><%= entries.call(matching, :h3) %><% else %><%= empty_note(t("design.lists.catalog.no_matching")) %><% end %>
       </section>

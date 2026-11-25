@@ -9,7 +9,7 @@
    } %>
 <% practised, unpractised = matches.partition { |item, _| item.practised? } %>
 <% row_link = ->(list) { rankings_url.({ list: list.id }) } %>
-<% plain_row = "flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-muted-foreground outline-none hover:bg-muted/60 focus-visible:ring-3 focus-visible:ring-ring/50" %>
+<% plain_row = "flex w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-base-content/60 outline-none hover:bg-base-200/60 focus-visible:ring-3 focus-visible:ring-primary/50" %>
 <div class="flex items-center gap-2 border-b p-3">
   <%= form_with url: rankings_path, method: :get, class: "min-w-0 flex-1", data: { turbo_action: "replace" } do %>
     <% { device: params[:device], order: params[:order], mode: params[:mode], sort: params[:sort], list: params[:list] }.compact_blank.each do |name, value| %>
@@ -20,7 +20,7 @@
   <% end %>
   <% current_sort = records_t("rankings.list.sorts.#{@sort}") %>
   <div class="relative shrink-0" data-controller="dropdown">
-    <button type="button" data-dropdown-target="trigger" class="inline-flex h-9 items-center gap-1 rounded-lg px-2 text-xs text-muted-foreground outline-none hover:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 aria-expanded:bg-muted" aria-label="<%= records_t("rankings.list.sort_label", sort: current_sort) %>">
+    <button type="button" data-dropdown-target="trigger" class="inline-flex h-9 items-center gap-1 rounded-lg px-2 text-xs text-base-content/60 outline-none hover:bg-base-200 focus-visible:ring-3 focus-visible:ring-primary/50 aria-expanded:bg-base-200" aria-label="<%= records_t("rankings.list.sort_label", sort: current_sort) %>">
       <%= current_sort %><%= icon("chevron-down", class: "size-3.5") %>
     </button>
     <div role="menu" class="<%= cn(UiHelper::MENU_CONTENT, "absolute top-full right-0 mt-1.5 w-44") %>">
@@ -46,7 +46,7 @@
              totals << records_t("rankings.list.pack_improved", count: item.improved_count) if item.improved_count.positive? %>
           <div class="px-2.5 pt-1.5 pb-1">
             <h2 class="text-sm font-medium [overflow-wrap:anywhere]"><%= item.pack.name %></h2>
-            <p class="text-xs text-muted-foreground tabular-nums"><%= totals.join(records_t("rankings.list.pack_join")) %></p>
+            <p class="text-xs text-base-content/60 tabular-nums"><%= totals.join(records_t("rankings.list.pack_join")) %></p>
           </div>
           <ul class="space-y-0.5">
             <% rows.each do |ranking| %>
@@ -61,7 +61,7 @@
 
 <% if unpractised.any? %>
   <div class="<%= cn("p-1.5", practised.any? && "border-t") %>">
-    <h2 class="px-2.5 pt-1.5 pb-1 text-xs font-medium text-muted-foreground"><%= records_t(@device ? "rankings.list.no_device_records" : "rankings.list.no_records", count: unpractised.sum { |_, rows| rows.size }) %></h2>
+    <h2 class="px-2.5 pt-1.5 pb-1 text-xs font-medium text-base-content/60"><%= records_t(@device ? "rankings.list.no_device_records" : "rankings.list.no_records", count: unpractised.sum { |_, rows| rows.size }) %></h2>
     <ul class="space-y-0.5">
       <% unpractised.each do |item, rows| %>
         <% if item.items.size == 1 %>
@@ -70,7 +70,7 @@
           <% current = item.items.any? { |ranking| ranking.list == selected } %>
           <% name = records_t("rankings.list.pack_lists", pack: item.pack.name, count: item.items.size) %>
           <li data-pack-id="<%= item.pack.id %>">
-            <%= tag.button type: "button", data: { visit_url: row_link.(rows.first.list) }, "data-list-id": rows.first.list.id, "aria-current": (current ? "true" : nil), class: cn(plain_row, current && "bg-muted text-foreground") do %>
+            <%= tag.button type: "button", data: { visit_url: row_link.(rows.first.list) }, "data-list-id": rows.first.list.id, "aria-current": (current ? "true" : nil), class: cn(plain_row, current && "bg-base-200 text-base-content") do %>
               <span class="line-clamp-2 min-w-0 flex-1 [overflow-wrap:anywhere]" title="<%= name %>"><%= name %></span>
               <span class="shrink-0 text-xs tabular-nums"><%= records_t("rankings.list.words", count: item.items.sum { |ranking| ranking.list.words.size }) %></span>
               <%= icon("chevron-right", class: "size-4 shrink-0 xl:hidden") %>
@@ -83,7 +83,7 @@
 <% end %>
 
 <% if matches.empty? %>
-  <div class="px-4 py-8 text-center text-sm text-muted-foreground">
+  <div class="px-4 py-8 text-center text-sm text-base-content/60">
     <p class="[overflow-wrap:anywhere]"><%= records_t("rankings.list.no_match", query:) %></p>
     <%= link_button records_t("rankings.list.clear_search"), rankings_url.({ q: nil }), variant: :link, size: :sm %>
   </div>

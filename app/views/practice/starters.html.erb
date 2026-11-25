@@ -4,7 +4,7 @@
   <section aria-labelledby="starter-title" class="space-y-6">
     <div class="space-y-2">
       <h1 id="starter-title" class="text-2xl font-bold"><%= t("design.practice.starter.title") %></h1>
-      <p class="text-base text-muted-foreground"><%= t("design.practice.starter.description") %></p>
+      <p class="text-base text-base-content/60"><%= t("design.practice.starter.description") %></p>
     </div>
     <ul class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       <% @starters.each_with_index do |pack, index| %>
@@ -12,9 +12,9 @@
         <% name_id = "starter-#{pack.catalog_id}" %>
         <li data-catalog-id="<%= pack.catalog_id %>">
           <%= card(class: "h-full gap-3 px-5 py-5") do %>
-            <p class="text-[13px] text-muted-foreground"><%= pack_stats(pack.lists.size, pack.word_count) %></p>
+            <p class="text-[13px] text-base-content/60"><%= pack_stats(pack.lists.size, pack.word_count) %></p>
             <h2 id="<%= name_id %>" class="text-lg font-bold"><%= pack.name %></h2>
-            <p class="text-[13px] text-muted-foreground"><%= t("design.practice.starter.first", list: first&.name.to_s) %></p>
+            <p class="text-[13px] text-base-content/60"><%= t("design.practice.starter.first", list: first&.name.to_s) %></p>
             <ul class="space-y-1 font-mono text-[15px]">
               <% pack.first_words.each do |word| %><li><%= word[:display] %></li><% end %>
             </ul>

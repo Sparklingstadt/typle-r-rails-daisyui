@@ -7,7 +7,7 @@ class Ui::ButtonComponentTest < ViewComponent::TestCase
     link = page.find("a[href='/packs'][data-slot=button][data-variant=outline][data-size=lg]")
     assert_equal "戻る", link.text
     assert link.has_css?("svg.lucide-arrow-left[aria-hidden=true]"), "the icon comes before the label"
-    assert_includes link[:class].split, "h-9", "the lg size"
+    assert_includes link[:class].split, "btn-sm", "the lg size"
   end
 
   test "a block takes the label's place" do

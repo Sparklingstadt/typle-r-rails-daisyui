@@ -5,11 +5,11 @@ import { message } from "practice_run"
 // to the next; the button goes on to the same pack. Nothing typed here is recorded.
 const caret = "relative after:absolute after:inset-x-0 after:-bottom-[0.08em] after:h-[max(3px,0.06em)] after:rounded-full motion-safe:after:animate-pulse"
 const stateClass = {
-  done: "text-green-700 dark:text-green-400",
-  current: `${caret} text-foreground after:bg-primary`,
-  error: "rounded-sm bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-400",
-  "current-error": `${caret} text-red-700 after:bg-destructive dark:text-red-400`,
-  pending: "text-foreground",
+  done: "text-success",
+  current: `${caret} text-base-content after:bg-primary`,
+  error: "rounded-sm bg-error/10 text-error",
+  "current-error": `${caret} text-error after:bg-error`,
+  pending: "text-base-content",
 }
 
 export default class extends Controller {
@@ -51,7 +51,7 @@ export default class extends Controller {
     const { characters, states, extra, errorIndex } = this.compare(this.word.input, this.fieldTarget.value)
     this.lettersTarget.replaceChildren(
       ...characters.map((char, index) => Object.assign(document.createElement("span"), { textContent: char, className: stateClass[states[index]] })),
-      ...extra.map(char => Object.assign(document.createElement("span"), { textContent: char, className: "rounded-sm bg-red-100 text-red-700 line-through dark:bg-red-950 dark:text-red-400" })))
+      ...extra.map(char => Object.assign(document.createElement("span"), { textContent: char, className: "rounded-sm bg-error/10 text-error line-through" })))
     this.fieldTarget.setAttribute("aria-invalid", String(errorIndex >= 0))
     this.meaningTarget.textContent = this.word.meaning
     const current = (this.index % this.wordsValue.length) + 1
@@ -61,8 +61,8 @@ export default class extends Controller {
     // The button becomes the main one once a word is typed.
     const primary = this.done > 0
     this.buttonTarget.classList.toggle("bg-primary", primary)
-    this.buttonTarget.classList.toggle("text-primary-foreground", primary)
+    this.buttonTarget.classList.toggle("text-primary-content", primary)
     this.buttonTarget.classList.toggle("hover:bg-primary/90", primary)
-    for (const name of ["border-border", "bg-background", "hover:bg-muted", "hover:text-foreground", "dark:border-input", "dark:bg-input/30", "dark:hover:bg-input/50"]) this.buttonTarget.classList.toggle(name, !primary)
+    for (const name of ["border-base-300", "bg-base-100", "hover:bg-base-200", "hover:text-base-content", "", "", ""]) this.buttonTarget.classList.toggle(name, !primary)
   }
 }

@@ -167,7 +167,7 @@ export default class extends Controller {
   dragStart(event) {
     this.dragged = this.rowOf(event)
     event.dataTransfer.effectAllowed = "move"
-    this.dragged.classList.add("bg-muted", "shadow-md")
+    this.dragged.classList.add("bg-base-200", "shadow-md")
     this.over = event => {
       const row = event.target.closest?.("[data-word-rows-target=row]")
       if (!row || !this.dragged) return
@@ -182,7 +182,7 @@ export default class extends Controller {
 
   dragEnd() {
     const moved = this.dragged
-    this.dragged?.classList.remove("bg-muted", "shadow-md")
+    this.dragged?.classList.remove("bg-base-200", "shadow-md")
     this.dragged = null
     this.rowsTarget.removeEventListener("dragover", this.over)
     this.renumber()
@@ -260,7 +260,7 @@ export default class extends Controller {
     this.importSummaryTarget.textContent = message(l.importSummary, { count, size: sizeText })
     const cell = (text, extra = "") => `<td class="truncate px-3 py-2${extra}">${escapeHtml(text)}</td>`
     this.importPreviewTarget.innerHTML = words.slice(0, 3).map(word =>
-      `<tr class="border-t">${cell(word.display)}${cell(word.input)}${cell(word.annotation || "—", " text-muted-foreground")}</tr>`).join("")
+      `<tr class="border-t">${cell(word.display)}${cell(word.input)}${cell(word.annotation || "—", " text-base-content/60")}</tr>`).join("")
     this.importMoreTarget.hidden = count <= 3
     this.importMoreTarget.textContent = count > 3 ? message(l.importMore, { count: count - 3 }) : ""
     this.importModesTarget.hidden = existing === 0

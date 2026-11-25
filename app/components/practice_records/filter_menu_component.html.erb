@@ -1,8 +1,8 @@
 <div class="relative max-w-full" data-controller="dropdown">
-  <button type="button" class="<%= trigger_class %>" data-dropdown-target="trigger" aria-label="<%= records_t("history.filter_menu.label", name:, current: current_label) %>"><span class="shrink-0 text-muted-foreground"><%= name %></span><span class="truncate"><%= current ? current[1] : records_t("history.filter_menu.all") %></span><%= icon("chevron-down", class: "size-3.5 shrink-0 text-muted-foreground") %></button>
+  <button type="button" class="<%= trigger_class %>" data-dropdown-target="trigger" aria-label="<%= records_t("history.filter_menu.label", name:, current: current_label) %>"><span class="shrink-0 text-base-content/60"><%= name %></span><span class="truncate"><%= current ? current[1] : records_t("history.filter_menu.all") %></span><%= icon("chevron-down", class: "size-3.5 shrink-0 text-base-content/60") %></button>
   <div role="menu" class="<%= cn(UiHelper::MENU_CONTENT, "absolute top-full left-0 mt-1.5 max-h-96 w-72 max-w-[calc(100vw-2rem)] overflow-y-auto") %>">
     <% choices.each do |value, label, count| %>
-      <a class="<%= RecordsDesignHelper::RECORDS_MENU_ITEM %>" role="menuitemradio" aria-checked="<%= chosen?(value) %>" href="<%= url_for_choice(value) %>"><% if chosen?(value) %><%= menu_check %><% end %><span class="min-w-0 flex-1 truncate"><%= label %></span><span class="shrink-0 text-xs text-muted-foreground tabular-nums"><%= records_t("history.filter_menu.count", count:) %></span></a>
+      <a class="<%= RecordsDesignHelper::RECORDS_MENU_ITEM %>" role="menuitemradio" aria-checked="<%= chosen?(value) %>" href="<%= url_for_choice(value) %>"><% if chosen?(value) %><%= menu_check %><% end %><span class="min-w-0 flex-1 truncate"><%= label %></span><span class="shrink-0 text-xs text-base-content/60 tabular-nums"><%= records_t("history.filter_menu.count", count:) %></span></a>
     <% end %>
   </div>
 </div>

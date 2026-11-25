@@ -1,5 +1,5 @@
-# typle-r's shadcn/ui components (typle-r/src/components/ui) as helpers: the same class strings, merged the way `cn()`
-# merges them, so a page written with these looks the same as typle-r's.
+# The app's UI parts as helpers: each renders its component (app/components/ui), built on daisyUI. The class strings
+# are Ui::Classes'.
 module UiHelper
   include Ui::Classes
 
@@ -17,13 +17,13 @@ module UiHelper
   # TrendChart's tooltip: the value and date of the run being read, above it (the trend-chart controller fills it).
   def trend_chart_tooltip
     tag.div(hidden: true, "aria-hidden": "true", data: { trend_chart_target: "tooltip" },
-            class: "pointer-events-none absolute bottom-full z-10 mb-3 flex flex-col whitespace-nowrap rounded-md bg-popover px-2 py-1 text-popover-foreground shadow-md ring-1 ring-foreground/10") do
+            class: "pointer-events-none absolute bottom-full z-10 mb-3 flex flex-col whitespace-nowrap rounded-md bg-base-100 px-2 py-1 text-base-content shadow-md ring-1 ring-base-content/10") do
       safe_join([tag.span(class: "text-sm font-semibold tabular-nums", data: { trend_chart_target: "tooltipValue" }),
-                 tag.span(class: "text-xs text-muted-foreground", data: { trend_chart_target: "tooltipDate" })])
+                 tag.span(class: "text-xs text-base-content/60", data: { trend_chart_target: "tooltipDate" })])
     end
   end
 
-  # Ui::ButtonComponent as an <a> (typle-r's <Button asChild><Link/></Button>).
+  # Ui::ButtonComponent as an <a>.
   def link_button(label = nil, url = nil, **options, &block)
     url, label = label, nil if block
     render(Ui::ButtonComponent.new(label, url:, as: :link, **options), &block)
@@ -68,7 +68,7 @@ module UiHelper
   def page_alert
     return if alert.blank? || @page_alert_shown
     @page_alert_shown = true
-    tag.div(role: "alert", class: alert_classes(:destructive, "mb-6 border-destructive/40 bg-destructive/5")) do
+    tag.div(role: "alert", class: alert_classes(:destructive, "mb-6 border-error/40 bg-error/5")) do
       safe_join([ icon("circle-alert"), tag.div(alert, "data-slot": "alert-description", class: "text-sm") ])
     end
   end
