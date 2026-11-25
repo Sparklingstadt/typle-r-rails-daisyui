@@ -8,6 +8,6 @@ class Ui::BadgeComponent < ApplicationComponent
   end
 
   def call
-    tag.span(content? ? content : @text, class: badge_classes(variant: @variant, class: @class), "data-slot": "badge", **@options)
+    tag.span(content? ? content : @text, class: badge_classes(variant: @variant, class: @class), **@options)
   end
 end

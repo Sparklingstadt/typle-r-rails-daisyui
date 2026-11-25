@@ -5,5 +5,5 @@ class Ui::EmptyNoteComponent < ApplicationComponent
     @class = class_option(binding)
   end
 
-  def call = tag.p(content? ? content : @text, class: cn(EMPTY_NOTE, @class), "data-slot": "empty-note")
+  def call = tag.p(content? ? content : @text, class: cn(EMPTY_NOTE, @class))
 end

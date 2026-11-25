@@ -6,6 +6,6 @@ class Ui::IconTileComponent < ApplicationComponent
   end
 
   def call
-    tag.span(icon(@name, class: "size-5"), class: cn("grid size-10 place-items-center rounded-field bg-base-200 text-base-content/60", @class), "data-slot": "icon-tile")
+    tag.span(icon(@name, class: "size-5"), class: cn("grid size-10 place-items-center rounded-field bg-base-200 text-base-content/60", @class))
   end
 end

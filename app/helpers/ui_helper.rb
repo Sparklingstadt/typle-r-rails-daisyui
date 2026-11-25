@@ -40,14 +40,7 @@ module UiHelper
 
   def ui_badge(text = nil, **options, &block) = render(Ui::BadgeComponent.new(text, **options), &block)
 
-  # Ui::CardComponent and its parts (Ui::Card).
   def card(**options, &block) = render(Ui::CardComponent.new(**options), &block)
-  def card_header(**options, &block) = render(Ui::Card::HeaderComponent.new(**options), &block)
-  def card_title(text = nil, **options, &block) = render(Ui::Card::TitleComponent.new(text, **options), &block)
-  def card_description(text = nil, **options, &block) = render(Ui::Card::DescriptionComponent.new(text, **options), &block)
-  def card_action(**options, &block) = render(Ui::Card::ActionComponent.new(**options), &block)
-  def card_content(**options, &block) = render(Ui::Card::ContentComponent.new(**options), &block)
-  def card_footer(**options, &block) = render(Ui::Card::FooterComponent.new(**options), &block)
 
   def empty_note(text = nil, **options, &block) = render(Ui::EmptyNoteComponent.new(text, **options), &block)
   def empty_state(**options, &block) = render(Ui::EmptyStateComponent.new(**options), &block)
@@ -69,7 +62,7 @@ module UiHelper
     return if alert.blank? || @page_alert_shown
     @page_alert_shown = true
     tag.div(role: "alert", class: alert_classes(:error, "mb-6 border-error/40 bg-error/5")) do
-      safe_join([ icon("circle-alert"), tag.div(alert, "data-slot": "alert-description", class: "text-sm") ])
+      safe_join([ icon("circle-alert"), tag.div(alert, class: "text-sm") ])
     end
   end
 

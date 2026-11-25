@@ -34,17 +34,11 @@ module Ui
       link: "border-0 bg-transparent text-primary underline-offset-4 hover:underline"
     }.freeze
 
-    # daisyUI's card with a border. The parts keep the card's spacing (--card-spacing, smaller for size: :sm).
-    CARD = "group/card card card-border overflow-hidden border-base-300 bg-base-100 gap-(--card-spacing) py-(--card-spacing) text-sm [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 data-[size=sm]:[--card-spacing:--spacing(3)]"
-    CARD_HEADER = "group/card-header grid auto-rows-min items-start gap-1 px-(--card-spacing) has-data-[slot=card-action]:grid-cols-[1fr_auto] has-data-[slot=card-description]:grid-rows-[auto_auto] [.border-b]:pb-(--card-spacing)"
-    CARD_TITLE = "card-title font-heading text-base leading-snug font-medium group-data-[size=sm]/card:text-sm"
-    CARD_DESCRIPTION = "text-sm text-base-content/60"
-    CARD_ACTION = "col-start-2 row-span-2 row-start-1 self-start justify-self-end"
-    CARD_CONTENT = "px-(--card-spacing)"
-    CARD_FOOTER = "card-actions items-center border-t bg-base-200/50 p-(--card-spacing)"
     # A plain bordered box (daisyUI's card with a border) for a section or a row: its padding and layout are the caller's.
     PANEL = "card card-border border-base-300 bg-base-100"
     PANEL_DASHED = "card card-dash border-base-300 bg-base-100"
+    # A card (Ui::CardComponent): a PANEL whose content is clipped to its corners. Its padding and gap are the caller's.
+    CARD = "#{PANEL} overflow-hidden text-sm"
     CARD_LIST = "divide-y divide-base-300 overflow-hidden rounded-box border bg-base-100"
 
     INPUT = "input w-full"

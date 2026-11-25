@@ -10,7 +10,7 @@ class Ui::PageHeaderComponent < ApplicationComponent
 
   def call
     return tag.header(heading, class: "mb-6 space-y-1") if @plain
-    tag.header(class: "mb-6 flex flex-wrap items-end justify-between gap-3", "data-slot": "page-header") do
+    tag.header(class: "mb-6 flex flex-wrap items-end justify-between gap-3") do
       safe_join([ tag.div(heading, class: "space-y-1"), (content if content?) ].compact)
     end
   end

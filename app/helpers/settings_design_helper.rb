@@ -59,7 +59,7 @@ module SettingsDesignHelper
     return if record.nil? || record.errors.empty?
     tag.div(role: "alert", class: alert_classes(:error)) do
       safe_join([icon("circle-alert"),
-                 tag.ul(class: "text-sm", "data-slot": "alert-description") { safe_join(record.errors.full_messages.map { tag.li(_1) }) }])
+                 tag.ul(class: "text-sm") { safe_join(record.errors.full_messages.map { tag.li(_1) }) }])
     end
   end
 

@@ -70,8 +70,8 @@
               <span class="truncate" data-device-label><%= device_label %></span>
               <%= icon("chevron-down", class: "size-3.5 shrink-0 in-data-[running=true]:hidden") %><%= icon("lock", class: "hidden size-3 shrink-0 in-data-[running=true]:block") %>
             </button>
-            <div role="menu" data-slot="dropdown-menu-content" class="absolute top-full right-0 z-50 mt-1.5 w-64 rounded-lg border bg-base-100 p-1 text-base-content shadow-md">
-              <p data-slot="dropdown-menu-label" class="px-2 pt-1.5 pb-1 text-xs text-base-content/60"><%= t("design.practice.device_menu.heading") %></p>
+            <div role="menu" class="absolute top-full right-0 z-50 mt-1.5 w-64 rounded-lg border bg-base-100 p-1 text-base-content shadow-md">
+              <p class="px-2 pt-1.5 pb-1 text-xs text-base-content/60"><%= t("design.practice.device_menu.heading") %></p>
               <%= form_with url: choose_devices_path, role: "group" do |f| %>
                 <% @device.options.each do |label, key| %>
                   <% chosen = key == @device.key %>
@@ -82,7 +82,7 @@
                   </button>
                 <% end %>
               <% end %>
-              <div role="separator" data-slot="dropdown-menu-separator" class="my-1 h-px bg-base-300"></div>
+              <div role="separator" class="my-1 h-px bg-base-300"></div>
               <%= link_to devices_path, role: "menuitem", class: "relative flex cursor-pointer items-center gap-2 rounded-md py-2 pr-3 pl-8 text-sm outline-none hover:bg-base-200 hover:text-base-content focus-visible:bg-base-200 focus-visible:text-base-content" do %>
                 <%= icon(:monitor, class: "absolute left-2.5 size-4") %><%= t("design.practice.device_menu.manage") %>
               <% end %>
@@ -155,7 +155,7 @@
                 aria-label="<%= t("design.practice.writing_input") %>" placeholder="<%= t("design.practice.writing_input") %>" aria-describedby="writing-feedback" data-writing-target="field"
                 class="h-12 min-w-0 flex-1 basis-60 rounded-lg border bg-base-100 px-3 text-center text-xl outline-none placeholder:text-base placeholder:text-base-content/60 focus-visible:border-primary focus-visible:ring-3 focus-visible:ring-primary/50"
                 data-action="input->writing#fieldInput keydown->writing#fieldKey compositionstart->writing#compositionStart compositionend->writing#compositionEnd blur->writing#blur focus->writing#focus">
-              <button type="button" data-slot="button" data-variant="primary" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+              <button type="button" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                 <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
               </button>
               <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>
@@ -175,7 +175,7 @@
               <div class="flex flex-wrap items-center justify-center gap-2">
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#undo"><%= icon("undo-2") %><%= t("design.practice.writing_pad_undo") %></button>
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#clearPad"><%= icon("eraser") %><%= t("design.practice.writing_pad_clear") %></button>
-                <button type="button" data-slot="button" data-variant="primary" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
+                <button type="button" class="<%= button_classes(size: :sm, class: "h-12") %>" data-action="writing#check" aria-label="<%= t("design.practice.writing_judge") %>" aria-keyshortcuts="Enter">
                   <%= t("design.practice.writing_judge") %><%= kbd("Enter", class: "hidden sm:inline-flex") %>
                 </button>
                 <button type="button" class="<%= button_classes(variant: :outline, size: :sm, class: "h-12") %>" data-action="writing#skip"><%= icon("skip-forward") %><%= t("design.practice.writing_skip") %></button>

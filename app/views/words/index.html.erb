@@ -16,7 +16,7 @@
   <% else %>
     <div class="space-y-4">
       <% if @requested && @list.id.to_s != @requested %>
-        <div role="alert" class="<%= alert_classes %>"><%= icon("circle-alert") %><div data-slot="alert-description" class="text-sm text-balance text-base-content/60"><%= tt("wordLists.page.notFound") %></div></div>
+        <div role="alert" class="<%= alert_classes %>"><%= icon("circle-alert") %><div class="text-sm text-balance text-base-content/60"><%= tt("wordLists.page.notFound") %></div></div>
       <% end %>
       <div class="grid items-start gap-6 lg:grid-cols-[20rem_minmax(0,1fr)]">
         <%= render "practice/aside", lists: @lists, selected: @list, mode: nil, id: "words-aside",

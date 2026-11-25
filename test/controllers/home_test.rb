@@ -5,7 +5,7 @@ class HomeTest < ActionDispatch::IntegrationTest
     get home_path
     assert_response :success
     assert_select "h1", "自分の単語で、タイピング練習。"
-    assert_select "[data-slot=badge]", "完了した練習 0 回"
+    assert_select ".badge", "完了した練習 0 回"
     assert_select "a[href=?]", guide_path, "使い方"
   end
 

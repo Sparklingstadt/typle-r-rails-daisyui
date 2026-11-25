@@ -21,11 +21,10 @@ class Ui::ButtonComponent < ApplicationComponent
 
   def call
     classes = button_classes(variant: @variant, size: @size, class: @class)
-    data = { "data-slot": "button", "data-variant": @variant, "data-size": @size }
     case @as
-    when :link then link_to(@url, class: classes, **data, **@options) { body }
-    when :visit then tag.button(type: "button", class: classes, **data, "data-visit-url": @url, **@options) { body }
-    when :form then button_to(@url, class: classes, form_class: @form_class, **data, **@options) { body }
+    when :link then link_to(@url, class: classes, **@options) { body }
+    when :visit then tag.button(type: "button", class: classes, "data-visit-url": @url, **@options) { body }
+    when :form then button_to(@url, class: classes, form_class: @form_class, **@options) { body }
     end
   end
 

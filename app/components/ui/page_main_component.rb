@@ -6,6 +6,6 @@ class Ui::PageMainComponent < ApplicationComponent
   end
 
   def call
-    tag.main(content, class: cn("mx-auto w-full px-4 pt-8 pb-16 sm:px-6 lg:px-8", @width, @class), "data-slot": "page-main")
+    tag.main(content, class: cn("mx-auto w-full px-4 pt-8 pb-16 sm:px-6 lg:px-8", @width, @class))
   end
 end
